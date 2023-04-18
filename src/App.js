@@ -88,7 +88,8 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 // import SaaSProductLandingPage from "demos/SaaSProductLandingPage.js";
 // import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 // import ServiceLandingPage from "demos/ServiceLandingPage.js";
- import HostingCloudLandingPage from "./demos/HostingCloudLandingPage.js";
+// import HostingCloudLandingPage from "./demos/HostingCloudLandingPage.js";
+ import WebCCLVietnameseLandingPage from "demos/cclVietnamese.js";
 
 /* Inner Pages */
 // import LoginPage from "pages/Login.js";
@@ -120,7 +121,7 @@ export default function App() {
       <GlobalStyles />
       <Router>
         <Routes>
-          <Route path="/" element={<HostingCloudLandingPage />} />
+          <Route path="/" element={<WebCCLVietnameseLandingPage />} />
         </Routes>
       </Router>
     </>
