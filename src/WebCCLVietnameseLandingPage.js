@@ -25,7 +25,8 @@ import logo from "images/WebCCLVietnameseLogo.svg";
 import useInView from "helpers/useInView";
 
 /* Hero */
-const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 bg-primary-900 text-gray-100`;
+const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 -mb-8 pb-8 min-h-screen bg-primary-900 text-gray-100`;
+
 const Row = tw.div`flex`;
 const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
 const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-100 border-gray-400 hocus:border-gray-700`;
@@ -101,7 +102,12 @@ export default ({
   navButton1Index = "#landingPageDemos",
   navButton1Text = "About Us",
 
+  /*
   navButton2Index = "https://cclvietnamese.com.au/info.html",
+  navButton2Text = "Kỳ thi CCL",
+  */
+
+  navButton2Index = "/info",
   navButton2Text = "Kỳ thi CCL",
 
   navButton3Index = "https://cclvietnamese.com.au/register.html",
@@ -222,7 +228,40 @@ export default ({
                 </ImageContainer>
               </ImageColumn>
             </HeroRow>
+
+            <SectionContainer id="landingPageDemos">
+              <SectionHeading>Landing Pages</SectionHeading>
+              <SectionDescription>
+                We have {noOfLandingPages} premade landing pages. Click on the "View Live Demo" button to see them in
+                action. Customizing or Creating your own custom landing page is really simple by using our UI components.
+              </SectionDescription>
+              <PreviewCards>
+                {Object.entries(landingPages).map(([pageName, page], index) => (
+                  <PreviewCardContainer key={index}>
+                    <PreviewCard initial="rest" animate="rest" whileHover="hover" href={page.url} target="_blank">
+                      <PreviewCardImageContainer>
+                        <PreviewCardImage
+                          transition={{ type: "tween" }}
+                          variants={previewImageAnimationVariants}
+                          $imageSrc={page.imageSrc}
+                        />
+                      </PreviewCardImageContainer>
+                      <PreviewButton>View Live Demo</PreviewButton>
+                    </PreviewCard>
+                  </PreviewCardContainer>
+                ))}
+              </PreviewCards>
+            </SectionContainer>
             
+          </Content2Xl>
+          </PrimaryBackgroundContainer>
+
+      </AnimationRevealPage>
+  );
+};
+
+/* Preview landing Pages and Inner Pages
+
             <SectionContainer id="landingPageDemos">
               <SectionHeading>Landing Pages</SectionHeading>
               <SectionDescription>
@@ -281,13 +320,7 @@ export default ({
                 </span>
               </SectionDescription>
               <BlocksRenderer blocks={Object.values(blocks)} />
-            </SectionContainer>
-          </Content2Xl>
-          </PrimaryBackgroundContainer>
-
-      </AnimationRevealPage>
-  );
-};
+            </SectionContainer> */
 
 const BlocksRenderer = ({ blocks }) => {
   const [lastVisibleBlockIndex, setLastVisibleBlockIndex] = useState(0);
@@ -309,6 +342,7 @@ const BlocksRenderer = ({ blocks }) => {
   );
 };
 
+
 const Block = ({ notifyIsVisible, components }) => {
   const [ref, inView] = useInView();
 
@@ -328,7 +362,7 @@ const Block = ({ notifyIsVisible, components }) => {
     iframe.style.height = "auto";
     iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
   };
-
+/*
   return (
     <div ref={ref} tw="mt-32">
       <ComponentsType>{components.type}</ComponentsType>
@@ -369,5 +403,5 @@ const Block = ({ notifyIsVisible, components }) => {
         ))}
       </Components>
     </div>
-  );
+  );*/
 };

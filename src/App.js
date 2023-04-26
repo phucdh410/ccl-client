@@ -93,7 +93,9 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import WebCCLVietnameseLandingPage from "./WebCCLVietnameseLandingPage.js";
 
 /* Inner Pages */
- import LoginPage from "pages/Login.js";
+import LoginPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseSignIn.js";
+import TestInfoPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseTestInfo.js";
+//import LoginPage from "pages/Login.js";
 // import SignupPage from "pages/Signup.js";
 // import PricingPage from "pages/Pricing.js";
 // import AboutUsPage from "pages/AboutUs.js";
@@ -127,7 +129,8 @@ export default function App() {
             <Route path="/components/:type/:subtype/:name" element={<ComponentRenderer />} />
             <Route path="/components/:type/:name" element={<ComponentRenderer />} />        
             <Route path="/" element={<WebCCLVietnameseLandingPage />} />
-            <Route path="/login" element={<LoginPage />} />               
+            <Route path="/login" element={<LoginPage />} />  
+            <Route path="/info" element={<TestInfoPage />} />             
         </Routes>
       </Router>
     </>
