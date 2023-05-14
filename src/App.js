@@ -95,6 +95,7 @@ import WebCCLVietnameseLandingPage from "./WebCCLVietnameseLandingPage.js";
 /* Inner Pages */
 import LoginPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseSignIn.js";
 import TestInfoPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseTestInfo.js";
+import EnquiryPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseEnquiry.js";
 //import LoginPage from "pages/Login.js";
 // import SignupPage from "pages/Signup.js";
 // import PricingPage from "pages/Pricing.js";
@@ -130,7 +131,8 @@ export default function App() {
             <Route path="/components/:type/:name" element={<ComponentRenderer />} />        
             <Route path="/" element={<WebCCLVietnameseLandingPage />} />
             <Route path="/login" element={<LoginPage />} />  
-            <Route path="/info" element={<TestInfoPage />} />             
+            <Route path="/info" element={<TestInfoPage />} />   
+            <Route path="/enquiry" element={<EnquiryPage />} />          
         </Routes>
       </Router>
     </>

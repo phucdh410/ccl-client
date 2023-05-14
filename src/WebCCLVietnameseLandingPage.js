@@ -1,50 +1,45 @@
 import React, { useState, useEffect } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import { Link } from 'react-router-dom';
-import { Rnd } from "react-rnd";
-import { motion } from "framer-motion";
-import { components } from "ComponentRenderer.js";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import { Container, Content2Xl, ContentWithVerticalPadding } from "components/misc/Layouts";
-import tw from "twin.macro";
+import Footer from "components/footers/WebCCLVietnameseFooter.js";
+import heroScreenshotImageSrc from "images/results/An - 5 PR Points.png";
+import logo from "images/WebCCLVietnameseLogo.svg";
+import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
+import ResponsiveVideoEmbed from "helpers/WebCCLVietnameseResponsiveVideoEmbed.js";
 import styled from "styled-components";
+import tw from "twin.macro";
+import useInView from "helpers/useInView";
+
+import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
+import { components } from "WebCCLVietnameseCompRender.js";
+import {Content2Xl, ContentWithVerticalPadding } from "components/misc/Layouts";
 import { css } from "styled-components/macro";
 import { LogoLink } from "components/headers/WebCCLVietnameseHeader.js";
+
 import { SectionHeading as HeadingBase } from "components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
-
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
 import { ReactComponent as RadioIcon } from "feather-icons/dist/icons/radio.svg";
 import { ReactComponent as HandleIcon } from "images/handle-icon.svg";
-import { ReactComponent as ArrowRightIcon } from "images/arrow-right-3-icon.svg";
-
-import heroScreenshotImageSrc from "images/results/An - 5 PR Points.png";
-
-import logo from "images/WebCCLVietnameseLogo.svg";
-import useInView from "helpers/useInView";
 
 /* Hero */
 const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 -mb-8 pb-8 min-h-screen bg-primary-900 text-gray-100`;
 
 const Row = tw.div`flex`;
 const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
-const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-100 border-gray-400 hocus:border-gray-700`;
+const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-100 border-gray-400 hocus:border-gray-700 cursor-pointer`;
 const PrimaryNavLink = tw(
   NavLink
 )`text-gray-100 bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-900 focus:shadow-outline mt-6 md:mt-4 lg:mt-0`;
 const HeroRow = tw(Row)`flex-col lg:flex-row justify-between items-center pt-8 lg:pt-12 pb-16 max-w-screen-2xl mx-auto flex-wrap`;
 
 const Column = tw.div`flex-1`;
-
 const UpdateNotice = tw(Column)`w-full flex-auto mb-4 sm:mb-8 rounded px-4 py-3 sm:px-5 sm:py-4 bg-orange-100 text-orange-800 flex items-center sm:items-start md:items-center justify-center lg:justify-start border border-orange-200 text-xs sm:text-sm text-center sm:text-left md:leading-none`;
 const UpdateNoticeIcon = tw(RadioIcon)`w-0 sm:w-5 sm:mr-3`;
-
 const TextColumn = tw(Column)`mx-auto lg:mr-0 max-w-2xl lg:max-w-xl xl:max-w-2xl flex-shrink-0`;
-
-//const Heading = tw(HeadingBase)`text-center lg:text-left text-primary-900 leading-snug`;
 const Heading = tw(HeadingBase)`text-center lg:text-left max-w-3xl lg:max-w-4xl leading-snug`;
-
 const Description = tw(
   DescriptionBase
 )`mt-4 text-center lg:text-left lg:text-base text-gray-100 max-w-lg mx-auto lg:mx-0`;
@@ -83,51 +78,43 @@ const PreviewCardImage = styled(motion.div)`
 const PreviewButton = tw(PrimaryButtonBase)`w-full rounded-b-lg rounded-t-none py-5 font-semibold`;
 
 const ComponentsContainer = tw.div`mt-24`;
-const ComponentsType = tw.h3`text-4xl font-black text-primary-500 border-b-4 border-primary-500 inline-block`;
-const Components = tw.div``;
-const Component = tw.div`mt-12 border rounded-lg bg-white`;
-const ComponentHeading = tw.div`px-8 py-5 border-b flex flex-col sm:flex-row justify-between items-center`;
-const ComponentName = tw.h6`text-lg`;
-const ComponentPreviewLink = tw.a`mt-4 sm:mt-0 text-primary-500 hocus:text-primary-900 transition duration-300 font-semibold flex items-center`;
-const ComponentContent = tw.div`flex justify-between overflow-hidden rounded-b-lg bg-gray-600 relative`;
-const ResizableBox = styled(Rnd)`
-  ${tw`relative! bg-white pr-4`}
-  .resizeHandleWrapper > div {
-    ${tw`w-4! right-0!`}
+const ResizeHandleButton = tw.button`cursor-col-resize focus:outline-none w-4 border-l bg-gray-100 absolute right-0 inset-y-0`;
+
+const StyledModal = styled(ReactModalAdapter)`
+  &.mainHeroModal__overlay {
+    ${tw`fixed inset-0 z-50`}
+  }
+  &.mainHeroModal__content {
+    ${tw`xl:mx-auto m-4 sm:m-16 max-w-screen-xl absolute inset-0 flex justify-center items-center rounded-lg bg-transparent outline-none`}
+  }
+  .content {
+    ${tw`w-full lg:p-16`}
   }
 `;
-const ResizeHandleButton = tw.button`cursor-col-resize focus:outline-none w-4 border-l bg-gray-100 absolute right-0 inset-y-0`;
 
 export default ({
   navButton1Index = "#landingPageDemos",
   navButton1Text = "About Us",
 
-  /*
-  navButton2Index = "https://cclvietnamese.com.au/info.html",
-  navButton2Text = "Kỳ thi CCL",
-  */
-
   navButton2Index = "/info",
-  navButton2Text = "Kỳ thi CCL",
+  navButton2Text = "Thi CCL",
 
-  navButton3Index = "https://cclvietnamese.com.au/register.html",
+  navButton3Index = "https://www.youtube.com/embed/aMM00ItsPO0",
   navButton3Text = "Hướng dẫn đăng ký thi",
 
-  navButton4Index = "https://cclvietnamese.com.au/enquiry.html",
-  navButton4Text = "Tư vấn khóa học",
+  navButton4Index = "/enquiry",
+  navButton4Text = "Khóa học",
  
   navButtonPlatformIndex = "/login",
   navButtonPlatformText = "PLATFORM",
   
   features = null,
   primaryButtonUrl = "#landingPageDemos",
-  primaryButtonText = "Explore Demos",
-  secondaryButtonUrl = "#componentDemos",
-  secondaryButtonText = "View Components",
-
-
-
+  primaryButtonText = "ĐĂNG KÝ HỌC",
+  secondaryButtonUrl = "#landingPageDemos",
+  secondaryButtonText = "Đánh giá của học viên",
   buttonRoundedCss = "",
+
   landingPages = components.landingPages,
   innerPages = components.innerPages,
   blocks = components.blocks,
@@ -157,26 +144,23 @@ export default ({
   const noOfInnerPages = Object.keys(innerPages).length;
   const noOfComponentBlocks = Object.values(blocks).reduce((acc, block) => acc + Object.keys(block.elements).length, 0);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const toggleModal = () => setModalIsOpen(!modalIsOpen);
+
   features = features || [
-    `${noOfLandingPages} Landing Page Demos`,
-    "Khóa học ngắn, chỉ từ 5 tuần",
-    `${noOfInnerPages} Inner Pages`,
-    "Nhiều ưu đãi khi đăng ký sớm",
-    `${noOfComponentBlocks} Components`,
-    "Tỷ lệ đậu cao",
-    "Fully Responsive"
-    
+    `Khóa học ngắn, chỉ từ ${noOfLandingPages} tuần`,
+    `Nhiều ưu đãi khi đăng ký trước ${noOfInnerPages}`,
+    `Tỷ lệ đậu đạt ${noOfComponentBlocks} `,
+    `Discount khi đăng ký các combo`
   ];
-//<Container tw="bg-gray-100 -mx-8 -mt-8 pt-8 px-8"></Container>
   return (
     <AnimationRevealPage disabled>
         <PrimaryBackgroundContainer>
           <Content2Xl>
-          
             <NavRow>
               <LogoLink href="/">
                 <img src={logo} alt="" />
-                CCL Vietnamese.com.au
+                cclVietnamese.com.au
               </LogoLink>
               <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
                 <NavLink href={navButton1Index}>
@@ -185,7 +169,7 @@ export default ({
                 <NavLink target="_blank" href={navButton2Index}>
                   {navButton2Text}
                 </NavLink>
-                <NavLink target="_blank" href={navButton3Index}>
+                <NavLink target="_self" onClick={toggleModal}>
                   {navButton3Text}
                 </NavLink>
                 <NavLink target="_blank" href={navButton4Index}>
@@ -219,7 +203,9 @@ export default ({
                   <PrimaryButton href={primaryButtonUrl} css={buttonRoundedCss}>
                     {primaryButtonText}
                   </PrimaryButton>
-                  <SecondaryButton href={secondaryButtonUrl}>{secondaryButtonText}</SecondaryButton>
+                  <SecondaryButton href={secondaryButtonUrl} css={buttonRoundedCss}>
+                    {secondaryButtonText}
+                  </SecondaryButton>
                 </Actions>
               </TextColumn>
               <ImageColumn>
@@ -227,6 +213,17 @@ export default ({
                   <Image src={heroScreenshotImageSrc} />
                 </ImageContainer>
               </ImageColumn>
+              <StyledModal
+                closeTimeoutMS={300}
+                className="mainHeroModal"
+                isOpen={modalIsOpen}
+                onRequestClose={toggleModal}
+                shouldCloseOnOverlayClick={true}
+              >
+                  <div className="content">
+                    <ResponsiveVideoEmbed url={navButton3Index} tw="w-full" />
+                  </div>
+              </StyledModal>
             </HeroRow>
 
             <SectionContainer id="landingPageDemos">
@@ -251,76 +248,15 @@ export default ({
                   </PreviewCardContainer>
                 ))}
               </PreviewCards>
+              
             </SectionContainer>
-            
+            <Footer />
           </Content2Xl>
           </PrimaryBackgroundContainer>
 
       </AnimationRevealPage>
   );
 };
-
-/* Preview landing Pages and Inner Pages
-
-            <SectionContainer id="landingPageDemos">
-              <SectionHeading>Landing Pages</SectionHeading>
-              <SectionDescription>
-                We have {noOfLandingPages} premade landing pages. Click on the "View Live Demo" button to see them in
-                action. Customizing or Creating your own custom landing page is really simple by using our UI components.
-              </SectionDescription>
-              <PreviewCards>
-                {Object.entries(landingPages).map(([pageName, page], index) => (
-                  <PreviewCardContainer key={index}>
-                    <PreviewCard initial="rest" animate="rest" whileHover="hover" href={page.url} target="_blank">
-                      <PreviewCardImageContainer>
-                        <PreviewCardImage
-                          transition={{ type: "tween" }}
-                          variants={previewImageAnimationVariants}
-                          $imageSrc={page.imageSrc}
-                        />
-                      </PreviewCardImageContainer>
-                      <PreviewButton>View Live Demo</PreviewButton>
-                    </PreviewCard>
-                  </PreviewCardContainer>
-                ))}
-              </PreviewCards>
-            </SectionContainer>
-            <SectionContainer>
-              <SectionHeading>Inner Pages</SectionHeading>
-              <SectionDescription>
-                We also provide {noOfInnerPages} additional inner pages for your various needs like a signup, login,
-                pricing, about us, contact, blog etc. To view them in action click the "View Live Demo" button.
-              </SectionDescription>
-              <PreviewCards>
-                {Object.entries(innerPages).map(([pageName, page], index) => (
-                  <PreviewCardContainer key={index}>
-                    <PreviewCard initial="rest" animate="rest" whileHover="hover" href={page.url} target="_blank">
-                      <PreviewCardImageContainer>
-                        <PreviewCardImage
-                          transition={{ type: "tween" }}
-                          variants={!page.scrollAnimationDisabled && previewImageAnimationVariants}
-                          $imageSrc={page.imageSrc}
-                        />
-                      </PreviewCardImageContainer>
-                      <PreviewButton>View Live Demo</PreviewButton>
-                    </PreviewCard>
-                  </PreviewCardContainer>
-                ))}
-              </PreviewCards>
-            </SectionContainer>
-
-            <SectionContainer id="componentDemos">
-              <SectionHeading>Component Blocks</SectionHeading>
-              <SectionDescription>
-                We also provide {noOfComponentBlocks} components along with the premade landing pages so you can create
-                your own landing page within minutes as you see fit. You can combine these components to create 1000s of
-                unique attractive web pages.
-                <span tw="block text-sm text-gray-500 mt-2">
-                  (Preview Panel below inspired by Tailwind UI)
-                </span>
-              </SectionDescription>
-              <BlocksRenderer blocks={Object.values(blocks)} />
-            </SectionContainer> */
 
 const BlocksRenderer = ({ blocks }) => {
   const [lastVisibleBlockIndex, setLastVisibleBlockIndex] = useState(0);
@@ -362,46 +298,5 @@ const Block = ({ notifyIsVisible, components }) => {
     iframe.style.height = "auto";
     iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
   };
-/*
-  return (
-    <div ref={ref} tw="mt-32">
-      <ComponentsType>{components.type}</ComponentsType>
-      <Components>
-        {Object.values(components.elements).map((component, componentIndex) => (
-          <Component key={componentIndex}>
-            <ComponentHeading>
-              <ComponentName>{component.name}</ComponentName>
-              <ComponentPreviewLink className="group" href={component.url} target="_blank">
-                View Live Demo{" "}
-                <ArrowRightIcon tw="transition duration-300 transform group-hover:translate-x-px ml-2 w-4 h-4" />
-              </ComponentPreviewLink>
-            </ComponentHeading>
-            <ComponentContent>
-              <ResizableBox
-                minWidth={310}
-                default={{
-                  width: "100%",
-                  height: "100%"
-                }}
-                bounds="parent"
-                disableDragging={true}
-                enableResizing={{ right: true }}
-                resizeHandleComponent={{ right: ResizeHandle }}
-                resizeHandleWrapperClass={`resizeHandleWrapper`}
-                onResize={() => updateComponentBlockIframeHeight(componentBlockRefs[component.url])}
-              >
-                <iframe
-                  src={component.url}
-                  title="Hero"
-                  width="100%"
-                  ref={ref => (componentBlockRefs[component.url] = ref)}
-                  onLoad={e => updateComponentBlockIframeHeight(e.target)}
-                />
-              </ResizableBox>
-            </ComponentContent>
-          </Component>
-        ))}
-      </Components>
-    </div>
-  );*/
+
 };
