@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
+import { components } from "WebCCLVietnameseCompRender.js";
+import {Content2Xl, ContentWithVerticalPadding } from "components/misc/Layouts";
+import { css } from "styled-components/macro";
+import { LogoLink } from "components/headers/WebCCLVietnameseHeader.js";
+import { SectionHeading as HeadingBase } from "components/misc/Headings";
+import { SectionDescription as DescriptionBase } from "components/misc/Typography";
+import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
+import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
+import { ReactComponent as RadioIcon } from "feather-icons/dist/icons/radio.svg";
+
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
+import Features from "components/features/ThreeColSimple.js";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
 import heroScreenshotImageSrc from "images/results/An - 5 PR Points.png";
 import logo from "images/WebCCLVietnameseLogo.svg";
@@ -8,21 +21,14 @@ import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
 import ResponsiveVideoEmbed from "helpers/WebCCLVietnameseResponsiveVideoEmbed.js";
 import styled from "styled-components";
 import tw from "twin.macro";
-import useInView from "helpers/useInView";
 
-import { Link } from 'react-router-dom';
-import { motion } from "framer-motion";
-import { components } from "WebCCLVietnameseCompRender.js";
-import {Content2Xl, ContentWithVerticalPadding } from "components/misc/Layouts";
-import { css } from "styled-components/macro";
-import { LogoLink } from "components/headers/WebCCLVietnameseHeader.js";
+//TabGrid for studentResults
+import TabGrid from "components/cards/WebCCLVietnameseTabCardGrid.js";
 
-import { SectionHeading as HeadingBase } from "components/misc/Headings";
-import { SectionDescription as DescriptionBase } from "components/misc/Typography";
-import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
-import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
-import { ReactComponent as RadioIcon } from "feather-icons/dist/icons/radio.svg";
-import { ReactComponent as HandleIcon } from "images/handle-icon.svg";
+//TabGrid for whyUs?
+import chefIconImageSrc from "images/chef-icon.svg";
+import celebrationIconImageSrc from "images/celebration-icon.svg";
+import shopIconImageSrc from "images/shop-icon.svg";
 
 /* Hero */
 const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 -mb-8 pb-8 min-h-screen bg-primary-900 text-gray-100`;
@@ -44,11 +50,18 @@ const Description = tw(
   DescriptionBase
 )`mt-4 text-center lg:text-left lg:text-base text-gray-100 max-w-lg mx-auto lg:mx-0`;
 const Actions = tw.div`flex flex-col sm:flex-row justify-center lg:justify-start`;
+
+//Buttons on the <Actions> (Next to the photos)
 const ActionButton = tw(
   AnchorLink
 )`px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
+
+const OpenPageButton = tw(
+  Link
+)`px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
+
 const PrimaryButton = tw(
-  ActionButton
+  OpenPageButton
 )`mt-6 sm:mt-12 sm:mr-8`;
 const SecondaryButton = tw(
   ActionButton
@@ -77,9 +90,6 @@ const PreviewCardImage = styled(motion.div)`
 `;
 const PreviewButton = tw(PrimaryButtonBase)`w-full rounded-b-lg rounded-t-none py-5 font-semibold`;
 
-const ComponentsContainer = tw.div`mt-24`;
-const ResizeHandleButton = tw.button`cursor-col-resize focus:outline-none w-4 border-l bg-gray-100 absolute right-0 inset-y-0`;
-
 const StyledModal = styled(ReactModalAdapter)`
   &.mainHeroModal__overlay {
     ${tw`fixed inset-0 z-50`}
@@ -92,8 +102,11 @@ const StyledModal = styled(ReactModalAdapter)`
   }
 `;
 
+//The student results tab
+const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
+
 export default ({
-  navButton1Index = "#landingPageDemos",
+  navButton1Index = "#studentResults",
   navButton1Text = "About Us",
 
   navButton2Index = "/info",
@@ -109,9 +122,9 @@ export default ({
   navButtonPlatformText = "PLATFORM",
   
   features = null,
-  primaryButtonUrl = "#landingPageDemos",
+  primaryButtonUrl = "/enquiry",
   primaryButtonText = "ĐĂNG KÝ HỌC",
-  secondaryButtonUrl = "#landingPageDemos",
+  secondaryButtonUrl = "#studentResults",
   secondaryButtonText = "Đánh giá của học viên",
   buttonRoundedCss = "",
 
@@ -200,7 +213,7 @@ export default ({
                   ))}
                 </FeatureList>
                 <Actions>
-                  <PrimaryButton href={primaryButtonUrl} css={buttonRoundedCss}>
+                  <PrimaryButton to={primaryButtonUrl} css={buttonRoundedCss}>
                     {primaryButtonText}
                   </PrimaryButton>
                   <SecondaryButton href={secondaryButtonUrl} css={buttonRoundedCss}>
@@ -226,29 +239,45 @@ export default ({
               </StyledModal>
             </HeroRow>
 
-            <SectionContainer id="landingPageDemos">
-              <SectionHeading>Landing Pages</SectionHeading>
-              <SectionDescription>
-                We have {noOfLandingPages} premade landing pages. Click on the "View Live Demo" button to see them in
-                action. Customizing or Creating your own custom landing page is really simple by using our UI components.
-              </SectionDescription>
-              <PreviewCards>
-                {Object.entries(landingPages).map(([pageName, page], index) => (
-                  <PreviewCardContainer key={index}>
-                    <PreviewCard initial="rest" animate="rest" whileHover="hover" href={page.url} target="_blank">
-                      <PreviewCardImageContainer>
-                        <PreviewCardImage
-                          transition={{ type: "tween" }}
-                          variants={previewImageAnimationVariants}
-                          $imageSrc={page.imageSrc}
-                        />
-                      </PreviewCardImageContainer>
-                      <PreviewButton>View Live Demo</PreviewButton>
-                    </PreviewCard>
-                  </PreviewCardContainer>
-                ))}
-              </PreviewCards>
-              
+            <SectionContainer id="studentResults">
+              {/* TabGrid Component also accepts a tabs prop to customize the tabs and its content directly. Please open the TabGrid component file to see the structure of the tabs props.*/}
+              <TabGrid
+                heading={
+                  <>
+                    Kết quả xuất sắc <HighlightedText>2023</HighlightedText>
+                  </>
+                }
+              />
+              <Features
+                heading={
+                  <>
+                    Amazing <HighlightedText>Services.</HighlightedText>
+                  </>
+                }
+                cards={[
+                  {
+                    imageSrc: shopIconImageSrc,
+                    title: "Chất lượng tiên phong",
+                    description: "Nơi đầu tiên ra đời khóa CCL Intensive và đạt tỷ lệ đậu 100%",
+                    url: "https://google.com"
+                  },
+                  {
+                    imageSrc: chefIconImageSrc,
+                    title: "Thời gian học ngắn",
+                    description: "Khóa học tiêu chuẩn chỉ cần 6 tuần, tuy nhiên đã từng có bạn học chỉ 1 ngày",
+                    url: "https://facebook.com"
+                  },
+                  {
+                    imageSrc: celebrationIconImageSrc,
+                    title: "Chi phí hợp lý",
+                    description: "Vô cùng nhiều ưu đã dành cho các bạn đã thi PTE hoặc học các khóa của Master Group",
+                    url: "https://reddit.com"
+                  }
+                ]}
+
+                imageContainerCss={tw`p-2!`}
+                imageCss={tw`w-20! h-20!`}
+              />
             </SectionContainer>
             <Footer />
           </Content2Xl>
@@ -256,47 +285,4 @@ export default ({
 
       </AnimationRevealPage>
   );
-};
-
-const BlocksRenderer = ({ blocks }) => {
-  const [lastVisibleBlockIndex, setLastVisibleBlockIndex] = useState(0);
-
-  const updateLastVisibleBlockIndex = index => {
-    console.log("LAST WAS ", lastVisibleBlockIndex);
-    if (index > lastVisibleBlockIndex) setLastVisibleBlockIndex(index);
-  };
-
-  return (
-    <ComponentsContainer>
-      {blocks.map(
-        (block, index) =>
-          lastVisibleBlockIndex + 1 >= index && (
-            <Block key={index} components={block} notifyIsVisible={() => updateLastVisibleBlockIndex(index)} />
-          )
-      )}
-    </ComponentsContainer>
-  );
-};
-
-
-const Block = ({ notifyIsVisible, components }) => {
-  const [ref, inView] = useInView();
-
-  useEffect(() => {
-    if (inView) notifyIsVisible();
-  }, [inView, notifyIsVisible]);
-
-  const ResizeHandle = (
-    <ResizeHandleButton>
-      <HandleIcon tw="w-4 h-4 text-gray-600" />
-    </ResizeHandleButton>
-  );
-
-  const componentBlockRefs = {};
-
-  const updateComponentBlockIframeHeight = iframe => {
-    iframe.style.height = "auto";
-    iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
-  };
-
 };

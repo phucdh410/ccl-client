@@ -83,23 +83,7 @@ export default () => {
               </LinkListItem>
             </LinkList>
           </Column>
-          <Column>
-            <ColumnHeading>Product</ColumnHeading>
-            <LinkList>
-              <LinkListItem>
-                <Link href="#">Log In</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Personal</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Business</Link>
-              </LinkListItem>
-              <LinkListItem>
-                <Link href="#">Team</Link>
-              </LinkListItem>
-            </LinkList>
-          </Column>
+
           <Column>
             <ColumnHeading>Legal</ColumnHeading>
             <LinkList>
@@ -121,13 +105,13 @@ export default () => {
             <ColumnHeading>Contact</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                +61 4 (156)-8868
+                (+61) 415-608-868
               </LinkListItem>
               <LinkListItem>
                 <Link href="mailto:support@cclvietnamese.com.au">support@cclvietnamese.com.au</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">ABN: </Link>
+                ABN: 76667428864
               </LinkListItem>
               <LinkListItem>
                 <Link href="#">Report Abuse</Link>
