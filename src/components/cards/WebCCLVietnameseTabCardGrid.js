@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import { Container, ContentWithPaddingXl } from "components/misc/Layouts.js";
+import { Container, ContentWithPaddingResult } from "components/misc/Layouts.js";
 import { SectionHeading } from "components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as StarIcon } from "images/star-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
+import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
+import TestimonialPopup from "components/testimonials/TwoColumnWithImage.js";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -32,7 +34,7 @@ const CardImageContainer = styled.div`
 `;
 const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
 const CardRating = styled.div`
-  ${tw`mr-1 text-sm font-bold flex items-end`}
+  ${tw`mr-1 text-sm font-bold flex items-end text-gray-900`}
   svg {
     ${tw`w-4 h-4 fill-current text-orange-400 mr-1`}
   }
@@ -42,6 +44,8 @@ const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
   ${tw`absolute inset-0 flex justify-center items-center`}
 `;
+
+//Define the const variable Button's design "Xem thêm" when hover the house over the Card
 const CardButton = tw(PrimaryButtonBase)`text-sm`;
 
 const CardReview = tw.div`font-medium text-xs text-gray-600`;
@@ -58,6 +62,23 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
+const TestimonialPopupBackground = styled.div`
+  ${tw`absolute flex items-center justify-center p-4 bg-gray-300 rounded-lg`}
+`;
+
+const TestimonialPopupArea = styled(ReactModalAdapter)`
+  &.mainHeroModal__overlay {
+    ${tw`fixed inset-0 z-50`}
+  }
+  &.mainHeroModal__content {
+    ${tw`xl:mx-auto m-4 sm:m-16 max-w-screen-xl absolute inset-0 flex justify-center items-center rounded-lg bg-transparent outline-none`}
+  }
+  .content {
+    ${tw`w-full lg:p-16`}
+  }
+`;
+
+
 export default ({
   heading = "Checkout the Menu",
   tabs = {
@@ -72,12 +93,16 @@ export default ({
    * as the key and value of the key will be its content (as an array of objects).
    * To see what attributes are configurable of each object inside this array see the example above for "Starters".
    */
+
+  //Define the const variable that handles the pop-up when click the "Xem thêm Button"
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const toggleModal = () => setIsModalOpen(!isModalOpen); 
 
   return (
     <Container>
-      <ContentWithPaddingXl>
+      <ContentWithPaddingResult>
         <HeaderRow>
           <Header>{heading}</Header>
           <TabsControl>
@@ -110,14 +135,16 @@ export default ({
           >
             {tabs[tabKey].map((card, index) => (
               <CardContainer key={index}>
-                <Card className="group" href={card.url} initial="rest" whileHover="hover" animate="rest">
+                <Card className="group" initial="rest" whileHover="hover" animate="rest">
                   <CardImageContainer imageSrc={card.imageSrc}>
                     <CardRatingContainer>
                       <CardRating>
                         <StarIcon />
-                        {card.rating}
+                        {card.resultGroup}
                       </CardRating>
-                      <CardReview>({card.reviews})</CardReview>
+                      <CardReview>
+                        {card.resultComment}
+                      </CardReview>
                     </CardRatingContainer>
                     <CardHoverOverlay
                       variants={{
@@ -132,7 +159,7 @@ export default ({
                       }}
                       transition={{ duration: 0.3 }}
                     >
-                      <CardButton>Xem thêm</CardButton>
+                      <CardButton onClick={toggleModal}>Xem thêm</CardButton>
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>
@@ -145,9 +172,22 @@ export default ({
             ))}
           </TabContent>
         ))}
-      </ContentWithPaddingXl>
+      </ContentWithPaddingResult>
       <DecoratorBlob1 />
       <DecoratorBlob2 />
+      <TestimonialPopupArea
+        closeTimeoutMS={300}
+        className="mainHeroModal"
+        isOpen={isModalOpen}
+        onRequestClose={toggleModal}
+        shouldCloseOnOverlayClick={true}
+      >
+          <TestimonialPopupBackground>
+            <div className="testimonial">
+              <TestimonialPopup tw="w-full" />
+            </div>
+          </TestimonialPopupBackground>
+      </TestimonialPopupArea>
     </Container>
   );
 };
@@ -157,82 +197,132 @@ const result1stTab = () => {
   const cards = [
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/87T.jpg",
       studentName: "Th Nguyen",
       occupation: "Accountant and External Auditor",
       result: "87/90",
-      rating: "5.0",
-      reviews: "87",
+      resultGroup: "80+",
+      resultComment: "(History Record)",
       url: "#"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      studentName: "Macaroni",
-      content: "Cheese Pizza",
-      price: "$2.99",
-      rating: "4.8",
-      reviews: "32",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83.5H.jpg",
+      studentName: "H Huynh",
+      occupation: "Pastry Chef",
+      result: "83.5/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
       url: "#"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327??ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      studentName: "Nelli",
-      content: "Hamburger & Fries",
-      price: "$7.99",
-      rating: "4.9",
-      reviews: "89",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83.5C.jpg",
+      studentName: "Ch Nguyen",
+      occupation: "Occupational Therapist",
+      result: "83.5/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
       url: "#"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      studentName: "Jalapeno Poppers",
-      content: "Crispy Soyabeans",
-      price: "$8.99",
-      rating: "4.6",
-      reviews: "12",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83T.jpg",
+      studentName: "Ph Nguyen",
+      occupation: "Marketing Specialist",
+      result: "83/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
       url: "#"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      studentName: "Cajun Chicken",
-      content: "Roasted Chicken & Egg",
-      price: "$7.99",
-      rating: "4.2",
-      reviews: "19",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82.5H.jpg",
+      studentName: "H Nguyen",
+      occupation: "Marketing Specialist",
+      result: "82.5/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
       url: "#"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1550461716-dbf266b2a8a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      studentName: "Chillie Cake",
-      content: "Deepfried Chicken",
-      price: "$2.99",
-      rating: "5.0",
-      reviews: "61",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82H.jpg",
+      studentName: "H Nguyen",
+      occupation: "IT Specialist",
+      result: "82/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
       url: "#"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Guacamole Mex",
-      content: "Mexican Chilli",
-      price: "$3.99",
-      rating: "4.2",
-      reviews: "95",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5H.jpg",
+      studentName: "H Dao",
+      occupation: "Marketing Specialist",
+      result: "81.5/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
       url: "#"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1565310022184-f23a884f29da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Carnet Nachos",
-      content: "Chilli Crispy Nachos",
-      price: "$3.99",
-      rating: "3.9",
-      reviews: "26",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5G.jpg",
+      studentName: "Gi Nguyen",
+      occupation: "Entrepreuner",
+      result: "81.5/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
+      url: "#"
+    },
+    {
+      imageSrc:
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5P.jpg",
+      studentName: "Ph Vo",
+      occupation: "Student",
+      result: "81.5/90",
+      resultGroup: "80+",
+      //resultComment: "History Record",
+      url: "#"
+    },
+    {
+      imageSrc:
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/79.5T.jpg",
+      studentName: "Nh Nguyen",
+      occupation: "Software Development Specialist",
+      result: "79.5/90",
+      resultGroup: "70+",
+      //resultComment: "History Record",
+      url: "#"
+    },
+    {
+      imageSrc:
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/76D.jpg",
+      studentName: "Ph Nghiem",
+      occupation: "Civil Engineer",
+      result: "76/90",
+      resultGroup: "70+",
+      //resultComment: "History Record",
+      url: "#"
+    },
+    {
+      imageSrc:
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/74H.jpg",
+      studentName: "H Nguyen",
+      occupation: "Marketing Specialist",
+      result: "74/90",
+      resultGroup: "70+",
+      resultComment: "(One-day learner)",
+      url: "#"
+    },
+    {
+      imageSrc:
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/71K.jpg",
+      studentName: "K Ngo",
+      occupation: "Chemical Engineer",
+      result: "71/90",
+      resultGroup: "70+",
+      //resultComment: "History Record",
       url: "#"
     },
   ];

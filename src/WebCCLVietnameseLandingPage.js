@@ -251,7 +251,7 @@ export default ({
               <Features
                 heading={
                   <>
-                    Amazing <HighlightedText>Services.</HighlightedText>
+                    Nội dung được thiết kế theo <HighlightedText> NGHIÊN CỨU</HighlightedText>
                   </>
                 }
                 cards={[
