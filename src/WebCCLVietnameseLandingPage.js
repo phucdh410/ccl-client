@@ -35,10 +35,10 @@ const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 -mb-8 pb-8 min-h
 
 const Row = tw.div`flex`;
 const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
-const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-12 text-gray-100 border-gray-400 hocus:border-gray-700 cursor-pointer`;
-const PrimaryNavLink = tw(
+const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-8 text-gray-100 border-gray-400 hocus:border-gray-700 cursor-pointer`;
+const PlatformButton = tw(
   NavLink
-)`text-gray-100 bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-900 focus:shadow-outline mt-6 md:mt-4 lg:mt-0`;
+)`text-gray-100 bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-900 focus:shadow-outline mr-0 mt-6 md:mt-4 lg:mt-0`;
 const HeroRow = tw(Row)`flex-col lg:flex-row justify-between items-center pt-8 lg:pt-12 pb-16 max-w-screen-2xl mx-auto flex-wrap`;
 
 const Column = tw.div`flex-1`;
@@ -175,7 +175,7 @@ export default ({
                 <img src={logo} alt="" />
                 cclVietnamese.com.au
               </LogoLink>
-              <div tw="flex flex-wrap justify-center lg:justify-end items-center -mr-12">
+              <div tw="sm:hidden flex justify-center lg:justify-end items-center -mr-6">
                 <NavLink href={navButton1Index}>
                   {navButton1Text}
                 </NavLink>
@@ -188,13 +188,12 @@ export default ({
                 <NavLink target="_blank" href={navButton4Index}>
                   {navButton4Text}
                 </NavLink>
-                <div tw="md:hidden flex-100 h-0"></div>
-                  <Link to={navButtonPlatformIndex}>
-                    <PrimaryNavLink>
-                      {navButtonPlatformText}
-                    </PrimaryNavLink>
-                  </Link>
-                </div>
+                <Link to={navButtonPlatformIndex}>
+                  <PlatformButton>
+                    {navButtonPlatformText}
+                  </PlatformButton>
+                </Link>
+              </div>
             </NavRow>
             <HeroRow>
               <UpdateNotice>
