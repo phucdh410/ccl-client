@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { components } from "WebCCLVietnameseCompRender.js";
 import {Content2Xl, ContentWithVerticalPadding } from "components/misc/Layouts";
 import { css } from "styled-components/macro";
-import { LogoLink } from "components/headers/WebCCLVietnameseHeader.js";
+
 import { SectionHeading as HeadingBase } from "components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
-import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
+
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
 import { ReactComponent as RadioIcon } from "feather-icons/dist/icons/radio.svg";
 
@@ -15,11 +15,10 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import Features from "components/features/ThreeColSimple.js";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
+
+import NavigationBar from "components/hero/WebCCLVietnameseHero.js"
 import heroScreenshotImageSrc from "images/results/An - 5 PR Points.png";
-import logo from "images/WebCCLVietnameseLogo.svg";
-import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
-import ResponsiveVideoEmbed from "helpers/WebCCLVietnameseResponsiveVideoEmbed.js";
-import styled from "styled-components";
+
 import tw from "twin.macro";
 
 //TabGrid for studentResults
@@ -32,15 +31,8 @@ import shopIconImageSrc from "images/shop-icon.svg";
 
 /* Hero */
 const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 -mb-8 pb-8 min-h-screen bg-primary-900 text-gray-100`;
-
 const Row = tw.div`flex`;
-const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
-const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-8 text-gray-100 border-gray-400 hocus:border-gray-700 cursor-pointer`;
-const PlatformButton = tw(
-  NavLink
-)`text-gray-100 bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-900 focus:shadow-outline mr-0 mt-6 md:mt-4 lg:mt-0`;
 const HeroRow = tw(Row)`flex-col lg:flex-row justify-between items-center pt-8 lg:pt-12 pb-16 max-w-screen-2xl mx-auto flex-wrap`;
-
 const Column = tw.div`flex-1`;
 const UpdateNotice = tw(Column)`w-full flex-auto mb-4 sm:mb-8 rounded px-4 py-3 sm:px-5 sm:py-4 bg-orange-100 text-orange-800 flex items-center sm:items-start md:items-center justify-center lg:justify-start border border-orange-200 text-xs sm:text-sm text-center sm:text-left md:leading-none`;
 const UpdateNoticeIcon = tw(RadioIcon)`w-0 sm:w-5 sm:mr-3`;
@@ -75,52 +67,11 @@ const FeatureText = tw.p`ml-2 font-medium text-gray-100`;
 const ImageColumn = tw(Column)`mx-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-8`;
 const ImageContainer = tw.div`flex justify-end`;
 const Image = tw.img`max-w-full rounded-t sm:rounded w-full h-[40rem] md:w-[40rem] md:h-[40rem]`;
-
 const SectionContainer = tw(ContentWithVerticalPadding)``;
-const SectionHeading = tw(HeadingBase)`text-primary-900`;
-const SectionDescription = tw(DescriptionBase)`text-center mx-auto text-gray-600 max-w-4xl`;
-
-const PreviewCards = tw.div`flex flex-wrap -mr-12`;
-const PreviewCardContainer = tw.div`mt-24 mx-auto md:mx-0 max-w-lg w-full md:w-1/2 lg:w-1/3 pr-12`;
-const PreviewCard = tw(motion.a)`block rounded-lg shadow-raised`;
-const PreviewCardImageContainer = tw.div`rounded-t-lg border-0 border-b-0`;
-const PreviewCardImage = styled(motion.div)`
-  ${props => css`background-image: url("${props.$imageSrc}");`}
-  ${tw`h-128 md:h-144 bg-cover bg-left-top`}
-`;
-const PreviewButton = tw(PrimaryButtonBase)`w-full rounded-b-lg rounded-t-none py-5 font-semibold`;
-
-const StyledModal = styled(ReactModalAdapter)`
-  &.mainHeroModal__overlay {
-    ${tw`fixed inset-0 z-50`}
-  }
-  &.mainHeroModal__content {
-    ${tw`xl:mx-auto m-4 sm:m-16 max-w-screen-xl absolute inset-0 flex justify-center items-center rounded-lg bg-transparent outline-none`}
-  }
-  .content {
-    ${tw`w-full lg:p-16`}
-  }
-`;
-
 //The student results tab
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 
 export default ({
-  navButton1Index = "#studentResults",
-  navButton1Text = "About Us",
-
-  navButton2Index = "/info",
-  navButton2Text = "Thi CCL",
-
-  navButton3Index = "https://www.youtube.com/embed/aMM00ItsPO0",
-  navButton3Text = "Hướng dẫn đăng ký thi",
-
-  navButton4Index = "/enquiry",
-  navButton4Text = "Khóa học",
- 
-  navButtonPlatformIndex = "/login",
-  navButtonPlatformText = "PLATFORM",
-  
   features = null,
   primaryButtonUrl = "/enquiry",
   primaryButtonText = "ĐĂNG KÝ HỌC",
@@ -140,25 +91,12 @@ export default ({
    */
   useEffect(() => {
     window.gtag("js", new Date());
-    window.gtag("config", "UA-45799926-9");
+    window.gtag("config", "G-B7N1H5S8N6");
   }, [])
-
-  const previewImageAnimationVariants = {
-    rest: {
-      backgroundPositionY: "0%"
-    },
-    hover: {
-      backgroundPositionY: "100%",
-      transition: { type: "tween", ease: "linear", duration: 5 }
-    }
-  };
 
   const noOfLandingPages = Object.keys(landingPages).length;
   const noOfInnerPages = Object.keys(innerPages).length;
   const noOfComponentBlocks = Object.values(blocks).reduce((acc, block) => acc + Object.keys(block.elements).length, 0);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
   features = features || [
     `Khóa học ngắn, chỉ từ ${noOfLandingPages} tuần`,
@@ -170,31 +108,8 @@ export default ({
     <AnimationRevealPage disabled>
         <PrimaryBackgroundContainer>
           <Content2Xl>
-            <NavRow>
-              <LogoLink href="/">
-                <img src={logo} alt="" />
-                cclVietnamese.com.au
-              </LogoLink>
-              <div tw="sm:hidden flex justify-center lg:justify-end items-center -mr-6">
-                <NavLink href={navButton1Index}>
-                  {navButton1Text}
-                </NavLink>
-                <NavLink target="_blank" href={navButton2Index}>
-                  {navButton2Text}
-                </NavLink>
-                <NavLink target="_self" onClick={toggleModal}>
-                  {navButton3Text}
-                </NavLink>
-                <NavLink target="_blank" href={navButton4Index}>
-                  {navButton4Text}
-                </NavLink>
-                <Link to={navButtonPlatformIndex}>
-                  <PlatformButton>
-                    {navButtonPlatformText}
-                  </PlatformButton>
-                </Link>
-              </div>
-            </NavRow>
+            <NavigationBar />
+              
             <HeroRow>
               <UpdateNotice>
                 <UpdateNoticeIcon />
@@ -225,17 +140,6 @@ export default ({
                   <Image src={heroScreenshotImageSrc} />
                 </ImageContainer>
               </ImageColumn>
-              <StyledModal
-                closeTimeoutMS={300}
-                className="mainHeroModal"
-                isOpen={modalIsOpen}
-                onRequestClose={toggleModal}
-                shouldCloseOnOverlayClick={true}
-              >
-                  <div className="content">
-                    <ResponsiveVideoEmbed url={navButton3Index} tw="w-full" />
-                  </div>
-              </StyledModal>
             </HeroRow>
 
             <SectionContainer id="studentResults">

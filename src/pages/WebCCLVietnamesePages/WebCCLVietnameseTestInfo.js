@@ -2,11 +2,12 @@ import React from "react";
 import tw from "twin.macro";
 import styled, { css } from "styled-components/macro"; //eslint-disable-line
 import { ContainerInfo} from "components/misc/WebCCLVietnameseLayout.js";
+import {Content2Xl} from "components/misc/Layouts";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { SectionDescription } from "components/misc/Typography.js";
 
 import InfoSection from 'images/info/CCLOverviewInforgraphic.svg'; 
-
+import NavigationBar from "components/hero/WebCCLVietnameseHero.js"
 
 
 
@@ -24,21 +25,16 @@ export default ({
   subheading = "",
   heading = "THÔNG TIN VỀ KỲ THI",
   description = "Những chi tiết bạn nên biết về kỳ thi Credential Community Language (CCL)",
-  testimonials = [
-    {
-      customerName: "David Hanson",
-      customerProfile: "CEO, Koalify",
-      imageSrc:
-        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.85&w=256&h=256&q=80",
-      quote:
-        "We have been using servana for about 2 years. And in that time we have had no problem at all. The user interface is really simple to use. Our services scale automatically and we never have to worry about downtimes. is as described."
-    },
-  ]
 }) => {
   
 
   return (
+    
     <PrimaryBackgroundContainer>
+      <Content2Xl>
+        <NavigationBar/>
+      </Content2Xl>
+
       <ContainerInfo>
         <HeadingContainer>
           {subheading && <Subheading>{subheading}</Subheading>}
