@@ -2,7 +2,10 @@ import React, { useState }  from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
+import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
+
+import NavigationBar from "components/hero/WebCCLVietnameseHero.js"
 //import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import EmailIllustrationSrc from "images/email-illustration.svg";
 
@@ -32,7 +35,7 @@ const TextEmphasizes = tw.span`text-white`;
 const Select = styled.select``;
 const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
 const FormContainer = styled.div`
-  ${tw`p-10 sm:p-12 md:p-16 bg-primary-900 text-gray-100 relative`}
+  ${tw`p-8 sm:p-4 md:p-8 bg-primary-900 text-gray-100 relative`}
   form {
     ${tw`mt-4`}
   }
@@ -161,6 +164,9 @@ export default ({
     return (
       <PrimaryBackgroundContainer>
         <FormContainer>
+          <Content2Xl>
+            <NavigationBar />
+          </Content2Xl>
           <TwoColumn>
             <ImageColumn>
               <Image imageSrc={EmailIllustrationSrc} />

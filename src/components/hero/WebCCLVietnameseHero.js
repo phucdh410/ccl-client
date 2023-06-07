@@ -6,6 +6,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 
 import { ReactComponent as MenuIconImport } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIconImport } from "feather-icons/dist/icons/x.svg";
+import { ReactComponent as CloseVideoIconImport } from "feather-icons/dist/icons/x-circle.svg";
 
 import logo from "images/WebCCLVietnameseLogo.svg";
 import { LogoLink } from "components/headers/WebCCLVietnameseHeader.js";
@@ -18,6 +19,9 @@ const MenuIcon = tw(
 const CloseIcon = tw(
   CloseIconImport
 )`lg:hidden w-6 h-6`;
+const CloseVideoIcon = tw(
+  CloseVideoIconImport
+)`w-6 h-6`;
 
 const MenuContainer = styled.div`
   ${tw`lg:flex lg:justify-between items-center`}
@@ -36,7 +40,7 @@ const PlatformButton = tw(
 
 const StyledModal = styled(ReactModalAdapter)`
   &.mainHeroModal__overlay {
-    ${tw`fixed inset-0 z-50`}
+    ${tw`fixed inset-0`}
   }
   &.mainHeroModal__content {
     ${tw`xl:mx-auto m-4 sm:m-16 max-w-screen-xl absolute inset-0 flex justify-center items-center rounded-lg bg-transparent outline-none`}
@@ -46,6 +50,7 @@ const StyledModal = styled(ReactModalAdapter)`
   }
 `;
 
+const CloseModalButton = tw.button`top-0 mt-8 left-1/2 transform -translate-x-1/2 text-gray-100 hocus:border-gray-700 z-50`;
 const VideoEmbedContainer = tw.div`w-full`;
 
 
@@ -112,6 +117,9 @@ export default ({
           onRequestClose={toggleModal}
           shouldCloseOnOverlayClick={true}
         >
+          <CloseModalButton onClick={toggleModal}>
+            <CloseVideoIcon/>
+          </CloseModalButton>
           <VideoEmbedContainer>
             <ResponsiveVideoEmbed url={navButton3Index} />
           </VideoEmbedContainer>
