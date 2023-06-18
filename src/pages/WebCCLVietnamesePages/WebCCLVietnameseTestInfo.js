@@ -6,7 +6,7 @@ import { SectionHeading, Subheading as SubheadingBase } from "components/misc/He
 import { SectionDescription } from "components/misc/Typography.js";
 
 import InfoSection from 'images/info/CCLOverviewInforgraphic.svg'; 
-import NavigationBar from "components/hero/WebCCLVietnameseHero.js"
+import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import "slick-carousel/slick/slick.css";
 
 //The foundation layout

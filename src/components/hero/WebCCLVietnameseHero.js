@@ -1,135 +1,119 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { components } from "WebCCLVietnameseCompRender.js";
+import { css } from "styled-components/macro"; //eslint-disable-line
+import { SectionHeading as HeadingBase } from "components/misc/Headings";
+import { SectionDescription as DescriptionBase } from "components/misc/Typography";
+import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
+import { ReactComponent as RadioIcon } from "feather-icons/dist/icons/radio.svg";
+
+import AnchorLink from "react-anchor-link-smooth-scroll";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { css } from "styled-components/macro"; //eslint-disable-line
+import heroScreenshotImageSrc from "images/results/An - 5 PR Points.png";
 
-import { ReactComponent as MenuIconImport } from "feather-icons/dist/icons/menu.svg";
-import { ReactComponent as CloseIconImport } from "feather-icons/dist/icons/x.svg";
-import { ReactComponent as CloseVideoIconImport } from "feather-icons/dist/icons/x-circle.svg";
-
-import logo from "images/WebCCLVietnameseLogo.svg";
-import { LogoLink } from "components/headers/WebCCLVietnameseHeader.js";
-import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
-import ResponsiveVideoEmbed from "helpers/WebCCLVietnameseResponsiveVideoEmbed.js";
-
-const MenuIcon = tw(
-  MenuIconImport
-)`lg:hidden w-6 h-6`;
-const CloseIcon = tw(
-  CloseIconImport
-)`lg:hidden w-6 h-6`;
-const CloseVideoIcon = tw(
-  CloseVideoIconImport
-)`w-6 h-6`;
-
-const MenuContainer = styled.div`
-  ${tw`lg:flex lg:justify-between items-center`}
-  ${({ menuOpen }) => menuOpen ? tw`flex` : tw`hidden`}
-`;
-const MenuRow = tw.div`flex justify-between items-center`;
-
+/* Hero */
 const Row = tw.div`flex`;
-const NavRow = tw(Row)`flex flex-col lg:flex-row items-center justify-between`;
-const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 border-b-2 mr-8 text-gray-100 border-gray-400 hocus:border-gray-700 cursor-pointer`;
-const PlatformButton = tw(
-  NavLink
-)`text-gray-100 bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-900 focus:shadow-outline mr-0 mt-6 md:mt-4 lg:mt-0`;
+const HeroRow = tw(
+  Row
+)`flex-col lg:flex-row justify-between items-center pt-8 lg:pt-12 pb-16 max-w-screen-2xl mx-auto flex-wrap`;
+const Column = tw.div`flex-1`;
+const UpdateNotice = tw(
+  Column
+)`w-full flex-auto mb-4 sm:mb-8 rounded px-4 py-3 sm:px-5 sm:py-4 bg-orange-100 text-orange-800 flex items-center sm:items-start md:items-center justify-center lg:justify-start border border-orange-200 text-xs sm:text-sm text-center sm:text-left md:leading-none`;
+const UpdateNoticeIcon = tw(RadioIcon)`w-0 sm:w-5 sm:mr-3`;
+const TextColumn = tw(
+  Column
+)`mx-auto lg:mr-0 max-w-2xl lg:max-w-xl xl:max-w-2xl flex-shrink-0`;
+const Heading = tw(
+  HeadingBase
+)`text-center lg:text-left max-w-3xl lg:max-w-4xl leading-snug`;
+const Description = tw(
+  DescriptionBase
+)`mt-4 text-center lg:text-left lg:text-base text-gray-100 max-w-lg mx-auto lg:mx-0`;
+const Actions = tw.div`flex flex-col sm:flex-row justify-center lg:justify-start`;
 
+//Buttons on the <Actions> (Next to the photos)
+const ActionButton = tw(
+  AnchorLink
+)`px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
 
+const OpenPageButton = tw(
+  Link
+)`px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300 mt-12 inline-block tracking-wide text-center px-10 py-4 font-semibold tracking-normal`;
 
-const StyledModal = styled(ReactModalAdapter)`
-  &.mainHeroModal__overlay {
-    ${tw`fixed inset-0`}
-  }
-  &.mainHeroModal__content {
-    ${tw`xl:mx-auto m-4 sm:m-16 max-w-screen-xl absolute inset-0 flex justify-center items-center rounded-lg bg-transparent outline-none`}
-  }
-  .content {
-    ${tw`w-full lg:p-16`}
-  }
-`;
+const PrimaryButton = tw(OpenPageButton)`mt-6 sm:mt-12 sm:mr-8`;
+const SecondaryButton = tw(
+  ActionButton
+)`mt-6 sm:mt-12 sm:ml-12 bg-gray-300 text-gray-800 hocus:bg-gray-400 hocus:text-gray-900`;
+const FeatureList = tw.ul`mt-6 leading-loose flex flex-wrap max-w-xl mx-auto lg:mx-0`;
+const Feature = tw.li`mt-2 flex items-center flex-shrink-0 w-full sm:w-[50%] justify-center lg:justify-start`;
+const FeatureIcon = tw(CheckboxIcon)`w-5 h-5 text-primary-100`;
+const FeatureText = tw.p`ml-2 font-medium text-gray-100`;
 
-const CloseModalButton = tw.button`top-0 mt-8 left-1/2 transform -translate-x-1/2 text-gray-100 hocus:border-gray-700 z-50`;
-const VideoEmbedContainer = tw.div`w-full`;
-
+//Top Landing page image and texts
+const ImageColumn = tw(Column)`mx-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-8`;
+const ImageContainer = tw.div`flex justify-end`;
+const Image = tw.img`max-w-full rounded-t sm:rounded w-full h-[40rem] md:w-[40rem] md:h-[40rem]`;
 
 export default ({
-  navButton1Index = "#studentResults",
-  navButton1Text = "About Us",
+  features = null,
+  primaryButtonUrl = "/enquiry",
+  primaryButtonText = "ĐĂNG KÝ HỌC",
+  secondaryButtonUrl = "#studentResults",
+  secondaryButtonText = "Đánh giá của học viên",
+  buttonRoundedCss = "",
 
-  navButton2Index = "/info",
-  navButton2Text = "Thi CCL",
-
-  navButton3Index = "https://www.youtube.com/embed/aMM00ItsPO0",
-  navButton3Text = "Hướng dẫn đăng ký thi",
-
-  navButton4Index = "/enquiry",
-  navButton4Text = "Khóa học",
-
-  navButtonPlatformIndex = "/login",
-  navButtonPlatformText = "PLATFORM",
-
-
+  landingPages = components.landingPages,
+  innerPages = components.innerPages,
+  blocks = components.blocks,
+  heading = "Nơi hội tụ những bảng điểm kỷ lục",
+  description = "Với hệ thống giáo trình được xây dựng sát với tiêu chí chấm điểm của NAATI, CCLVietnamese.com.au đã trở thành trung tâm đầu tiên đạt được thành tích 100% đậu. Với kinh nghiệm đào tạo thực tế và gọn gàng, CCLVietnamese có khóa học rất ngắn nhưng số lượng bảng điểm 80+ vượt trội",
 }) => {
-  useEffect(() => {
-    window.gtag("js", new Date());
-    window.gtag("config", "G-B7N1H5S8N6");
-  }, []);
+  const noOfLandingPages = Object.keys(landingPages).length;
+  const noOfInnerPages = Object.keys(innerPages).length;
+  const noOfComponentBlocks = Object.values(blocks).reduce(
+    (acc, block) => acc + Object.keys(block.elements).length,
+    0
+  );
 
-  // State to track whether the menu is open or not
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const toggleModal = () => setModalIsOpen(!modalIsOpen);
-
-
-
+  features = features || [
+    `Khóa học ngắn, chỉ từ ${noOfLandingPages} tuần`,
+    `Nhiều ưu đãi khi đăng ký trước ${noOfInnerPages}`,
+    `Tỷ lệ đậu đạt ${noOfComponentBlocks} `,
+    `Discount khi đăng ký các combo`,
+  ];
   return (
-    <NavRow>
-      <MenuRow>
-        <LogoLink href="/">
-          <img src={logo} alt="" />
-          cclVietnamese.com.au
-        </LogoLink>      
-      </MenuRow> 
-      
-      <MenuContainer  menuOpen={menuOpen}>
-        <NavLink href={navButton1Index}>{navButton1Text}</NavLink>
-        <NavLink target="_blank" href={navButton2Index}>
-          {navButton2Text}
-        </NavLink>
-        <NavLink target="_self" onClick={toggleModal}>
-          {navButton3Text}
-        </NavLink>
-        <NavLink target="_blank" href={navButton4Index}>
-          {navButton4Text}
-        </NavLink>
-        <Link to={navButtonPlatformIndex}>
-          <PlatformButton>{navButtonPlatformText}</PlatformButton>
-        </Link>
-
-        <StyledModal
-          closeTimeoutMS={300}
-          className="mainHeroModal"
-          isOpen={modalIsOpen}
-          onRequestClose={toggleModal}
-          shouldCloseOnOverlayClick={true}
-        >
-          <CloseModalButton onClick={toggleModal}>
-            <CloseVideoIcon/>
-          </CloseModalButton>
-          <VideoEmbedContainer>
-            <ResponsiveVideoEmbed url={navButton3Index} />
-          </VideoEmbedContainer>
-        </StyledModal>
-      </MenuContainer>
-      <MenuIcon onClick={toggleMenu}>
-          {/* This will show three lines if menu is closed and an X if it's open */}
-          {menuOpen ? <CloseIcon /> : <MenuIcon />}
-      </MenuIcon>
-
-    </NavRow>        
+    <HeroRow>
+      <UpdateNotice>
+        <UpdateNoticeIcon />
+        Trang web vẫn đang trong giai đoạn hoàn thiện.
+      </UpdateNotice>
+      <TextColumn>
+        <Heading as="h1">{heading}</Heading>
+        <Description>{description}</Description>
+        <FeatureList>
+          {features.map((feature, index) => (
+            <Feature key={index}>
+              <FeatureIcon />
+              <FeatureText>{feature}</FeatureText>
+            </Feature>
+          ))}
+        </FeatureList>
+        <Actions>
+          <PrimaryButton to={primaryButtonUrl} css={buttonRoundedCss}>
+            {primaryButtonText}
+          </PrimaryButton>
+          <SecondaryButton href={secondaryButtonUrl} css={buttonRoundedCss}>
+            {secondaryButtonText}
+          </SecondaryButton>
+        </Actions>
+      </TextColumn>
+      <ImageColumn>
+        <ImageContainer>
+          <Image src={heroScreenshotImageSrc} />
+        </ImageContainer>
+      </ImageColumn>
+    </HeroRow>
   );
 };

@@ -5,7 +5,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 
-import NavigationBar from "components/hero/WebCCLVietnameseHero.js"
+import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 //import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import EmailIllustrationSrc from "images/email-illustration.svg";
 
