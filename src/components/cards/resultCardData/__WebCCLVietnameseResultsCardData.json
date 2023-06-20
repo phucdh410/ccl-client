@@ -2,7 +2,7 @@
     {
       "id": "1",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/87T.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/87T.jpg",
       "studentName": "Th Nguyen",
       "occupation": "Accountant and External Auditor",
       "result": "87/90",
@@ -20,7 +20,7 @@
     {
       "id": "2",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83.5H.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83.5H.jpg",
       "studentName": "H Huynh",
       "occupation": "Pastry Chef",
       "result": "83.5/90",
@@ -38,7 +38,7 @@
     {
         "id": "3",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83.5C.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83.5C.jpg",
       "studentName": "Ch Nguyen",
       "occupation": "Occupational Therapist",
       "result": "83.5/90",
@@ -56,7 +56,7 @@
     {
         "id": "4",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83T.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/83T.jpg",
       "studentName": "Ph Nguyen",
       "occupation": "Marketing Specialist",
       "result": "83/90",
@@ -74,7 +74,7 @@
     {
         "id": "5",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82.5H.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82.5H.jpg",
       "studentName": "H Nguyen",
       "occupation": "Marketing Specialist",
       "result": "82.5/90",
@@ -82,7 +82,7 @@
       "resultComment": "History Record",
       "url": "#",
       "galleryImgs": [
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82.5H.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82.5H.jpg",
         "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=512&h=512&q=80",
         "https://images.pexels.com/photos/3201922/pexels-photo-3201922.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "https://images.pexels.com/photos/2404422/pexels-photo-2404422.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -92,7 +92,7 @@
     {
         "id": "6",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82H.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/82H.jpg",
       "studentName": "H Nguyen",
       "occupation": "IT Specialist",
       "result": "82/90",
@@ -104,7 +104,7 @@
     {
         "id": "7",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5H.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5H.jpg",
       "studentName": "H Dao",
       "occupation": "Marketing Specialist",
       "result": "81.5/90",
@@ -116,7 +116,7 @@
     {
         "id": "8",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5G.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5G.jpg",
       "studentName": "Gi Nguyen",
       "occupation": "Entrepreuner",
       "result": "81.5/90",
@@ -128,7 +128,7 @@
     {
         "id": "9",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5P.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/81.5P.jpg",
       "studentName": "Ph Vo",
       "occupation": "Student",
       "result": "81.5/90",
@@ -139,7 +139,7 @@
     {
         "id": "10",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/79.5T.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/79.5T.jpg",
       "studentName": "Nh Nguyen",
       "occupation": "Software Development Specialist",
       "result": "79.5/90",
@@ -150,7 +150,7 @@
     {
         "id": "11",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/76D.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/76D.jpg",
       "studentName": "Ph Nghiem",
       "occupation": "Civil Engineer",
       "result": "76/90",
@@ -161,7 +161,7 @@
     {
         "id": "12",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/74H.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/74H.jpg",
       "studentName": "H Nguyen",
       "occupation": "Marketing Specialist",
       "result": "74/90",
@@ -173,7 +173,7 @@
     {
         "id": "13",
       "imageSrc":
-        "https:cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/71K.jpg",
+        "https://cclvietnamese-results-2023.s3.ap-southeast-2.amazonaws.com/04.2023/71K.jpg",
       "studentName": "K Ngo",
       "occupation": "Chemical Engineer",
       "result": "71/90",
