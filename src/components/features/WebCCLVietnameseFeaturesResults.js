@@ -18,8 +18,6 @@ import CARD_DATA from "components/cards/resultCardData/WebCCLVietnameseResultsCa
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 const SectionContainer = tw(ContentWithVerticalPadding)``;
 
-const CARD_DATA_POPUP = CARD_DATA[0];
-
 export default () => {
   return (
     <SectionContainer id="studentResults">
@@ -30,7 +28,6 @@ export default () => {
             Kết quả xuất sắc <HighlightedText>2023</HighlightedText>
           </>
         }
-        testimonials = {CARD_DATA_POPUP}
       />
       <Features
         heading={

@@ -91,7 +91,8 @@ const TestimonialPopupArea = styled(ReactModalAdapter)`
 `;
 
 // Prepare data for each tab
-//Declare the values that need to grab from
+//Declare the values that this program will grab from the CARD_DATA array.
+//This array contains the TestDate object pair in CARD_DATA
 const testDates = ["2023.04", "2023.02", "2022.11", "2022.07"];
 
 //Tab names
