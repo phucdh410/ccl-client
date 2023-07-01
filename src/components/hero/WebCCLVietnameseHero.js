@@ -10,24 +10,28 @@ import { ReactComponent as RadioIcon } from "feather-icons/dist/icons/radio.svg"
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import styled from "styled-components";
 import tw from "twin.macro";
+
+import HeroSlider from "components/hero/WebCCLVietnameseHeroSlider.js"
 import heroScreenshotImageSrc from "images/results/An - 5 PR Points.png";
 
 /* Hero */
 const Row = tw.div`flex`;
 const HeroRow = tw(
   Row
-)`flex-col lg:flex-row justify-between items-center pt-8 lg:pt-12 pb-16 max-w-screen-2xl mx-auto flex-wrap`;
+)`flex-col lg:flex-row justify-start items-center pt-8 lg:pt-12 pb-16 max-w-screen-2xl mx-auto flex-wrap`;
+
 const Column = tw.div`flex-1`;
+const TwoColumn = tw.div`max-w-md lg:max-w-none mx-auto lg:mx-0 flex flex-col items-center lg:items-stretch lg:flex-row overflow-hidden`;
 const UpdateNotice = tw(
   Column
-)`w-full flex-auto mb-4 sm:mb-8 rounded px-4 py-3 sm:px-5 sm:py-4 bg-orange-100 text-orange-800 flex items-center sm:items-start md:items-center justify-center lg:justify-start border border-orange-200 text-xs sm:text-sm text-center sm:text-left md:leading-none`;
+)`w-full flex-auto mb-4 sm:mb-8 rounded px-4 py-3 sm:px-5 sm:py-4 bg-orange-100 text-orange-800 flex items-center sm:items-start md:items-center justify-center lg:justify-start border border-orange-200 text-xs sm:text-sm text-center sm:text-left md:leading-none overflow-hidden`;
 const UpdateNoticeIcon = tw(RadioIcon)`w-0 sm:w-5 sm:mr-3`;
 const TextColumn = tw(
   Column
-)`mx-auto lg:mr-0 max-w-2xl lg:max-w-xl xl:max-w-2xl flex-shrink-0`;
+)`flex flex-col w-full lg:w-7/12`;
 const Heading = tw(
   HeadingBase
-)`text-center lg:text-left max-w-3xl lg:max-w-4xl leading-snug`;
+)`max-w-3xl lg:max-w-4xl lg:text-left leading-tight`;
 const Description = tw(
   DescriptionBase
 )`mt-4 text-center lg:text-left lg:text-base text-gray-100 max-w-lg mx-auto lg:mx-0`;
@@ -51,10 +55,9 @@ const Feature = tw.li`mt-2 flex items-center flex-shrink-0 w-full sm:w-[50%] jus
 const FeatureIcon = tw(CheckboxIcon)`w-5 h-5 text-primary-100`;
 const FeatureText = tw.p`ml-2 font-medium text-gray-100`;
 
-//Top Landing page image and texts
-const ImageColumn = tw(Column)`mx-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-8`;
-const ImageContainer = tw.div`flex justify-end`;
-const Image = tw.img`max-w-full rounded-t sm:rounded w-full h-[40rem] md:w-[40rem] md:h-[40rem]`;
+const HeroSliderImages = tw.div(
+  HeroSlider
+)`w-full`;
 
 export default ({
   features = null,
@@ -89,31 +92,29 @@ export default ({
         <UpdateNoticeIcon />
         Trang web vẫn đang trong giai đoạn hoàn thiện.
       </UpdateNotice>
-      <TextColumn>
-        <Heading as="h1">{heading}</Heading>
-        <Description>{description}</Description>
-        <FeatureList>
-          {features.map((feature, index) => (
-            <Feature key={index}>
-              <FeatureIcon />
-              <FeatureText>{feature}</FeatureText>
-            </Feature>
-          ))}
-        </FeatureList>
-        <Actions>
-          <PrimaryButton to={primaryButtonUrl} css={buttonRoundedCss}>
-            {primaryButtonText}
-          </PrimaryButton>
-          <SecondaryButton href={secondaryButtonUrl} css={buttonRoundedCss}>
-            {secondaryButtonText}
-          </SecondaryButton>
-        </Actions>
-      </TextColumn>
-      <ImageColumn>
-        <ImageContainer>
-          <Image src={heroScreenshotImageSrc} />
-        </ImageContainer>
-      </ImageColumn>
+      <TwoColumn>
+        <TextColumn>
+          <Heading as="h1">{heading}</Heading>
+          <Description>{description}</Description>
+          <FeatureList>
+            {features.map((feature, index) => (
+              <Feature key={index}>
+                <FeatureIcon />
+                <FeatureText>{feature}</FeatureText>
+              </Feature>
+            ))}
+          </FeatureList>
+          <Actions>
+            <PrimaryButton to={primaryButtonUrl} css={buttonRoundedCss}>
+              {primaryButtonText}
+            </PrimaryButton>
+            <SecondaryButton href={secondaryButtonUrl} css={buttonRoundedCss}>
+              {secondaryButtonText}
+            </SecondaryButton>
+          </Actions>
+        </TextColumn>
+        <HeroSliderImages />
+      </TwoColumn>
     </HeroRow>
   );
 };

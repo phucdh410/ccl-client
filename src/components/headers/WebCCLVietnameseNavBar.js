@@ -55,8 +55,8 @@ const VideoEmbedContainer = tw.div`w-full`;
 
 
 export default ({
-  navButton1Index = "#studentResults",
-  navButton1Text = "About Us",
+  navButton1Index = "/",
+  navButton1Text = "Giới thiệu",
 
   navButton2Index = "/info",
   navButton2Text = "Thi CCL",
@@ -91,7 +91,7 @@ export default ({
       <MenuRow>
         <LogoLink href="/">
           <img src={logo} alt="" />
-          cclVietnamese.com.au
+          CCLVietnamese.COM.AU
         </LogoLink>      
       </MenuRow> 
       

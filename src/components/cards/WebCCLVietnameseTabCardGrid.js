@@ -89,30 +89,34 @@ const TestimonialPopupArea = styled(ReactModalAdapter)`
     ${tw`w-full lg:p-16`}
   }
 `;
-
-// Prepare data for each tab
-//Declare the values that this program will grab from the CARD_DATA array.
-//This array contains the TestDate object pair in CARD_DATA
-const testDates = ["2023.04", "2023.02", "2022.11", "2022.07"];
-
 //Tab names
 const tabNames = ["04.2023", "02.2023", "11.2022", "07.2022"];
 
-const CARD_DATA_POPUP = CARD_DATA.filter((_, i) => i < CARD_DATA.length);
+// Prepare data for each tab
+//Declare the values that this program will grab from the CARD_DATA array.
+//This array contains the TestYears which are the array names in CARD_DATA
+const TestYears = ["2023", "2022"];
+const TestMonths = ["04", "02"];
 
-//If TestDate in the CARD_DATA_POPUP is equal to the string in the testDates array, then return the CARD_DATA_POPUP
-//Assign the CARD_DATA_POPUP array to the corresponding data
-const TAB1_DATA = CARD_DATA_POPUP.filter(
-  (item) => item.TestDate === testDates[0]
+console.log(CARD_DATA);
+
+//Filter by corresponding each year to get the data then filter again to get the Month
+const CARD_DATA_POPUP = {
+  Results2023: CARD_DATA.filter((item) => item.TestYear === "Results2023"),
+  Results2022: CARD_DATA.filter((item) => item.TestYear === "Results2022"),
+};
+
+const TAB1_DATA = CARD_DATA_POPUP[`Results${TestYears[0]}`].filter(
+  (item) => item.TestMonth === TestMonths[0]
 );
-const TAB2_DATA = CARD_DATA_POPUP.filter(
-  (item) => item.TestDate === testDates[1]
+const TAB2_DATA = CARD_DATA_POPUP[`Results${TestYears[0]}`].filter(
+  (item) => item.TestMonth === TestMonths[1]
 );
-const TAB3_DATA = CARD_DATA_POPUP.filter(
-  (item) => item.TestDate === testDates[2]
+const TAB3_DATA = CARD_DATA_POPUP[`Results${TestYears[1]}`].filter(
+  (item) => item.TestMonth === TestMonths[0]
 );
-const TAB4_DATA = CARD_DATA_POPUP.filter(
-  (item) => item.TestDate === testDates[3]
+const TAB4_DATA = CARD_DATA_POPUP[`Results${TestYears[1]}`].filter(
+  (item) => item.TestMonth === TestMonths[1]
 );
 
 export default ({

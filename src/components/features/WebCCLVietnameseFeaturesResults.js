@@ -2,17 +2,8 @@ import { ContentWithVerticalPadding } from "components/misc/Layouts";
 
 //TabGrid for studentResults
 import TabGrid from "components/cards/WebCCLVietnameseTabCardGrid.js";
-
-import Features from "components/features/ThreeColSimple.js";
-
-//TabGrid for whyUs?
-import chefIconImageSrc from "images/chef-icon.svg";
-import celebrationIconImageSrc from "images/celebration-icon.svg";
-import shopIconImageSrc from "images/shop-icon.svg";
-
+import Features from "components/pricing/WebCCLVietnameseFeaturesCourses.js";
 import tw from "twin.macro";
-
-import CARD_DATA from "components/cards/resultCardData/WebCCLVietnameseResultsCardData.js";
 
 //The student results tab
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
@@ -29,36 +20,14 @@ export default () => {
           </>
         }
       />
+
       <Features
         heading={
           <>
-            Nội dung được thiết kế theo{" "}
-            <HighlightedText> NGHIÊN CỨU</HighlightedText>
+            Khóa học được thiết kế{" "}
+            <HighlightedText> BÀI BẢN</HighlightedText>
           </>
         }
-        cards={[
-          {
-            imageSrc: shopIconImageSrc,
-            title: "Chất lượng tiên phong",
-            description:
-              "Nơi đầu tiên ra đời khóa CCL Intensive và đạt tỷ lệ đậu 100%",
-            url: "https://google.com",
-          },
-          {
-            imageSrc: chefIconImageSrc,
-            title: "Thời gian học ngắn",
-            description:
-              "Khóa học tiêu chuẩn chỉ cần 6 tuần, tuy nhiên đã từng có bạn học chỉ 1 ngày",
-            url: "https://facebook.com",
-          },
-          {
-            imageSrc: celebrationIconImageSrc,
-            title: "Chi phí hợp lý",
-            description:
-              "Vô cùng nhiều ưu đã dành cho các bạn đã thi PTE hoặc học các khóa của Master Group",
-            url: "https://reddit.com",
-          },
-        ]}
         imageContainerCss={tw`p-2!`}
         imageCss={tw`w-20! h-20!`}
       />
