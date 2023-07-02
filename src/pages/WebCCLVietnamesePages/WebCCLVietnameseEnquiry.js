@@ -55,7 +55,7 @@ const SubmitButton = tw.button`px-8 py-3 font-bold rounded bg-primary-700 text-g
 const SuccessMessage = tw.p`text-green-500 text-lg font-semibold mt-4`;
 const ErrorMessage = tw.p`text-red-500 text-lg font-semibold mt-4`;
 
-const API_ENDPOINT = "https://us-central1-microsoft-form-api-test.cloudfunctions.net/submitForm";
+const API_ENDPOINT = "https://forms.office.com/formapi/api/c103e421-ef91-4d17-9065-eb8cee2b90d9/users/f3af6e84-5228-470c-8caf-34feef272968/forms('IeQDwZHvF02QZeuM7iuQ2YRur_MoUgxHjK80_u8nKWhURFRZMlBCSDNTTjBKUTVGT1BYTU1DNDdBNC4u')/responses";
 
 
 
