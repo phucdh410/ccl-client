@@ -10,16 +10,7 @@ import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import Hero from "components/hero/WebCCLVietnameseHero.js"
 import Feature from "components/features/WebCCLVietnameseFeaturesResults.js"
 
-
-
 import tw from "twin.macro";
-
-
-
-
-
-
-
 
 //Page styling
 const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 -mb-8 pb-8 min-h-screen bg-primary-900 text-gray-100`;

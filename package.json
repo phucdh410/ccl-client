@@ -1,8 +1,9 @@
 {
-  "name": "treact",
-  "version": "2.0.1",
+  "name": "treact-template",
+  "version": "01.07.23",
   "private": true,
   "dependencies": {
+    "@glidejs/glide": "^3.6.0",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -23,7 +24,7 @@
     "twin.macro": "^3.0.0-rc.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

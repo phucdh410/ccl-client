@@ -4,36 +4,38 @@ import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
+import { ReactComponent as CheckedMark } from "feather-icons/dist/icons/check-circle.svg";
 
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
-//import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import EmailIllustrationSrc from "images/email-illustration.svg";
 
 
+//Style and Layout of the page
 const PrimaryBackgroundContainer = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
 const InputContainer = tw.div`relative py-5 mt-6`;
-const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-sm`;
-const ImageColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto`;
+const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-lg`;
+const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 const TextColumn = styled(Column)(props => [
   tw`md:w-7/12 mt-16 md:mt-0`,
   props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`
 ]);
-
+const ImageColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto`;
 const Image = styled.div(props => [
   `background-image: url("${props.imageSrc}");`,
   tw`rounded bg-contain bg-no-repeat bg-center h-full`,
 ]);
-const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 
+
+//Style on the title of the form
 const Subheading = tw(SubheadingBase)`text-center md:text-left`;
 const Heading = tw(SectionHeading)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200`
 const TextEmphasizes = tw.span`text-white`;
 
-const Select = styled.select``;
-const Input = tw.input`mt-6 first:mt-0 border-b-2 py-3 focus:outline-none font-medium transition duration-300 hocus:border-primary-500`
+//Style on the input field elements
+const Input = tw.input`border-2 rounded mt-6 first:mt-0 border-b-2 focus:outline-none font-medium transition duration-300 hocus:border-teal-500`
 const FormContainer = styled.div`
   ${tw`p-8 sm:p-4 md:p-8 bg-primary-900 text-gray-100 relative`}
   form {
@@ -42,8 +44,8 @@ const FormContainer = styled.div`
   h2 {
     ${tw`text-3xl sm:text-4xl font-bold`}
   }
-  input,textarea {
-    ${tw`w-full bg-transparent text-gray-100 text-base font-medium tracking-wide border-b-2 py-2 text-gray-100 hocus:border-pink-400 focus:outline-none transition duration-200`};
+  input {
+    ${tw`w-full bg-transparent text-gray-100 text-base tracking-wide px-5 py-2`};
 
     ::placeholder {
       ${tw`text-gray-500`}3
@@ -58,7 +60,7 @@ const ErrorMessage = tw.p`text-red-500 text-lg font-semibold mt-4`;
 const API_ENDPOINT = "https://cclvietnamese-proxy-server.azurewebsites.net/api/cclvietnamese-enquiry-form-test";
 
 export default ({
-  subheading = "Contact Us",
+  subheading = "THÔNG TIN HỌC PHÍ",
   heading = <>Tư vấn khóa học </>,
   description = <>Vui lòng điền mẫu sau để nhận được thông tin
                 <TextEmphasizes> khóa học </TextEmphasizes>
@@ -68,15 +70,25 @@ export default ({
                 <wbr/> 
                 vào email của bạn
                 </>,
-  submitButtonText = "Send",
-  formAction = "#",
-  formMethod = "get",
+  submitButtonText = "Gửi thông tin",
   textOnLeft = true,
 }) => {
+  //Declare the state variable, Initialise it with an empty string
   const [firstName, setFirstName] = useState("");
+  const [phone, setPhone] = useState(""); 
   const [emailAddress, setEmailAddress] = useState("");
+  const [facebookURL, setFacebookURL] = useState("");
+  const [promoCode, setPromoCode] = useState("");
+  
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Declare a state variable to track whether each input field has been filled.
+  // Initialize it as false, indicating that the field has not yet been filled.
+  const [isFirstNameFilled, setFirstNameFilled] = useState(false);
+  const [isPhoneFilled, setPhoneFilled] = useState(false);
+  const [isEmailFilled, setEmailFilled] = useState(false);
+  const [isFacebookURLFilled, setFacebookURLFilled] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -95,11 +107,11 @@ export default ({
       });
   
       if (!response.ok) {
-        throw new Error("An error occurred while submitting the form.");
+        throw new Error("Lỗi hệ thống! Thông tin chưa được chuyển đi. Vui lòng thử lại sau");
       }
   
       // Show a success message
-      setSuccessMessage("Form submitted successfully!");
+      setSuccessMessage("Vui lòng kiểm tra chi tiết học phí trong inbox của email bạn đã cung cấp");
       setErrorMessage(""); // Clear any previous error message
 
       // Clear the input fields after successful form submission
@@ -107,7 +119,7 @@ export default ({
       setEmailAddress("");
     } catch (error) {
       // Show an error message
-      setErrorMessage("An error occurred while submitting the form.");
+      setErrorMessage("Có lỗi xảy ra! Vui lòng liên hệ trực tiếp với trung tâm");
       setSuccessMessage(""); // Clear any previous success message
     }
   };
@@ -129,20 +141,34 @@ export default ({
                 {description && <Description>{description}</Description>}
                 <Column>
                   <form onSubmit={handleSubmit}>
-                    <InputContainer>
-                      <Label htmlFor="name-input">Your Name</Label>
-                      <Input
+                  <InputContainer>
+                    <Label htmlFor="name-input">Tên của bạn: </Label>
+                    <Input
                         id="name-input"
                         type="text"
                         name="name"
-                        placeholder="E.g. John Doe"
+                        placeholder="E.g. Hoàng Sơn"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
+                        onBlur={(e) => setFirstNameFilled(Boolean(e.target.value))}
                         required
-                      />
+                        className={`${isFirstNameFilled ? 'border-4 border-green-500 focus:border-green-500' : ''}`}
+                    />
+                  </InputContainer>
+                    <InputContainer>
+                      <Label htmlFor="phone-input">Số điện thoại</Label>
+                      <Input
+                        id="phone-input"
+                        country={'au'}
+                        name="phone"
+                        value={phone} // replace 'this.state.phone' with 'phone'
+                        onChange={setPhone} // replace 'phone => this.setState({ phone })' with 'setPhone'
+                        placeholder="Thêm mã quốc gia và bỏ số 0 e.g (+61) 0415 666 888 thành 61 415 666 888"
+                        required
+                      />      
                     </InputContainer>
                     <InputContainer>
-                      <Label htmlFor="email-input">Email Address</Label>
+                      <Label htmlFor="email-input">Địa chỉ Email</Label>
                       <Input
                         id="email-input"
                         type="email"
@@ -153,9 +179,33 @@ export default ({
                         required
                       />
                     </InputContainer>
-                    <SubmitButton type="submit" value="Submit">
-                      Submit
-                    </SubmitButton>
+                    <InputContainer>
+                      <Label htmlFor="fb-input">Facebook URL</Label>
+                      <Input
+                        id="fb-input"
+                        type="text"
+                        name="facebook"
+                        placeholder="E.g. facebook.com/your-profile"
+                        value={facebookURL}
+                        onChange={(e) => setFacebookURL(e.target.value)}
+                      />
+                    </InputContainer>
+                    <InputContainer>
+                      <Label htmlFor="promocode-input">Mã giới thiệu</Label>
+                      <Input
+                        id="promocode-input"
+                        type="text"
+                        name="promocode"
+                        placeholder="(Viết hoa hay thường đều được)"
+                        value={facebookURL}
+                        onChange={(e) => setFacebookURL(e.target.value)}
+                      />
+                    </InputContainer>
+                    {
+                      submitButtonText && <SubmitButton type="submit" value="Submit">
+                      {submitButtonText}
+                      </SubmitButton>
+                    }
                   </form>
                   {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
                   {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
