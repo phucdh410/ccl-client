@@ -59,6 +59,7 @@ const ErrorMessage = tw.p`text-red-500 text-lg font-semibold mt-4`;
 
 const API_ENDPOINT = "https://cclvietnamese-proxy-server.azurewebsites.net/api/cclvietnamese-enquiry-form-test";
 
+
 export default ({
   subheading = "THÔNG TIN HỌC PHÍ",
   heading = <>Tư vấn khóa học </>,
@@ -167,10 +168,10 @@ export default ({
                       <Label htmlFor="phone-input">Số điện thoại</Label>
                       <Input
                         id="phone-input"
-                        country={'au'}
+                        type="tel"
                         name="phone"
-                        value={phone} // replace 'this.state.phone' with 'phone'
-                        onChange={setPhone} // replace 'phone => this.setState({ phone })' with 'setPhone'
+                        value={phone} 
+                        onChange={(e) => setPhone(e.target.value)} 
                         placeholder="Thêm mã quốc gia và bỏ số 0 e.g (+61) 0415 666 888 thành 61 415 666 888"
                         required
                       />      
