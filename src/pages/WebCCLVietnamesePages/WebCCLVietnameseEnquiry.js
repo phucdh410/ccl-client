@@ -95,8 +95,12 @@ export default ({
 
     const data = {
       firstName: firstName,
-      emailAddress: emailAddress
+      emailAddress: emailAddress,
+      phone: phone,
+      facebookURL: facebookURL,
+      promoCode: promoCode
     };
+    
     try {
       const response = await fetch(API_ENDPOINT, {
         method: "POST",
@@ -110,9 +114,13 @@ export default ({
         throw new Error("Lỗi hệ thống! Thông tin chưa được chuyển đi. Vui lòng thử lại sau");
       }
   
-      // Show a success message
-      setSuccessMessage("Vui lòng kiểm tra chi tiết học phí trong inbox của email bạn đã cung cấp");
-      setErrorMessage(""); // Clear any previous error message
+       // Clear the input fields after successful form submission
+      setFirstName("");
+      setPhone("");
+      setEmailAddress("");
+      setFacebookURL("");
+      setPromoCode("");
+
 
       // Clear the input fields after successful form submission
       setFirstName("");
@@ -193,13 +201,13 @@ export default ({
                     <InputContainer>
                       <Label htmlFor="promocode-input">Mã giới thiệu</Label>
                       <Input
-                        id="promocode-input"
-                        type="text"
-                        name="promocode"
-                        placeholder="(Viết hoa hay thường đều được)"
-                        value={facebookURL}
-                        onChange={(e) => setFacebookURL(e.target.value)}
-                      />
+                          id="promocode-input"
+                          type="text"
+                          name="promocode"
+                          placeholder="(Viết hoa hay thường đều được)"
+                          value={promoCode}
+                          onChange={(e) => setPromoCode(e.target.value)}
+                        />
                     </InputContainer>
                     {
                       submitButtonText && <SubmitButton type="submit" value="Submit">
