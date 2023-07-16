@@ -114,8 +114,11 @@ export default ({
       if (!response.ok) {
         throw new Error("Lỗi hệ thống! Thông tin chưa được chuyển đi. Vui lòng thử lại sau");
       }
-  
-       // Clear the input fields after successful form submission
+      
+      // Set a success message
+      setSuccessMessage("Cảm ơn thông tin của bạn. Chi tiết đã được gửi vào email inbox (hoặc spam) của bạn rùi nhé <3"); 
+
+      // Clear the input fields after successful form submission
       setFirstName("");
       setPhone("");
       setEmailAddress("");
@@ -123,9 +126,6 @@ export default ({
       setPromoCode("");
 
 
-      // Clear the input fields after successful form submission
-      setFirstName("");
-      setEmailAddress("");
     } catch (error) {
       // Show an error message
       setErrorMessage("Có lỗi xảy ra! Vui lòng liên hệ trực tiếp với trung tâm");
