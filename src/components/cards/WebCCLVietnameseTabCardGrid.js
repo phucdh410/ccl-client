@@ -74,10 +74,6 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-const TestimonialPopupBackground = styled.div`
-  ${tw`absolute flex items-center justify-center p-4 bg-gray-300 rounded-lg`}
-`;
-
 const TestimonialPopupArea = styled(ReactModalAdapter)`
   &.mainHeroModal__overlay {
     ${tw`fixed inset-0 z-50`}
@@ -89,6 +85,12 @@ const TestimonialPopupArea = styled(ReactModalAdapter)`
     ${tw`w-full lg:p-16`}
   }
 `;
+
+
+const TestimonialPopupBackground = styled.div`
+${tw`absolute flex items-center justify-center p-4 bg-gray-300 rounded-lg`}
+`;
+
 //Tab names
 const tabNames = ["04.2023", "02.2023", "11.2022", "07.2022"];
 
@@ -231,7 +233,7 @@ export default ({
       <DecoratorBlob1 />
       <DecoratorBlob2 />
       <TestimonialPopupArea
-        closeTimeoutMS={300}
+        closeTimeoutMS={50}
         className="mainHeroModal"
         isOpen={isModalOpen}
         onRequestClose={toggleModal}
@@ -245,6 +247,7 @@ export default ({
             />
           </div>
         </TestimonialPopupBackground>
+
       </TestimonialPopupArea>
     </Container>
   );

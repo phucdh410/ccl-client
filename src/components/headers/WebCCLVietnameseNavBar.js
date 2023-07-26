@@ -41,6 +41,7 @@ const PlatformButton = tw(
 const StyledModal = styled(ReactModalAdapter)`
   &.mainHeroModal__overlay {
     ${tw`fixed inset-0`}
+    background-color: rgba(0,0,0,.8);
   }
   &.mainHeroModal__content {
     ${tw`xl:mx-auto m-4 sm:m-16 max-w-screen-xl absolute inset-0 flex justify-center items-center rounded-lg bg-transparent outline-none`}

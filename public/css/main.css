@@ -1,0 +1,19 @@
+.resulttab_tm_modalbox {
+    visibility: hidden;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 15;
+    height: 100vh;
+    background-color: rgba(0,0,0,.8);
+    opacity: 0;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .resulttab_tm_modalbox.opened {
+    visibility: visible;
+    opacity: 1;
+  }
