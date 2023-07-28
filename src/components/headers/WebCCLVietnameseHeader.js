@@ -35,10 +35,10 @@ export const PrimaryLink = tw(NavLink)`
 
 //Change the style of the logo, ${tw`w-40 mr-3`} defines the size of the logo
 export const LogoLink = styled(NavLink)`
-  ${tw`flex items-center font-black border-b-0 text-2xl! ml-0!`};
+  ${tw`flex items-center font-black border-b-0 md:text-2xl! ml-0!  gap-x-2 lg:gap-x-0`};
 
   img {
-    ${tw`w-24 mr-3`}
+    ${tw`w-10 h-10 md:w-24 md:mr-3 lg:w-24 lg:h-24`};
   }
 `;
 

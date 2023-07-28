@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import  { globalStyles } from 'twin.macro'
+import  tw, { globalStyles } from 'twin.macro'
 
 const GlobalStyles = createGlobalStyle(globalStyles, `
    /* Below animations are for modal created using React-Modal */
@@ -14,6 +14,14 @@ const GlobalStyles = createGlobalStyle(globalStyles, `
    .ReactModal__Overlay--before-close{
      transform: scale(0);
    }
+
+   @media screen and (max-width: 576px) {
+    .slick-list {
+      width: calc(100vw - 64px) !important;
+      margin-top: 2rem;
+    }
+   }
+   
 `)
 
 export default GlobalStyles

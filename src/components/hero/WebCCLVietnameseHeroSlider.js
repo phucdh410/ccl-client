@@ -19,9 +19,10 @@ const Image = styled.div(props => [
   tw`rounded bg-cover bg-center h-80 sm:h-96 lg:h-144`
 ]);
 
-const ControlContainer = tw.div`absolute bottom-0 right-0 bg-gray-100 px-6 py-4 rounded-tl-3xl border`;
+const ControlContainer = tw.div`rounded-br-md absolute bottom-0 right-0 bg-gray-100 px-2 py-2 lg:px-6 lg:py-4 rounded-tl-3xl border`;
 const ControlButton = styled(PrimaryButton)`
-  ${tw`mx-3 rounded-full text-gray-100 p-2`}
+  ${tw`mx-2 lg:mx-3 rounded-full text-gray-100 p-2`}
+  
   svg {
     ${tw`w-5 h-5`}
   }
@@ -47,7 +48,7 @@ export default ({
   return (
     <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
       {testimonials.map((testimonial, index) => (
-        <ImageAndControlContainer key={index}>
+        <ImageAndControlContainer key={index} className="ksdkgh">
           <Image imageSrc={testimonial.imageSrc} />
           <ControlContainer>
             <ControlButton onClick={imageSliderRef?.slickPrev}>

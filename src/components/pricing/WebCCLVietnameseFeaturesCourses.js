@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -17,10 +17,11 @@ const Subheading = tw(SubheadingBase)`mb-4 text-gray-100`;
 const Heading = tw(SectionHeading)`w-full`;
 const Description = tw(SectionDescription)`w-full text-gray-300 text-center`;
 
-const PlansContainer = tw.div`mt-16 flex flex-col items-center lg:flex-row lg:items-stretch lg:justify-between text-gray-900 font-medium`;
+const PlansContainer = tw.div`mt-4 lg:mt-16 flex flex-col items-center lg:flex-row lg:items-stretch lg:justify-between text-gray-900 font-medium`;
 const Plan = styled.div`
-  ${tw`w-full max-w-sm bg-white rounded-lg shadow-sm py-10 px-6 sm:px-10 lg:px-6 lg:py-10 xl:p-10 mx-3 flex flex-col justify-between mt-16 first:mt-0 lg:mt-0 shadow-raised`}
-`;
+  ${tw`w-full max-w-sm bg-white rounded-lg shadow-sm py-10 px-6 sm:px-10 lg:px-6 lg:py-10 xl:p-10 mx-3 lg:flex flex-col justify-between mt-0 lg:mt-16 first:mt-0 lg:mt-0 shadow-raised`}
+  ${props => props.active? tw`flex`:tw`hidden`}
+  `;
 
 const PlanHeader = styled.div`
   .nameAndFeaturedContainer {
@@ -60,7 +61,7 @@ const PlanFeatures = styled.ul`
       ${tw`font-semibold text-primary-900 tracking-wide ml-3`}
     }
     .noBS {
-      ${tw`text-gray-500 text-lg line-through hidden sm:block`}
+      ${tw`text-gray-500 text-lg line-through`}
     }
   }
 `;
@@ -69,6 +70,12 @@ const PlanAction = tw.div`mt-4`;
 const ActionButton = styled(PrimaryButtonBase)`
   ${tw`block text-center text-sm font-semibold tracking-wider w-full text-gray-100 bg-primary-500 px-6 py-4 rounded hover:bg-primary-700 focus:shadow-outline focus:outline-none transition-colors duration-300`}
 `;
+const FeatureTabListContainer = tw.div`lg:hidden mt-4 bg-white rounded-md p-4 text-gray-600 grid grid-cols-3 gap-x-2 text-center`
+const FeatureTabListItem = styled.span`
+  ${tw`cursor-pointer text-gray-600 font-medium rounded-sm transition duration-300 text-sm py-2 text-center`}
+  ${(props) => props.active && tw`bg-primary-500! text-gray-100!`}
+}
+`
 
 export default ({
   heading = "",
@@ -77,6 +84,8 @@ export default ({
   plans = null,
   primaryButtonText = "Nhận học phí vào email"
 }) => {
+  const [selectedFeatureIndex, setSelectedFeatureIndex] = useState(0)
+
   const defaultPlans = [
     {
       "name": "Essential",
@@ -145,9 +154,22 @@ export default ({
           {description && <Description>{description[0]}</Description>}
           {description && <Description>{description[1]}</Description>}
         </HeaderContainer>
+        <FeatureTabListContainer>
+        {plans.map((plan, index) => {
+          const isActive = index === selectedFeatureIndex;
+          return (
+          <FeatureTabListItem
+            key={index}
+            active={isActive}
+            onClick={() => setSelectedFeatureIndex(index)}
+          >
+            {plan.name}
+          </FeatureTabListItem>
+        )})}
+        </FeatureTabListContainer>
         <PlansContainer>
           {plans.map((plan, index) => (
-            <Plan key={index} featured={plan.featured}>
+            <Plan key={index} featured={plan.featured} active={index === selectedFeatureIndex}>
               <PlanHeader>
                 <span className="nameAndFeaturedContainer">
                   <span className="name">{plan.name}</span>

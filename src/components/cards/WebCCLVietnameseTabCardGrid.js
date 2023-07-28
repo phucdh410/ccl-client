@@ -75,6 +75,8 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 `;
 
 const TestimonialPopupArea = styled(ReactModalAdapter)`
+  ${tw`bg-gray-900 bg-opacity-25`}
+
   &.mainHeroModal__overlay {
     ${tw`fixed inset-0 z-50`}
   }
@@ -88,8 +90,12 @@ const TestimonialPopupArea = styled(ReactModalAdapter)`
 
 
 const TestimonialPopupBackground = styled.div`
-${tw`absolute flex items-center justify-center p-4 bg-gray-300 rounded-lg`}
+  ${tw`drop-shadow-xl absolute flex items-center justify-center p-4 bg-gray-300 rounded-lg w-[calc(100vw-2rem)] h-[fit-content] lg:w-[fit-content]`}
 `;
+
+const CardResultContainer = tw.div`mt-4 flex items-center justify-between`;
+const CardResultMoreDetail = tw.div`flex lg:hidden gap-x-1 items-center mt-4 text-sm text-gray-600 cursor-pointer`;
+const TestimonialPopupCloseButton = tw.button`absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-900 cursor-pointer transition duration-300 focus:outline-none z-50`;
 
 //Tab names
 const tabNames = ["04.2023", "02.2023", "11.2022", "07.2022"];
@@ -222,7 +228,19 @@ export default ({
                   <CardText>
                     <CardStudentName>{card.studentName}</CardStudentName>
                     <CardOccupation>{card.occupation}</CardOccupation>
-                    <CardResult>{card.result}</CardResult>
+                    <CardResultContainer>
+                      <CardResult>{card.result}</CardResult>
+                      <CardResultMoreDetail onClick={() => toggleModal(card)}>
+                      Xem thêm 
+                      <svg xmlns="http://www.w3.org/2000/svg" 
+                        width="12" 
+                        height="12" 
+                        fill="currentColor"
+                        viewBox="0 -2 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                      </CardResultMoreDetail>
+                    </CardResultContainer>
                   </CardText>
                 </Card>
               </CardContainer>
@@ -241,6 +259,16 @@ export default ({
       >
         <TestimonialPopupBackground>
           <div className="testimonial" tw="w-full">
+            <TestimonialPopupCloseButton onClick={toggleModal}>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" 
+                    height="20" 
+                    fill="currentColor" 
+                    class="bi bi-x-circle-fill" 
+                    viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                </svg>
+              </TestimonialPopupCloseButton>
             <GallerySlider
               testimonials={selectedCardData ? [selectedCardData] : []}
               card={selectedCardData}

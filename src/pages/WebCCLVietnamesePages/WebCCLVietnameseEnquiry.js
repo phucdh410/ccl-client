@@ -12,27 +12,27 @@ import EmailIllustrationSrc from "images/email-illustration.svg";
 
 //Style and Layout of the page
 const PrimaryBackgroundContainer = tw.div`relative`;
-const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
+const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-16`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
-const InputContainer = tw.div`relative py-5 mt-6`;
-const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-lg`;
+const InputContainer = tw.div`relative py-3 lg:py-5 mt-6`;
+const Label = tw.label`absolute top-0 left-0 tracking-wide font-semibold text-base lg:text-lg`;
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 const TextColumn = styled(Column)(props => [
-  tw`md:w-7/12 mt-16 md:mt-0`,
+  tw`md:w-7/12 lg:mt-16 mt-6`,
   props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`
 ]);
-const ImageColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto`;
+const ImageColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-40 md:h-auto`;
 const Image = styled.div(props => [
   `background-image: url("${props.imageSrc}");`,
-  tw`rounded bg-contain bg-no-repeat bg-center h-full`,
+  tw`rounded bg-contain bg-no-repeat bg-center h-40 md:h-full`,
 ]);
 
 
 //Style on the title of the form
-const Subheading = tw(SubheadingBase)`text-center md:text-left`;
+const Subheading = tw(SubheadingBase)`mt-2 lg:text-xl mb-2 mx-auto text-gray-100 text-center md:text-left py-1 px-3 rounded-md w-[fit-content]`;
 const Heading = tw(SectionHeading)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
-const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200`
-const TextEmphasizes = tw.span`text-white`;
+const Description = tw.p`leading-4 space-y-1 mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-100`
+const TextEmphasizes = tw.span`text-primary-600 bg-white rounded-sm px-1 mx-1 text-sm inline-block leading-[1.5rem]`;
 
 //Style on the input field elements
 const Input = tw.input`border-2 rounded mt-6 first:mt-0 border-b-2 focus:outline-none font-medium transition duration-300 hocus:border-teal-500`
@@ -53,7 +53,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const SubmitButton = tw.button`px-8 py-3 font-bold rounded bg-primary-700 text-gray-100 hocus:bg-primary-900 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300`;
+const SubmitButton = tw.button`mt-4 px-8 py-3 font-bold rounded bg-primary-700 text-gray-100 hocus:bg-primary-900 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300`;
 const SuccessMessage = tw.p`text-green-500 text-lg font-semibold mt-4`;
 const ErrorMessage = tw.p`text-red-500 text-lg font-semibold mt-4`;
 
