@@ -2,7 +2,6 @@ import React from "react";
 import GlobalStyles from 'styles/GlobalStyles';
 import { css } from "styled-components/macro"; //eslint-disable-line
 import WebCCLVietnameseLandingPage from "./WebCCLVietnameseLandingPage.js";
-import { Analytics } from '@vercel/analytics/react';
 
 /* Inner Pages */
 import LoginPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseSignIn.js";
@@ -22,7 +21,6 @@ export default function App() {
 
     <>
       <GlobalStyles />
-      <Analytics />
       <Router>
         <Routes>        
             <Route path="/" element={<WebCCLVietnameseLandingPage />} />
