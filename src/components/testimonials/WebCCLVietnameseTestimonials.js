@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import { css } from "styled-components/macro";
+//import { css } from "styled-components/macro";
 import { SectionHeading as StudentScore } from "../misc/Headings.js";
 import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-2-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-2-icon.svg";
@@ -29,9 +29,9 @@ const TheStudent = tw.h5`font-bold text-xl lg:text-xl xl:text-2xl text-primary-8
 const TheOccupation = tw.h5`font-bold text-lg lg:text-xl xl:text-2xl text-gray-700`;
 
 const SliderControlButtonContainer = styled.div`
-  ${tw`hidden lg:flex absolute top-0 h-full flex items-end md:items-center z-20 p-8 `}
+  ${tw`hidden lg:flex absolute top-0 h-full flex items-center z-20 p-8 `}
   button {
-    ${tw`rounded-full text-secondary-500 hover:text-primary-500 focus:outline-none transition duration-300 transform hover:scale-125 transform -translate-y-2/3 md:translate-y-0`}
+    ${tw`rounded-full text-secondary-500 hover:text-primary-500 focus:outline-none transition duration-300 transform hover:scale-125`}
     svg {
       ${tw`w-8`}
     }

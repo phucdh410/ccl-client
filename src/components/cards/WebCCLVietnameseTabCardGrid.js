@@ -7,11 +7,13 @@ import {
   Container,
   ContentWithPaddingResult,
 } from "components/misc/Layouts.js";
+import { useMediaQuery } from 'react-responsive';
 import { SectionHeading } from "components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as StarIcon } from "images/star-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
+import { ReactComponent as CloseIconImport } from "feather-icons/dist/icons/x-circle.svg";
 
 import CARD_DATA from "components/cards/resultCardData/WebCCLVietnameseResultsCardData.js";
 import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
@@ -19,20 +21,19 @@ import GallerySlider from "components/testimonials/WebCCLVietnameseTestimonials.
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
+
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
 
-const TabControl = styled.div`
-  ${tw`cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text-gray-600 font-medium rounded-sm transition duration-300 text-sm sm:text-base w-1/2 sm:w-auto text-center`}
-  &:hover {
-    ${tw`bg-gray-300 text-gray-700`}
-  }
-  ${(props) => props.active && tw`bg-primary-500! text-gray-100!`}
-  }
+const TestimonialPopupBackground = styled.div`
+  ${tw`drop-shadow-xl absolute flex items-center justify-center p-4 bg-gray-300 rounded-lg w-[calc(100vw-2rem)] h-[fit-content] lg:w-[fit-content]`}
 `;
 
-const TabContent = tw(
-  motion.div
-)`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
+const CardResultContainer = tw.div`mt-4 flex items-center justify-between`;
+const CardResultMoreDetail = tw.div`flex lg:hidden font-bold gap-x-1 items-center mt-4 text-sm text-primary-500 hover:scale-125 cursor-pointer`;
+
+const TestimonialPopupCloseButton = tw.button`absolute top-0 right-0 mt-4 mr-4 text-gray-800 hover:text-primary-500 hover:scale-125 cursor-pointer transition duration-300 focus:outline-none z-50`;
+const CloseIcon = tw(CloseIconImport)`w-8 h-8`;
+
 const CardContainer = tw.div`mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12`;
 const Card = tw(
   motion.a
@@ -45,23 +46,10 @@ const CardImageContainer = styled.div`
   ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
 `;
 const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
-const CardRating = styled.div`
-  ${tw`mr-1 text-sm font-bold flex items-end text-gray-900`}
-  svg {
-    ${tw`w-4 h-4 fill-current text-orange-400 mr-1`}
-  }
-`;
-
-const CardHoverOverlay = styled(motion.div)`
-  background-color: rgba(255, 255, 255, 0.5);
-  ${tw`absolute inset-0 flex justify-center items-center`}
-`;
 
 //Define the const variable Button's design "Xem thêm" when hover the house over the Card
 const CardButton = tw(PrimaryButtonBase)`text-sm`;
-
 const CardReview = tw.div`font-medium text-xs text-gray-600`;
-
 const CardText = tw.div`p-4 text-gray-900`;
 const CardStudentName = tw.h5`text-lg font-semibold group-hover:text-primary-500`;
 const CardOccupation = tw.p`mt-1 text-sm font-medium text-gray-600`;
@@ -72,6 +60,18 @@ const DecoratorBlob1 = styled(SvgDecoratorBlob1)`
 `;
 const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
+`;
+
+const CardHoverOverlay = styled(motion.div)`
+  background-color: rgba(255, 255, 255, 0.5);
+  ${tw`absolute inset-0 flex justify-center items-center`}
+`;
+
+const CardRating = styled.div`
+  ${tw`mr-1 text-sm font-bold flex items-end text-gray-900`}
+  svg {
+    ${tw`w-4 h-4 fill-current text-orange-400 mr-1`}
+  }
 `;
 
 const TestimonialPopupArea = styled(ReactModalAdapter)`
@@ -88,14 +88,20 @@ const TestimonialPopupArea = styled(ReactModalAdapter)`
   }
 `;
 
-
-const TestimonialPopupBackground = styled.div`
-  ${tw`drop-shadow-xl absolute flex items-center justify-center p-4 bg-gray-300 rounded-lg w-[calc(100vw-2rem)] h-[fit-content] lg:w-[fit-content]`}
+const TabControl = styled.div`
+  ${tw`cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text-gray-600 font-medium rounded-sm transition duration-300 text-sm sm:text-base w-1/2 sm:w-auto text-center`}
+  &:hover {
+    ${tw`bg-gray-300 text-gray-700`}
+  }
+  ${(props) => props.active && tw`bg-primary-500! text-gray-100!`}
+  }
 `;
 
-const CardResultContainer = tw.div`mt-4 flex items-center justify-between`;
-const CardResultMoreDetail = tw.div`flex lg:hidden gap-x-1 items-center mt-4 text-sm text-gray-600 cursor-pointer`;
-const TestimonialPopupCloseButton = tw.button`absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-900 cursor-pointer transition duration-300 focus:outline-none z-50`;
+const TabContent = tw(
+  motion.div
+)`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
+
+
 
 //Tab names
 const tabNames = ["04.2023", "02.2023", "11.2022", "07.2022"];
@@ -143,6 +149,7 @@ export default ({
    *
    * setSelectedCardData(cardData);
    */
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 1023px)' });
 
   //Define the const variable that handles the pop-up when click the "Xem thêm Button"
   const tabsKeys = Object.keys(tabs);
@@ -187,7 +194,7 @@ export default ({
                 display: "none",
               },
             }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             initial={activeTab === tabKey ? "current" : "hidden"}
             animate={activeTab === tabKey ? "current" : "hidden"}
           >
@@ -196,7 +203,7 @@ export default ({
                 <Card
                   className="group"
                   initial="rest"
-                  whileHover="hover"
+                  whileHover={!isSmallScreen ? "hover" : "rest"}
                   animate="rest"
                 >
                   <CardImageContainer imageSrc={card.imageSrc}>
@@ -218,7 +225,7 @@ export default ({
                           height: 0,
                         },
                       }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <CardButton onClick={() => toggleModal(card)}>
                         Xem thêm
@@ -231,14 +238,7 @@ export default ({
                     <CardResultContainer>
                       <CardResult>{card.result}</CardResult>
                       <CardResultMoreDetail onClick={() => toggleModal(card)}>
-                      Xem thêm 
-                      <svg xmlns="http://www.w3.org/2000/svg" 
-                        width="12" 
-                        height="12" 
-                        fill="currentColor"
-                        viewBox="0 -2 16 16">
-                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                      </svg>
+                      Xem thêm =>
                       </CardResultMoreDetail>
                     </CardResultContainer>
                   </CardText>
@@ -260,14 +260,7 @@ export default ({
         <TestimonialPopupBackground>
           <div className="testimonial" tw="w-full">
             <TestimonialPopupCloseButton onClick={toggleModal}>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    width="20" 
-                    height="20" 
-                    fill="currentColor" 
-                    class="bi bi-x-circle-fill" 
-                    viewBox="0 0 16 16">
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                </svg>
+                <CloseIcon/>
               </TestimonialPopupCloseButton>
             <GallerySlider
               testimonials={selectedCardData ? [selectedCardData] : []}

@@ -1,13 +1,15 @@
 import React, { useState }  from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
+import Footer from "components/footers/WebCCLVietnameseFooter.js";
+
+//import { css } from "styled-components/macro"; //eslint-disable-line
 import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
-import { ReactComponent as CheckedMark } from "feather-icons/dist/icons/check-circle.svg";
 
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import EmailIllustrationSrc from "images/email-illustration.svg";
+
 
 
 //Style and Layout of the page
@@ -30,9 +32,9 @@ const Image = styled.div(props => [
 
 //Style on the title of the form
 const Subheading = tw(SubheadingBase)`mt-2 lg:text-xl mb-2 mx-auto text-gray-100 text-center md:text-left py-1 px-3 rounded-md w-[fit-content]`;
-const Heading = tw(SectionHeading)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
+const Heading = tw(SectionHeading)`mt-4 font-black text-[#fbc52e] text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`leading-4 space-y-1 mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-100`
-const TextEmphasizes = tw.span`text-primary-600 bg-white rounded-sm px-1 mx-1 text-sm inline-block leading-[1.5rem]`;
+const TextEmphasizes = tw.span`font-bold text-primary-600 bg-white rounded-sm px-1 mx-1 text-sm inline-block leading-[1.5rem]`;
 
 //Style on the input field elements
 const Input = tw.input`border-2 rounded mt-6 first:mt-0 border-b-2 focus:outline-none font-medium transition duration-300 hocus:border-teal-500`
@@ -53,7 +55,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const SubmitButton = tw.button`mt-4 px-8 py-3 font-bold rounded bg-primary-700 text-gray-100 hocus:bg-primary-900 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300`;
+const SubmitButton = tw.button`mt-4 px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-gray-100 hocus:text-primary-500 focus:shadow-outline focus:outline-none transition duration-300`;
 const SuccessMessage = tw.p`text-green-500 text-lg font-semibold mt-4`;
 const ErrorMessage = tw.p`text-red-500 text-lg font-semibold mt-4`;
 
@@ -61,13 +63,13 @@ const API_ENDPOINT = "https://cclvietnamese-proxy-server.azurewebsites.net/api/c
 
 
 export default ({
-  subheading = "THÔNG TIN HỌC PHÍ",
+  subheading = "",
   heading = <>Tư vấn khóa học </>,
-  description = <>Vui lòng điền mẫu sau để nhận được thông tin
-                <TextEmphasizes> khóa học </TextEmphasizes>
+  description = <>Vui lòng điền mẫu sau để nhận được thông tin 
+                <TextEmphasizes> KHÓA HỌC </TextEmphasizes>
                 <wbr/> 
                 và 
-                <TextEmphasizes> học phí </TextEmphasizes>
+                <TextEmphasizes> HỌC PHÍ </TextEmphasizes>
                 <wbr/> 
                 vào email của bạn
                 </>,
@@ -83,13 +85,6 @@ export default ({
   
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  // Declare a state variable to track whether each input field has been filled.
-  // Initialize it as false, indicating that the field has not yet been filled.
-  const [isFirstNameFilled, setFirstNameFilled] = useState(false);
-  const [isPhoneFilled, setPhoneFilled] = useState(false);
-  const [isEmailFilled, setEmailFilled] = useState(false);
-  const [isFacebookURLFilled, setFacebookURLFilled] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -159,9 +154,7 @@ export default ({
                         placeholder="E.g. Hoàng Sơn"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        onBlur={(e) => setFirstNameFilled(Boolean(e.target.value))}
                         required
-                        className={`${isFirstNameFilled ? 'border-4 border-green-500 focus:border-green-500' : ''}`}
                     />
                   </InputContainer>
                     <InputContainer>
@@ -172,7 +165,7 @@ export default ({
                         name="phone"
                         value={phone} 
                         onChange={(e) => setPhone(e.target.value)} 
-                        placeholder="Thêm mã quốc gia và bỏ số 0 e.g (+61) 0415 666 888 thành 61 415 666 888"
+                        placeholder="Thêm mã quốc gia và bỏ số 0 đầu e.g + 61 412 345 678 "
                         required
                       />      
                     </InputContainer>
@@ -211,8 +204,10 @@ export default ({
                         />
                     </InputContainer>
                     {
-                      submitButtonText && <SubmitButton type="submit" value="Submit">
-                      {submitButtonText}
+                      <SubmitButton 
+                        type="submit" 
+                        value="Submit">
+                        Gửi thông tin
                       </SubmitButton>
                     }
                   </form>
@@ -222,6 +217,9 @@ export default ({
               </TextContent>
             </TextColumn>
           </TwoColumn>
+          <Content2Xl>
+            <Footer />
+          </Content2Xl>
         </FormContainer>
       </PrimaryBackgroundContainer>
   );

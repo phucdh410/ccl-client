@@ -10,9 +10,9 @@ import { ReactComponent as YoutubeIcon } from "images/youtube-icon.svg";
 
 const Container = tw.div`relative bg-gray-900 text-gray-100 -mx-8 -mb-8 px-8`;
 const Content = tw.div`max-w-screen-xl mx-auto pt-16 pb-8`
-const FiveColumns = tw.div`flex flex-wrap justify-between`;
+const NoOfColumns = tw.div`flex flex-wrap justify-between`;
 
-const Column = tw.div`w-1/2 md:w-1/5 mb-8 md:mb-0 text-sm sm:text-base text-center md:text-left`;
+const Column = tw.div`w-full md:w-1/6 mb-8 md:mb-0 text-sm sm:text-base text-center md:text-left`;
 const CompanyColumn = tw.div`text-center md:text-left mb-16 lg:mb-0 w-full lg:w-1/5`;
 
 const ColumnHeading = tw.h5`font-bold uppercase`;
@@ -35,16 +35,16 @@ const SocialLink = styled.a`
   }
 `;
 
-const CopyrightAndCompanyInfoRow = tw.div`pb-0 text-sm font-normal flex flex-col sm:flex-row justify-between items-center`
+const CopyrightAndCompanyInfoRow = tw.div`pb-0 text-sm font-normal flex flex-col sm:flex-row items-center justify-between`
 const CopyrightNotice = tw.div`flex items-center justify-center`;
-const CompanyInfo = tw.div``
+const CompanyInfo = tw.div`justify-end`
 
 const Divider = tw.div`my-8 border-b-2 border-gray-800`
 export default () => {
   return (
     <Container>
       <Content>
-        <FiveColumns>
+        <NoOfColumns>
           <CompanyColumn>
             <LogoContainer>
               <LogoText>cclvietnamese.com.au</LogoText>
@@ -55,7 +55,6 @@ export default () => {
               Australia 2000
             </CompanyAddress>
             <SocialLinksContainer>
-
               <SocialLink href="https://www.facebook.com/cclmaster/">
                 <FacebookIcon />
               </SocialLink>
@@ -63,10 +62,9 @@ export default () => {
               <SocialLink href="https://www.youtube.com/@cclvietnamese">
                 <YoutubeIcon />
               </SocialLink>
-
             </SocialLinksContainer>
           </CompanyColumn>
-          <Column>
+          {/* <Column>
             <ColumnHeading>Quick Links</ColumnHeading>
             <LinkList>
               <LinkListItem>
@@ -82,8 +80,8 @@ export default () => {
                 <Link href="#">About Us</Link>
               </LinkListItem>
             </LinkList>
-          </Column>
-
+          </Column> 
+          
           <Column>
             <ColumnHeading>Legal</ColumnHeading>
             <LinkList>
@@ -101,6 +99,9 @@ export default () => {
               </LinkListItem>
             </LinkList>
           </Column>
+          
+          */}
+
           <Column>
             <ColumnHeading>Contact</ColumnHeading>
             <LinkList>
@@ -118,17 +119,22 @@ export default () => {
               </LinkListItem>
             </LinkList>
           </Column>
-        </FiveColumns>
+
+          
+
+        </NoOfColumns>
+
         <Divider/>
+
         <CopyrightAndCompanyInfoRow>
           <CopyrightNotice>
-            <LogoImg src={LogoImage} /> Syndikates Education Pty Ltd
-            
+            <LogoImg src={LogoImage} /> Syndikates Education Pty Ltd ACN 667 428 864
           </CopyrightNotice>
           <CompanyInfo>
-            Built with {'\u2764\uFE0F'} &copy; 2023, 
+            Built with {'\u2764\uFE0F'} &copy; 2023 
           </CompanyInfo>
         </CopyrightAndCompanyInfoRow>
+
       </Content>
     </Container>
   );

@@ -1,5 +1,5 @@
 {
-  "name": "treact-template",
+  "name": "ccl-vietnamese-com-au",
   "version": "01.07.23",
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
     "react-dom": "^18.0.0",
     "react-github-btn": "^1.4.0",
     "react-modal": "^3.15.0",
+    "react-responsive": "^9.0.2",
     "react-rnd": "^10.3.7",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",

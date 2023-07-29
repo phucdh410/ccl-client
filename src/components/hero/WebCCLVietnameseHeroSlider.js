@@ -43,7 +43,7 @@ export default ({
 
   // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
   const [imageSliderRef, setImageSliderRef] = useState(null);
-  const [textSliderRef, setTextSliderRef] = useState(null);
+  const [textSliderRef] = useState(null);
 
   return (
     <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
