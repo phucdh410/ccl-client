@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 import tw from "twin.macro";
-import { css } from "styled-components/macro"; //eslint-disable-line
+//import { css } from "styled-components/macro"; //eslint-disable-line
+//import { Link } from "react-router-dom";
 
-
+import { Analytics } from '@vercel/analytics/react';
 import { ReactComponent as CloseVideoIconImport } from "feather-icons/dist/icons/x-circle.svg";
 
 import logo from "images/WebCCLVietnameseLogo.svg";
@@ -92,6 +93,7 @@ export default ({
 
   return (
     <NavRow>
+      <Analytics />
       <MenuRow>
         <LogoLink href="/">
           <img

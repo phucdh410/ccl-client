@@ -1,5 +1,6 @@
 import React from "react";
 //import { useState, useEffect } from "react";
+import { Analytics } from '@vercel/analytics/react';
 import { Link } from "react-router-dom";
 //import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading as HeadingBase } from "components/misc/Headings";
@@ -81,6 +82,7 @@ export default ({
   ];
   return (
     <HeroRow>
+      <Analytics />
       <UpdateNotice>
         <UpdateNoticeIcon />
         Trang web vẫn đang trong giai đoạn hoàn thiện.

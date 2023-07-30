@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Analytics } from '@vercel/analytics/react';
 //import { useState } from "react";
 import { Content2Xl } from "components/misc/Layouts";
 //import { Link } from 'react-router-dom';
@@ -31,6 +32,7 @@ export default () => {
   return (
     <AnimationRevealPage disabled>
         <PrimaryBackgroundContainer>
+          <Analytics />
           <Content2Xl>
             <NavigationBar />        
             <Hero/>

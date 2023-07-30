@@ -4,6 +4,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 //import { css } from "styled-components/macro";
+import { Analytics } from '@vercel/analytics/react';
 import { SectionHeading as StudentScore } from "../misc/Headings.js";
 import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-2-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-2-icon.svg";
@@ -63,6 +64,7 @@ const PreviousArrow = ({ currentSlide, slideCount, className, ...props }) => (
 export default ({ testimonials = [] }) => {
   return (
     <Container>
+      <Analytics />
       <Content>
       {testimonials.map((testimonial, index) => (
               <HeadingInfoContainer key={index}>

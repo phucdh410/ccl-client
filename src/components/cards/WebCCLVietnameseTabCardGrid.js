@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Analytics } from '@vercel/analytics/react';
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -164,6 +165,7 @@ export default ({
   return (
     <Container>
       <ContentWithPaddingResult>
+        <Analytics />
         <HeaderRow>
           <Header>{heading}</Header>
           <TabsControl>

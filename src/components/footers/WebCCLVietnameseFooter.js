@@ -1,7 +1,8 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
+import { Analytics } from '@vercel/analytics/react';
+//import { css } from "styled-components/macro"; //eslint-disable-line
 
 import LogoImage from "../../images/WebCCLVietnameseLogo.svg";
 import { ReactComponent as FacebookIcon } from "images/facebook-icon.svg";
@@ -43,6 +44,7 @@ const Divider = tw.div`my-8 border-b-2 border-gray-800`
 export default () => {
   return (
     <Container>
+      <Analytics />
       <Content>
         <NoOfColumns>
           <CompanyColumn>
@@ -115,7 +117,7 @@ export default () => {
                 ABN: 76667428864
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Report Abuse</Link>
+                <Link href="#">Home Page</Link>
               </LinkListItem>
             </LinkList>
           </Column>

@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { ContentWithVerticalPadding } from "components/misc/Layouts";
 
 //TabGrid for studentResults
@@ -13,6 +14,7 @@ export default () => {
   return (
     <SectionContainer id="studentResults">
       {/* TabGrid Component also accepts a tabs prop to customize the tabs and its content directly. Please open the TabGrid component file to see the structure of the tabs props.*/}
+      <Analytics />
       <TabGrid
         heading={
           <>

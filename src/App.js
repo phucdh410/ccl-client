@@ -4,7 +4,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import WebCCLVietnameseLandingPage from "./WebCCLVietnameseLandingPage.js";
 
 /* Inner Pages */
-import LoginPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseSignIn.js";
+//import LoginPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseSignIn.js";
 import TestInfoPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseTestInfo.js";
 import EnquiryPage from "pages/WebCCLVietnamesePages/WebCCLVietnameseEnquiry.js";
 
@@ -23,8 +23,7 @@ export default function App() {
       <GlobalStyles />
       <Router>
         <Routes>        
-            <Route path="/" element={<WebCCLVietnameseLandingPage />} />
-            <Route path="/login" element={<LoginPage />} />  
+            <Route path="/" element={<WebCCLVietnameseLandingPage />} /> 
             <Route path="/info" element={<TestInfoPage />} />   
             <Route path="/enquiry" element={<EnquiryPage />} />          
         </Routes>
