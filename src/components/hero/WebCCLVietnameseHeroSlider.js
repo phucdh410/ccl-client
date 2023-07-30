@@ -37,8 +37,6 @@ export default ({
    * You can modify the testimonials shown by modifying the array below or passing in the testimonials prop above
    * You can add or remove objects from the array as you need.
    */
-
-
   if (!testimonials || testimonials.length === 0) testimonials = CARD_DATA_HERO;
 
   // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
@@ -48,7 +46,7 @@ export default ({
   return (
     <TestimonialImageSlider arrows={false} ref={setImageSliderRef} asNavFor={textSliderRef} fade={true}>
       {testimonials.map((testimonial, index) => (
-        <ImageAndControlContainer key={index} className="ksdkgh">
+        <ImageAndControlContainer key={index}>
           <Image imageSrc={testimonial.imageSrc} />
           <ControlContainer>
             <ControlButton onClick={imageSliderRef?.slickPrev}>

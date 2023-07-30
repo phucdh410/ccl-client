@@ -105,13 +105,13 @@ const TabContent = tw(
 
 
 //Tab names
-const tabNames = ["04.2023", "02.2023", "11.2022", "07.2022"];
+const tabNames = ["04.2023", "02.2023", "11.2022", "09.2022"];
 
 // Prepare data for each tab
 //Declare the values that this program will grab from the CARD_DATA array.
 //This array contains the TestYears which are the array names in CARD_DATA
 const TestYears = ["2023", "2022"];
-const TestMonths = ["04", "02"];
+const TestMonths = ["07","04","02","11","09"]; //Add more years when in need
 
 console.log(CARD_DATA);
 
@@ -122,16 +122,16 @@ const CARD_DATA_POPUP = {
 };
 
 const TAB1_DATA = CARD_DATA_POPUP[`Results${TestYears[0]}`].filter(
-  (item) => item.TestMonth === TestMonths[0]
+  (item) => item.TestMonth === TestMonths[1]
 );
 const TAB2_DATA = CARD_DATA_POPUP[`Results${TestYears[0]}`].filter(
-  (item) => item.TestMonth === TestMonths[1]
+  (item) => item.TestMonth === TestMonths[2]
 );
 const TAB3_DATA = CARD_DATA_POPUP[`Results${TestYears[1]}`].filter(
-  (item) => item.TestMonth === TestMonths[0]
+  (item) => item.TestMonth === TestMonths[3]
 );
 const TAB4_DATA = CARD_DATA_POPUP[`Results${TestYears[1]}`].filter(
-  (item) => item.TestMonth === TestMonths[1]
+  (item) => item.TestMonth === TestMonths[4]
 );
 
 export default ({

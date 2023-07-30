@@ -30,51 +30,61 @@ const TheStudent = tw.h5`font-bold text-xl lg:text-xl xl:text-2xl text-primary-8
 const TheOccupation = tw.h5`font-bold text-lg lg:text-xl xl:text-2xl text-gray-700`;
 
 const SliderControlButtonContainer = styled.div`
-  ${tw`hidden lg:flex absolute top-0 h-full flex items-center z-20 p-8 `}
-  button {
-    ${tw`rounded-full text-secondary-500 hover:text-primary-500 focus:outline-none transition duration-300 transform hover:scale-125`}
-    svg {
-      ${tw`w-8`}
-    }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-      padding: 10px;
-    }
+${tw`hidden lg:flex absolute top-0 h-full flex items-center z-20 p-8 `}
+button {
+  ${tw`rounded-full text-secondary-500 hover:text-primary-500 focus:outline-none transition duration-300 transform hover:scale-125`}
+  svg {
+    ${tw`w-8`}
   }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    padding: 10px;
+  }
+}
 `;
 
 
+const NextArrowSliderControlButtonContainer = styled(SliderControlButtonContainer)`
+  ${tw`right-0`}
+`;
+
+const PreviousArrowSliderControlButtonContainer = styled(SliderControlButtonContainer)`
+  ${tw`left-0`}
+`;
+
 const NextArrow = ({ currentSlide, slideCount, className, ...props }) => (
-  <SliderControlButtonContainer tw="right-0">
+  <NextArrowSliderControlButtonContainer>
     <button {...props}>
       <ArrowRightIcon {...props} />
+      <Analytics />
     </button>
-  </SliderControlButtonContainer>
+  </NextArrowSliderControlButtonContainer>
 );
 
 const PreviousArrow = ({ currentSlide, slideCount, className, ...props }) => (
-  <SliderControlButtonContainer tw="left-0">
+  <PreviousArrowSliderControlButtonContainer>
     <button {...props}>
       <ArrowLeftIcon />
+      <Analytics />
     </button>
-  </SliderControlButtonContainer>
+  </PreviousArrowSliderControlButtonContainer>
 );
+
 
 export default ({ testimonials = [] }) => {
   return (
     <Container>
-      <Analytics />
       <Content>
-      {testimonials.map((testimonial, index) => (
-              <HeadingInfoContainer key={index}>
-          
-          <TheStudent>{testimonial.studentName}</TheStudent>
-          <TheOccupation>{testimonial.occupation}</TheOccupation>
-          <StudentScore>{testimonial.result}</StudentScore>
-          <HeadingDescription></HeadingDescription>
-        </HeadingInfoContainer>
-      ))}
+        {testimonials.map((testimonial, index) => (
+          <HeadingInfoContainer key={index}>
+            <TheStudent>{testimonial.studentName}</TheStudent>
+            <TheOccupation>{testimonial.occupation}</TheOccupation>
+            <StudentScore>{testimonial.result}</StudentScore>
+            <HeadingDescription></HeadingDescription>
+            <Analytics />
+          </HeadingInfoContainer>
+        ))}
         <TestimonialSliderContainer >
           <TestimonialSlider
             dots
