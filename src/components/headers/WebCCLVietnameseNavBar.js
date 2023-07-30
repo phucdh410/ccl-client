@@ -115,7 +115,10 @@ export default ({
         </NavLink>
         <NavLink
           target="_self"
-          onClick={toggleModal}
+          onClick={() => {
+            toggleModal();
+            setMenuOpen(false); // close the menu bar (in small screen)
+          }}
         >
           {navButton3Text}
         </NavLink>
@@ -130,7 +133,6 @@ export default ({
             {navButtonPlatformText}
           </PlatformButton>
         
-
         <StyledModal
           closeTimeoutMS={300}
           className="mainHeroModal"
