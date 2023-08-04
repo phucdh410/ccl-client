@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Analytics } from '@vercel/analytics/react';
 //import { css } from "styled-components/macro"; //eslint-disable-line
 
-import LogoImage from "../../images/WebCCLVietnameseLogo.webp";
+import LogoImage from "../../images/logo/WebCCLVietnameseLogo.svg";
 import { ReactComponent as FacebookIcon } from "images/facebook-icon.svg";
 //import { ReactComponent as TwitterIcon } from "images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "images/youtube-icon.svg";
