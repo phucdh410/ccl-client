@@ -8,7 +8,7 @@ import tw from "twin.macro";
 import { Analytics } from '@vercel/analytics/react';
 import { ReactComponent as CloseVideoIconImport } from "feather-icons/dist/icons/x-circle.svg";
 
-import logo from "images/WebCCLVietnameseLogo.svg";
+import logo from "images/WebCCLVietnameseLogo.webp";
 import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
 import ResponsiveVideoEmbed from "helpers/WebCCLVietnameseResponsiveVideoEmbed.js";
 import { MenuButton } from './MenuButton';
