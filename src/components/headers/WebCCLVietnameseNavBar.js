@@ -77,13 +77,6 @@ export default ({
     window.gtag("config", "G-B7N1H5S8N6");
   }, []);
 
-  const defaultLogoLink = (
-    <LogoLink href="/">
-      <img src={logo} alt="logo" />
-      CCL Vietnamese
-    </LogoLink>
-  );
-
   // State to track whether the menu is open or not
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(state => !state);

@@ -3,6 +3,7 @@
   "version": "01.07.23",
   "private": true,
   "dependencies": {
+    "@babel/traverse": "^7.23.2",
     "@glidejs/glide": "^3.6.0",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^13.4.0",
