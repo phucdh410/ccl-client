@@ -114,7 +114,7 @@ export default () => {
                 <Link href="mailto:support@cclvietnamese.com.au">support@cclvietnamese.com.au</Link>
               </LinkListItem>
               <LinkListItem>
-                ABN: 76667428864
+                ABN: 76 667 428 864
               </LinkListItem>
               <LinkListItem>
                 <Link href="#">Home Page</Link>

@@ -61,7 +61,7 @@ const PlanFeatures = styled.ul`
       ${tw`font-semibold text-primary-900 tracking-wide ml-3`}
     }
     .noBS {
-      ${tw`text-gray-500 text-lg line-through`}
+      ${tw`text-gray-500 line-through`}
     }
   }
 `;
@@ -70,6 +70,8 @@ const PlanAction = tw.div`mt-4`;
 const ActionButton = styled(PrimaryButtonBase)`
   ${tw`block text-center text-sm font-semibold tracking-wider w-full text-gray-100 bg-primary-500 px-6 py-4 rounded hover:bg-primary-700 focus:shadow-outline focus:outline-none transition-colors duration-300`}
 `;
+const CourseHighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
+const FeatureHighlightedText = tw.span`bg-primary-500 font-semibold ml-3 text-gray-100 px-1 transform tracking-wide -skew-x-12 inline-block`;
 const FeatureTabListContainer = tw.div`lg:hidden mt-4 bg-white rounded-md p-4 text-gray-600 grid grid-cols-3 gap-x-2 text-center`
 const FeatureTabListItem = styled.span`
   ${tw`cursor-pointer text-gray-600 font-medium rounded-sm transition duration-300 text-sm py-2 text-center`}
@@ -80,7 +82,7 @@ const FeatureTabListItem = styled.span`
 export default ({
   heading = "",
   subheading = "",
-  description = ["Các khóa học có nội dung giống nhau 100%","chỉ khác nhau ở mức độ hỗ trợ từ phía trung tâm"],
+  description = ["Nhiều ưu đãi và lựa chọn cho từng nhu cầu"],
   plans = null,
   primaryButtonText = "Nhận học phí vào email"
 }) => {
@@ -88,18 +90,19 @@ export default ({
 
   const defaultPlans = [
     {
-      "name": "Essential",
+      "name": "Standard",
       "numberOfStudents": ["Chỉ", "8", " bạn/lớp"],
       "description": "Chi phí rất hợp lý, phù hợp với các bạn đã có nền tảng tiếng Anh tốt",
       "features": [
+        { "name": "Học tất cả về CCL chỉ trong 20 giờ" },
+        { "name": "Khóa học không giới hạn" },
+        { "name": "Truy cập toàn bộ tài liệu và audio" },
+        { "name": "Review kỹ càng cuối khóa" },
+        { "name": "Học 100% online" },
         { "name": "Lớp học quá đông", noBS: true },
         { "name": "Tài liệu hạn chế", noBS: true },
         { "name": "Thời gian học quá dài", noBS: true },
-        { "name": "Lớp Foundation Unlimited" },
-        { "name": "Lớp Intensive trong 5 tuần" },
-        { "name": "Truy cập toàn bộ tài liệu" },
-        { "name": "Học 100% online" },
-        { "name": "Học trong trung bình 6 tuần trước khi đi thi" },
+        { "name": "Platform thiếu chức năng", noBS: true },
       ],
        url: "/enquiry",
       "featured": "Phổ biến"
@@ -107,39 +110,25 @@ export default ({
     {
       "name": "Mentor",
       "numberOfStudents": ["Chỉ", "4", " bạn/lớp"],
-      "description": "Có sự hỗ trợ của một mentor ngoài giờ lên lớp trong 4 tuần",
+      "description": "Có sự hỗ trợ của một mentor ngoài giờ lên lớp",
       "features": [
-        { "name": "Lớp học quá đông", noBS: true },
-        { "name": "Tài liệu hạn chế", noBS: true },
-        { "name": "Thời gian học quá dài", noBS: true },
-        { "name": "Lớp Foundation Unlimited" },
-        { "name": "Lớp Intensive trong 5 tuần" },
-        { "name": "Truy cập toàn bộ tài liệu" },
-        { "name": "Học 100% online" },
-        { "name": "Học trong trung bình 6 tuần trước khi đi thi" },
-        { "name": "Trainer chữa toàn bộ bài làm 4 ngày/tuần" }
+        { "name": "Toàn bộ quyền lợi của khóa STANDARD" },
+        { "name": "Review với mentor 4 buổi/tuần theo lịch cá nhân" },
+        { "name": "Hoàn tiền thi nếu kết quả không đạt yêu cầu" },
       ],
       url: "/enquiry",
-      "featured": "100% Pass"
+      "featured": "HỖ TRỢ"
     },
     {
       name: "VIP",
       numberOfStudents: ["Toàn bộ", " 1 v 1"],
       description: "Một chi phí duy nhất và 100% cầm 5 điểm CCL trong tay",
       features: [
-        { "name": "Lớp học quá đông", noBS: true },
-        { "name": "Tài liệu hạn chế", noBS: true },
-        { "name": "Thời gian học quá dài", noBS: true },
-        { "name": "Lớp Foundation Unlimited" },
-        { "name": "Lớp Intensive trong 5 tuần" },
-        { "name": "Truy cập toàn bộ tài liệu" },
-        { "name": "Học 100% online" },
-        { "name": "Học trong trung bình 6 tuần trước khi đi thi" },
-        { "name": "Trainer chữa toàn bộ bài làm 4 ngày/tuần" },
-        { "name": "Toàn bộ thời gian học là 1 kèm 1" }
+        { "name": "Toàn bộ quyền lợi của khóa MENTOR" },
+        { "name": "Đảm bảo việc lấy 5 điểm CCL không phát sinh chi phí ngoài ý muốn" },
       ],
       url: "/enquiry",
-      featured: ""
+      featured: "ĐẢM BẢO"
     }
   ];
 
@@ -172,7 +161,9 @@ export default ({
             <Plan key={index} featured={plan.featured} active={index === selectedFeatureIndex}>
               <PlanHeader>
                 <span className="nameAndFeaturedContainer">
-                  <span className="name">{plan.name}</span>
+                  <CourseHighlightedText className="name">
+                    {plan.name}
+                  </CourseHighlightedText>
                   {plan.featured && <span className="featuredText">{plan.featured}</span>}
                 </span>
                 <div className="courseFeatureContainer">
@@ -185,14 +176,27 @@ export default ({
                 <p className="description">{plan.description}</p>
               </PlanHeader>
               <PlanFeatures>
-                {plan.features.map((feature, index) => (
-                  <li className={`feature ${feature.noBS ? 'noBS' : ''}`} key={index}>
-                    <CheckboxIcon className={`icon ${feature.noBS ? 'icon-noBS' : ''}`} />
-                    <span className={`text ${feature.noBS ? 'noBS' : ''}`}>{feature.name}</span>
-                  </li>
-                ))}
+                {plan.features.map((feature, index) => {
+                  const isSpecialFeature = feature.name.startsWith("Toàn bộ quyền lợi của khóa");
+                  return (
+                    <li className={`feature ${feature.noBS ? 'noBS' : ''}`} key={index}>
+                      <CheckboxIcon className={`icon ${feature.noBS ? 'icon-noBS' : ''}`} />
+                      {isSpecialFeature ? (
+                        <div className="feature-special">
+                          <span className={`text ${feature.noBS ? 'noBS' : ''}`}>
+                            {"Toàn bộ quyền lợi của khóa "}
+                          </span>
+                          <FeatureHighlightedText>
+                            {feature.name.split("khóa ")[1]}
+                          </FeatureHighlightedText>
+                        </div>
+                      ) : (
+                        <span className={`text ${feature.noBS ? 'noBS' : ''}`}>{feature.name}</span>
+                      )}
+                    </li>
+                  );
+                })}
               </PlanFeatures>
-
               <PlanAction>
                 <ActionButton as="a" href={plan.url}>
                   {primaryButtonText}
