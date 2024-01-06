@@ -17,7 +17,7 @@ const Subheading = tw(SubheadingBase)`mb-4 text-gray-100`;
 const Heading = tw(SectionHeading)`w-full`;
 const Description = tw(SectionDescription)`w-full text-gray-300 text-center`;
 
-const PlansContainer = tw.div`mt-4 lg:mt-16 flex flex-col items-center lg:flex-row lg:items-stretch lg:justify-between text-gray-900 font-medium`;
+const PlansContainer = tw.div`lg:mt-16 flex flex-col items-center lg:flex-row lg:items-stretch lg:justify-between text-gray-900 font-medium`;
 const Plan = styled.div`
   ${tw`w-full max-w-sm bg-white rounded-lg shadow-sm py-10 px-6 sm:px-10 lg:px-6 lg:py-10 xl:p-10 mx-3 lg:flex flex-col justify-between mt-0 lg:mt-16 first:mt-0 lg:mt-0 shadow-raised`}
   ${props => props.active? tw`flex`:tw`hidden`}
@@ -31,7 +31,7 @@ const PlanHeader = styled.div`
     ${tw`lg:text-lg xl:text-xl font-bold uppercase tracking-wider mr-3`}
   }
   .featuredText {
-    ${tw`text-xs font-bold px-3 rounded py-2 uppercase bg-green-300 text-green-900 leading-none mt-4 sm:mt-0 w-full sm:w-auto text-center`}
+    ${tw`text-xs font-bold px-3 rounded py-2 uppercase bg-green-300 text-green-900 leading-none mt-0 sm:mt-0 w-full sm:w-auto text-center`}
   }
   
   .courseFeatureContainer {
@@ -66,13 +66,13 @@ const PlanFeatures = styled.ul`
   }
 `;
 
-const PlanAction = tw.div`mt-4`;
+const PlanAction = tw.div``;
 const ActionButton = styled(PrimaryButtonBase)`
   ${tw`block text-center text-sm font-semibold tracking-wider w-full text-gray-100 bg-primary-500 px-6 py-4 rounded hover:bg-primary-700 focus:shadow-outline focus:outline-none transition-colors duration-300`}
 `;
 const CourseHighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 const FeatureHighlightedText = tw.span`bg-primary-500 font-semibold ml-3 text-gray-100 px-1 transform tracking-wide -skew-x-12 inline-block`;
-const FeatureTabListContainer = tw.div`lg:hidden mt-4 bg-white rounded-md p-4 text-gray-600 grid grid-cols-3 gap-x-2 text-center`
+const FeatureTabListContainer = tw.div`lg:hidden bg-white rounded-md p-4 text-gray-600 grid grid-cols-3 gap-x-2 text-center`
 const FeatureTabListItem = styled.span`
   ${tw`cursor-pointer text-gray-600 font-medium rounded-sm transition duration-300 text-sm py-2 text-center`}
   ${(props) => props.active && tw`bg-primary-500! text-gray-100!`}

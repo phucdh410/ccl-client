@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Analytics } from '@vercel/analytics/react';
 import { motion } from "framer-motion";
 import tw from "twin.macro";
@@ -16,7 +16,7 @@ import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
 import { ReactComponent as CloseIconImport } from "feather-icons/dist/icons/x-circle.svg";
 
-import CARD_DATA from "components/cards/resultCardData/WebCCLVietnameseResultsCardData.js";
+import fetchCourseResults from "components/cards/resultCardData/WebCCLVietnameseResultsCardData.js";
 import ReactModalAdapter from "helpers/WebCCLVietnameseReactModalAdapter.js";
 import GallerySlider from "components/testimonials/WebCCLVietnameseTestimonials.js";
 
@@ -102,47 +102,66 @@ const TabContent = tw(
   motion.div
 )`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 
-
-
-//Tab names
-const tabNames = ["04.2023", "02.2023", "11.2022", "09.2022"];
-
-// Prepare data for each tab
-//Declare the values that this program will grab from the CARD_DATA array.
-//This array contains the TestYears which are the array names in CARD_DATA
-const TestYears = ["2023", "2022"];
-const TestMonths = ["07","04","02","11","09"]; //Add more years when in need
-
-console.log(CARD_DATA);
-
-//Filter by corresponding each year to get the data then filter again to get the Month
-const CARD_DATA_POPUP = {
-  Results2023: CARD_DATA.filter((item) => item.TestYear === "Results2023"),
-  Results2022: CARD_DATA.filter((item) => item.TestYear === "Results2022"),
-};
-
-const TAB1_DATA = CARD_DATA_POPUP[`Results${TestYears[0]}`].filter(
-  (item) => item.TestMonth === TestMonths[1]
-);
-const TAB2_DATA = CARD_DATA_POPUP[`Results${TestYears[0]}`].filter(
-  (item) => item.TestMonth === TestMonths[2]
-);
-const TAB3_DATA = CARD_DATA_POPUP[`Results${TestYears[1]}`].filter(
-  (item) => item.TestMonth === TestMonths[3]
-);
-const TAB4_DATA = CARD_DATA_POPUP[`Results${TestYears[1]}`].filter(
-  (item) => item.TestMonth === TestMonths[4]
-);
-
 export default ({
   heading = "Checkout the Menu",
-  tabs = {
-    [tabNames[0]]: TAB1_DATA,
-    [tabNames[1]]: TAB2_DATA,
-    [tabNames[2]]: TAB3_DATA,
-    [tabNames[3]]: TAB4_DATA,
-  },
 }) => {
+  const [dateDisplay, setDateDisplay] = useState([])
+  const [cardData, setCardData] = useState([])
+  const [tabsData, setTabsData] = useState([]);
+  const [tabNames, setTabNames] = useState([]);  
+
+  const loadData = async () => {
+    try {
+      const cardData = await fetchCourseResults();
+      setCardData(cardData?.courseResults);
+      setDateDisplay(cardData?.dateDisplay);
+    } catch (error) {
+      console.error('loadData::', error)
+    }
+  }
+
+  const getCardData = () =>{
+    let data = {}
+    const testYears = cardData.map((item) => item.TestYear);
+    testYears.forEach((year) => {
+      data[year] = cardData.filter((item) => item.TestYear === year);
+    })
+    return data;
+  }
+
+  const prepareTabData = () => {
+    const CARD_DATA_POPUP = getCardData()
+    if(!CARD_DATA_POPUP) return;
+    dateDisplay.forEach((dateTime) => {
+      let tabData = CARD_DATA_POPUP[`Results${dateTime.year}`]
+      tabData.label = dateTime.label;
+      setTabsData(prev => {
+        return prev.concat(tabData);
+      });
+      setTabNames(prev => {
+        return prev.concat(dateTime.label);
+      });
+    });
+  }
+
+  const getTabData = (key) => {
+    const year = key.slice(3, key.length);
+    const month = key.slice(0, 2);
+    return tabsData.filter((item) => item.TestYear === `Results${year}` && item.TestMonth === month);
+  }
+
+  useEffect(()=>{
+    loadData();
+  }, [])
+
+  useEffect(() => {
+    prepareTabData();
+  }, [dateDisplay])
+
+  useEffect(() => {
+    setActiveTab(tabNames[0]);
+  }, [tabNames])
+
   /*
    * To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab
    * as the key and value of the key will be its content (as an array of objects).
@@ -153,8 +172,7 @@ export default ({
   const isSmallScreen = useMediaQuery({ query: '(max-width: 1023px)' });
 
   //Define the const variable that handles the pop-up when click the "Xem thêm Button"
-  const tabsKeys = Object.keys(tabs);
-  const [activeTab, setActiveTab] = useState(tabsKeys[0]);
+  const [activeTab, setActiveTab] = useState();
   const [selectedCardData, setSelectedCardData] = useState(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -169,7 +187,7 @@ export default ({
         <HeaderRow>
           <Header>{heading}</Header>
           <TabsControl>
-            {Object.keys(tabs).map((tabName, index) => (
+            {tabNames.map((tabName, index) => (
               <TabControl
                 key={index}
                 active={activeTab === tabName}
@@ -181,7 +199,7 @@ export default ({
           </TabsControl>
         </HeaderRow>
 
-        {tabsKeys.map((tabKey, index) => (
+        {tabNames.map((tabKey, index) => (
           <TabContent
             key={index}
             variants={{
@@ -200,7 +218,7 @@ export default ({
             initial={activeTab === tabKey ? "current" : "hidden"}
             animate={activeTab === tabKey ? "current" : "hidden"}
           >
-            {tabs[tabKey].map((card, index) => (
+            {getTabData(tabKey).map((card, index) => (
               <CardContainer key={index}>
                 <Card
                   className="group"

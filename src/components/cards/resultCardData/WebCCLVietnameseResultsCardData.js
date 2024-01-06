@@ -1,10 +1,14 @@
-import resultCardData from "./__WebCCLVietnameseResultsCardData.json";
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:1993';
 
-const CARD_DATA_RESULT = Object.entries(resultCardData).flatMap(([TestYear, items]) => {
-  return items.map(item => ({
-    ...item,
-    TestYear
-  }));
-});
-
-export default CARD_DATA_RESULT;
+const fetchCourseResults = async () => {
+  const url = `${BASE_URL}/api/course-result`;
+  try {
+    const res = await fetch(url, {
+      method: "POST"
+    });
+    return await res.json();
+  } catch (err) {
+    return console.error(err);
+  }
+};
+export default fetchCourseResults;
