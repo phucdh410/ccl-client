@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { motion } from "framer-motion";
 import tw from "twin.macro";
@@ -120,29 +120,40 @@ export default ({
     }
   }
 
-  const getCardData = () =>{
+  const getCardData = useCallback(() => {
     let data = {}
     const testYears = cardData.map((item) => item.TestYear);
     testYears.forEach((year) => {
       data[year] = cardData.filter((item) => item.TestYear === year);
     })
     return data;
-  }
+  },[cardData]);
 
-  const prepareTabData = () => {
-    const CARD_DATA_POPUP = getCardData()
-    if(!CARD_DATA_POPUP) return;
-    dateDisplay.forEach((dateTime) => {
-      let tabData = CARD_DATA_POPUP[`Results${dateTime.year}`]
-      tabData.label = dateTime.label;
-      setTabsData(prev => {
-        return prev.concat(tabData);
+  const prepareTabData = useCallback(() => {
+    const CARD_DATA_POPUP = getCardData();
+    if (!CARD_DATA_POPUP) return;
+  
+    dateDisplay.forEach(function(dateTime) {
+      const yearKey = `Results${dateTime.year}`;
+      let tabData = CARD_DATA_POPUP[yearKey];
+  
+      if (tabData) {
+        tabData.label = dateTime.label;
+      } else {
+        tabData = [];
+        console.log(`No data found for year: ${dateTime.year}`);
+      }
+  
+      setTabsData(function(prevTabsData) {
+        return prevTabsData.concat(tabData);
       });
-      setTabNames(prev => {
-        return prev.concat(dateTime.label);
+  
+      setTabNames(function(prevTabNames) {
+        return prevTabNames.concat(dateTime.label);
       });
     });
-  }
+  }, [dateDisplay, getCardData]);
+  
 
   const getTabData = (key) => {
     const year = key.slice(3, key.length);
@@ -156,7 +167,7 @@ export default ({
 
   useEffect(() => {
     prepareTabData();
-  }, [dateDisplay])
+  }, [dateDisplay, prepareTabData]);
 
   useEffect(() => {
     setActiveTab(tabNames[0]);
