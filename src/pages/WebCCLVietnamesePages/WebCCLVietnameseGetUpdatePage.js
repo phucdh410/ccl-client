@@ -6,6 +6,7 @@ import Footer from "components/footers/WebCCLVietnameseFooter.js";
 //import { css } from "styled-components"; // /macro"; //eslint-disable-line
 import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
+import { ReactComponent as LoadingIcon } from "images/loading.svg";
 
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import EmailIllustrationSrc from "images/email-illustration.svg";
@@ -34,6 +35,7 @@ const Image = styled.div(props => [
 const Subheading = tw(SubheadingBase)`mt-2 lg:text-xl mb-2 mx-auto text-gray-100 text-center md:text-left py-1 px-3 rounded-md w-[fit-content]`;
 const Heading = tw(SectionHeading)`mt-4 font-black text-[#fbc52e] text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`leading-4 space-y-1 mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-100`
+const TextRequired = tw.span`text-red-500 select-none ml-1`
 
 //Style on the input field elements
 const Input = tw.input`border-2 rounded mt-6 first:mt-0 border-b-2 focus:outline-none font-medium transition duration-300 hocus:border-teal-500`
@@ -54,7 +56,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const SubmitButton = tw.button`mt-4 px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-gray-100 hocus:text-primary-500 focus:shadow-outline focus:outline-none transition duration-300`;
+const SubmitButton = tw.button`mt-4 px-8 py-3 font-bold rounded flex flex-row gap-2 bg-primary-500 text-gray-100 hocus:bg-gray-100 hocus:text-primary-500 focus:shadow-outline focus:outline-none disabled:bg-primary-700 disabled:cursor-not-allowed transition duration-300`;
 const SuccessMessage = tw.p`text-green-500 text-lg font-semibold mt-4`;
 const ErrorMessage = tw.p`text-red-500 text-lg font-semibold mt-4`;
 
@@ -72,11 +74,14 @@ export default ({
   const [userPhoneno, set_userPhoneno] = useState("");
   const [userEmail, set_userEmail] = useState("");
 
+  const [submitting, setSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setSubmitting(true);
 
     const data = {
       user_name: userName,
@@ -111,6 +116,8 @@ export default ({
       setErrorMessage("Có lỗi xảy ra! Vui lòng liên hệ trực tiếp với trung tâm");
       setSuccessMessage(""); // Clear any previous success message
     }
+
+    setSubmitting(false);
   };
 
   return (
@@ -131,7 +138,7 @@ export default ({
                 <Column>
                   <form onSubmit={handleSubmit}>
                   <InputContainer>
-                    <Label htmlFor="name-input">Tên của bạn: </Label>
+                    <Label htmlFor="name-input">Tên của bạn: <TextRequired>*</TextRequired></Label>
                     <Input
                         id="name-input"
                         type="text"
@@ -143,7 +150,7 @@ export default ({
                     />
                   </InputContainer>
                     <InputContainer>
-                      <Label htmlFor="phone-input">Số điện thoại</Label>
+                      <Label htmlFor="phone-input">Số điện thoại <TextRequired>*</TextRequired></Label>
                       <Input
                         id="phone-input"
                         type="tel"
@@ -155,7 +162,7 @@ export default ({
                       />
                     </InputContainer>
                     <InputContainer>
-                      <Label htmlFor="email-input">Địa chỉ Email</Label>
+                      <Label htmlFor="email-input">Địa chỉ Email <TextRequired>*</TextRequired></Label>
                       <Input
                         id="email-input"
                         type="email"
@@ -169,7 +176,9 @@ export default ({
                     {
                       <SubmitButton
                         type="submit"
-                        value="Submit">
+                        value="Submit"
+                        disabled={submitting}>
+                        {submitting ? <LoadingIcon /> : null}
                         Đăng ký nhận email
                       </SubmitButton>
                     }
