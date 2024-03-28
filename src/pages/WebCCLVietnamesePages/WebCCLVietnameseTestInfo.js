@@ -1,15 +1,16 @@
 import React from "react";
 import tw from "twin.macro";
-import styled, { css } from "styled-components/macro"; //eslint-disable-line
+// eslint-disable-next-line
+import styled, { css } from "styled-components";
 import {Content2Xl, ContentRow as  ContainerInfo} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { SectionDescription } from "components/misc/Typography.js";
 
-// import InfoSection from 'images/info/CCLOverviewInforgraphic.svg'; 
-import InfoSection1 from 'images/info/CCLOverviewInforgraphic-artboards-01.svg'; 
-import InfoSection2 from 'images/info/CCLOverviewInforgraphic-artboards-02.svg'; 
-import InfoSection3 from 'images/info/CCLOverviewInforgraphic-artboards-03.svg'; 
-import InfoSection4 from 'images/info/CCLOverviewInforgraphic-artboards-04.svg'; 
+// import InfoSection from 'images/info/CCLOverviewInforgraphic.svg';
+import InfoSection1 from 'images/info/CCLOverviewInforgraphic-artboards-01.svg';
+import InfoSection2 from 'images/info/CCLOverviewInforgraphic-artboards-02.svg';
+import InfoSection3 from 'images/info/CCLOverviewInforgraphic-artboards-03.svg';
+import InfoSection4 from 'images/info/CCLOverviewInforgraphic-artboards-04.svg';
 
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import Footer from "components/footers/WebCCLVietnameseFooter.js";

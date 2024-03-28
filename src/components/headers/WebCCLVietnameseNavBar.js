@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 import tw from "twin.macro";
-//import { css } from "styled-components/macro"; //eslint-disable-line
+//import { css } from "styled-components"; // /macro"; //eslint-disable-line
 //import { Link } from "react-router-dom";
 
 import { Analytics } from '@vercel/analytics/react';
@@ -26,7 +26,7 @@ const NavRow = tw(Row)`flex flex-col items-center justify-between -mx-8 -mt-8 px
 const NavLink = tw.a`transition duration-100 font-medium pb-1 border-b-2 mr-0 lg:mr-8 text-gray-100 border-gray-100 lg:border-gray-400 hocus:border-primary-500 cursor-pointer`;
 const PlatformButton = tw(
   NavLink
-)`block lg:inline text-center text-primary-500 lg:text-gray-100 bg-gray-100 lg:bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-800 lg:hocus:bg-gray-100 hocus:text-gray-100 lg:hocus:text-primary-500 focus:shadow-outline mr-0 mt-0 lg:mt-6 md:mt-4 lg:mt-0`;
+)`block lg:inline text-center text-primary-500 lg:text-gray-100 bg-gray-100 lg:bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-800 lg:hocus:bg-gray-100 hocus:text-gray-100 lg:hocus:text-primary-500 focus:shadow-outline mr-0 mt-0`;
 
 //Change the style of the logo, ${tw`w-40 mr-3`} defines the size of the logo
 export const LogoLink = styled(NavLink)`
@@ -125,7 +125,7 @@ export default ({
           <PlatformButton onClick={() => alert("PLATFORM vẫn đang trong giai đoạn hoàn thiện")}>
             {navButtonPlatformText}
           </PlatformButton>
-        
+
         <StyledModal
           closeTimeoutMS={300}
           className="mainHeroModal"
@@ -141,7 +141,7 @@ export default ({
           </VideoEmbedContainer>
         </StyledModal>
       </MenuContainer>
-     
+
     </NavRow>
   );
 };

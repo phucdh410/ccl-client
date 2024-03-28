@@ -1,6 +1,7 @@
 import React from "react";
 import GlobalStyles from 'styles/GlobalStyles';
-import { css } from "styled-components/macro"; //eslint-disable-line
+// eslint-disable-next-line
+import { css } from "styled-components";
 import WebCCLVietnameseLandingPage from "./WebCCLVietnameseLandingPage.js";
 
 /* Inner Pages */
@@ -22,11 +23,11 @@ export default function App() {
     <>
       <GlobalStyles />
       <Router>
-        <Routes>        
-            <Route path="/" element={<WebCCLVietnameseLandingPage />} /> 
-            <Route path="/info" element={<TestInfoPage />} />   
-            <Route path="/enquiry" element={<EnquiryPage />} />          
-            <Route path="/getupdates" element={<GetUpdatePage />} />          
+        <Routes>
+            <Route path="/" element={<WebCCLVietnameseLandingPage />} />
+            <Route path="/info" element={<TestInfoPage />} />
+            <Route path="/enquiry" element={<EnquiryPage />} />
+            <Route path="/getupdates" element={<GetUpdatePage />} />
         </Routes>
       </Router>
     </>

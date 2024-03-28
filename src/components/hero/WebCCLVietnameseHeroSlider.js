@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
-import styled from "styled-components";
+// eslint-disable-next-line
+import styled, { css } from "styled-components";
 import tw from "twin.macro";
-import { css } from "styled-components/macro"; //eslint-disable-line
 import { PrimaryButton } from "../misc/Buttons.js";
 import { ReactComponent as ChevronLeftIcon } from "feather-icons/dist/icons/chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "feather-icons/dist/icons/chevron-right.svg";
@@ -22,7 +22,7 @@ const Image = styled.div(props => [
 const ControlContainer = tw.div`rounded-br-md absolute bottom-0 right-0 bg-gray-100 px-2 py-2 lg:px-6 lg:py-4 rounded-tl-3xl border`;
 const ControlButton = styled(PrimaryButton)`
   ${tw`mx-2 lg:mx-3 rounded-full text-gray-100 p-2`}
-  
+
   svg {
     ${tw`w-5 h-5`}
   }

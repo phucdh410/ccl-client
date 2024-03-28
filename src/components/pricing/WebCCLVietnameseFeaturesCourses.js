@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
+// eslint-disable-next-line
+import styled, { css } from "styled-components";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { SectionDescription } from "components/misc/Typography.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
@@ -19,7 +19,7 @@ const Description = tw(SectionDescription)`w-full text-gray-300 text-center`;
 
 const PlansContainer = tw.div`lg:mt-16 flex flex-col items-center lg:flex-row lg:items-stretch lg:justify-between text-gray-900 font-medium`;
 const Plan = styled.div`
-  ${tw`w-full max-w-sm bg-white rounded-lg shadow-sm py-10 px-6 sm:px-10 lg:px-6 lg:py-10 xl:p-10 mx-3 lg:flex flex-col justify-between mt-0 lg:mt-16 first:mt-0 lg:mt-0 shadow-raised`}
+  ${tw`w-full max-w-sm bg-white rounded-lg shadow-sm py-10 px-6 sm:px-10 lg:px-6 lg:py-10 xl:p-10 mx-3 lg:flex flex-col justify-between mt-8 lg:mt-0 shadow-raised`}
   ${props => props.active? tw`flex`:tw`hidden`}
   `;
 
@@ -33,7 +33,7 @@ const PlanHeader = styled.div`
   .featuredText {
     ${tw`text-xs font-bold px-3 rounded py-2 uppercase bg-green-300 text-green-900 leading-none mt-0 sm:mt-0 w-full sm:w-auto text-center`}
   }
-  
+
   .courseFeatureContainer {
     ${tw`mt-6 flex items-end justify-between`}
     .courseFeature {

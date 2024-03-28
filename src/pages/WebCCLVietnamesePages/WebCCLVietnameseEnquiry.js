@@ -2,8 +2,9 @@ import React, { useState }  from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
+import { ReactComponent as LoadingIcon } from "images/loading.svg";
 
-//import { css } from "styled-components/macro"; //eslint-disable-line
+//import { css } from "styled-components"; // /macro"; //eslint-disable-line
 import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 
@@ -35,6 +36,7 @@ const Subheading = tw(SubheadingBase)`mt-2 lg:text-xl mb-2 mx-auto text-gray-100
 const Heading = tw(SectionHeading)`mt-4 font-black text-[#fbc52e] text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`leading-4 space-y-1 mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-gray-100`
 const TextEmphasizes = tw.span`font-bold text-primary-600 bg-white rounded-sm px-1 mx-1 text-sm inline-block leading-[1.5rem]`;
+const TextRequired = tw.span`text-red-500 select-none ml-1`
 
 //Style on the input field elements
 const Input = tw.input`border-2 rounded mt-6 first:mt-0 border-b-2 focus:outline-none font-medium transition duration-300 hocus:border-teal-500`
@@ -55,7 +57,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const SubmitButton = tw.button`mt-4 px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-gray-100 hocus:text-primary-500 focus:shadow-outline focus:outline-none transition duration-300`;
+const SubmitButton = tw.button`mt-4 px-8 py-3 font-bold rounded flex flex-row gap-2 bg-primary-500 text-gray-100 hocus:bg-gray-100 hocus:text-primary-500 focus:shadow-outline focus:outline-none disabled:bg-primary-700 disabled:cursor-not-allowed transition duration-300`;
 const SuccessMessage = tw.p`text-green-500 text-lg font-semibold mt-4`;
 const ErrorMessage = tw.p`text-red-500 text-lg font-semibold mt-4`;
 
@@ -65,12 +67,12 @@ const API_ENDPOINT = "https://cclvietnamese-proxy-server.azurewebsites.net/api/c
 export default ({
   subheading = "",
   heading = <>Tư vấn khóa học </>,
-  description = <>Vui lòng điền mẫu sau để nhận được thông tin 
+  description = <>Vui lòng điền mẫu sau để nhận được thông tin
                 <TextEmphasizes> KHÓA HỌC </TextEmphasizes>
-                <wbr/> 
-                và 
+                <wbr/>
+                và
                 <TextEmphasizes> HỌC PHÍ </TextEmphasizes>
-                <wbr/> 
+                <wbr/>
                 vào email của bạn
                 </>,
   submitButtonText = "Gửi thông tin",
@@ -78,16 +80,19 @@ export default ({
 }) => {
   //Declare the state variable, Initialise it with an empty string
   const [firstName, setFirstName] = useState("");
-  const [phone, setPhone] = useState(""); 
+  const [phone, setPhone] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [facebookURL, setFacebookURL] = useState("");
   const [promoCode, setPromoCode] = useState("");
-  
+
+  const [submitting, setSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setSubmitting(true);
 
     const data = {
       firstName: firstName,
@@ -96,7 +101,7 @@ export default ({
       facebookURL: facebookURL,
       promoCode: promoCode
     };
-    
+
     try {
       const response = await fetch(API_ENDPOINT, {
         method: "POST",
@@ -105,13 +110,13 @@ export default ({
         },
         body: JSON.stringify(data),
       });
-  
+
       if (!response.ok) {
         throw new Error("Lỗi hệ thống! Thông tin chưa được chuyển đi. Vui lòng thử lại sau");
       }
-      
+
       // Set a success message
-      setSuccessMessage("Cảm ơn thông tin của bạn. Chi tiết đã được gửi vào email inbox (hoặc spam) của bạn rùi nhé <3"); 
+      setSuccessMessage("Cảm ơn thông tin của bạn. Chi tiết đã được gửi vào email inbox (hoặc spam) của bạn rùi nhé <3");
 
       // Clear the input fields after successful form submission
       setFirstName("");
@@ -126,6 +131,8 @@ export default ({
       setErrorMessage("Có lỗi xảy ra! Vui lòng liên hệ trực tiếp với trung tâm");
       setSuccessMessage(""); // Clear any previous success message
     }
+
+    setSubmitting(false);
   };
 
   return (
@@ -146,7 +153,7 @@ export default ({
                 <Column>
                   <form onSubmit={handleSubmit}>
                   <InputContainer>
-                    <Label htmlFor="name-input">Tên của bạn: </Label>
+                    <Label htmlFor="name-input">Tên của bạn <TextRequired>*</TextRequired></Label>
                     <Input
                         id="name-input"
                         type="text"
@@ -158,19 +165,19 @@ export default ({
                     />
                   </InputContainer>
                     <InputContainer>
-                      <Label htmlFor="phone-input">Số điện thoại</Label>
+                      <Label htmlFor="phone-input">Số điện thoại <TextRequired>*</TextRequired></Label>
                       <Input
                         id="phone-input"
                         type="tel"
                         name="phone"
-                        value={phone} 
-                        onChange={(e) => setPhone(e.target.value)} 
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         placeholder="Thêm mã quốc gia và bỏ số 0 đầu e.g + 61 412 345 678 "
                         required
-                      />      
+                      />
                     </InputContainer>
                     <InputContainer>
-                      <Label htmlFor="email-input">Địa chỉ Email</Label>
+                      <Label htmlFor="email-input">Địa chỉ Email <TextRequired>*</TextRequired></Label>
                       <Input
                         id="email-input"
                         type="email"
@@ -204,9 +211,11 @@ export default ({
                         />
                     </InputContainer>
                     {
-                      <SubmitButton 
-                        type="submit" 
-                        value="Submit">
+                      <SubmitButton
+                        type="submit"
+                        value="Submit"
+                        disabled={submitting}>
+                        {submitting ? <LoadingIcon /> : null}
                         Gửi thông tin
                       </SubmitButton>
                     }

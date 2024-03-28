@@ -3,7 +3,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
 
-//import { css } from "styled-components/macro"; //eslint-disable-line
+//import { css } from "styled-components"; // /macro"; //eslint-disable-line
 import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 
@@ -69,9 +69,9 @@ export default ({
 }) => {
   //Declare the state variable, Initialise it with an empty string
   const [userName, set_userName] = useState("");
-  const [userPhoneno, set_userPhoneno] = useState(""); 
+  const [userPhoneno, set_userPhoneno] = useState("");
   const [userEmail, set_userEmail] = useState("");
-  
+
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -82,9 +82,9 @@ export default ({
       user_name: userName,
       user_phoneno: userPhoneno,
       user_email: userEmail,
-      
+
     };
-    
+
     try {
       const response = await fetch(API_ENDPOINT, {
         method: "POST",
@@ -93,13 +93,13 @@ export default ({
         },
         body: JSON.stringify(data),
       });
-  
+
       if (!response.ok) {
         throw new Error("Lỗi hệ thống! Thông tin chưa được chuyển đi. Vui lòng thử lại sau");
       }
-      
+
       // Set a success message
-      setSuccessMessage("Cảm ơn thông tin của bạn. Chi tiết đã được gửi vào email inbox (hoặc spam) của bạn rùi nhé <3"); 
+      setSuccessMessage("Cảm ơn thông tin của bạn. Chi tiết đã được gửi vào email inbox (hoặc spam) của bạn rùi nhé <3");
 
       // Clear the input fields after successful form submission
       set_userName("");
@@ -148,11 +148,11 @@ export default ({
                         id="phone-input"
                         type="tel"
                         name="phone"
-                        value={userPhoneno} 
-                        onChange={(e) => set_userPhoneno(e.target.value)} 
+                        value={userPhoneno}
+                        onChange={(e) => set_userPhoneno(e.target.value)}
                         placeholder="Thêm mã quốc gia và bỏ số 0 đầu e.g + 61 412 345 678 "
                         required
-                      />      
+                      />
                     </InputContainer>
                     <InputContainer>
                       <Label htmlFor="email-input">Địa chỉ Email</Label>
@@ -167,8 +167,8 @@ export default ({
                       />
                     </InputContainer>
                     {
-                      <SubmitButton 
-                        type="submit" 
+                      <SubmitButton
+                        type="submit"
                         value="Submit">
                         Đăng ký nhận email
                       </SubmitButton>

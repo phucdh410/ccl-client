@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { Content2Xl } from "components/misc/Layouts";
 //import { Link } from 'react-router-dom';
 //import { motion } from "framer-motion";
-//import { css } from "styled-components/macro";
+//import { css } from "styled-components"; // /macro";
 
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
@@ -34,7 +34,7 @@ export default () => {
         <PrimaryBackgroundContainer>
           <Analytics />
           <Content2Xl>
-            <NavigationBar />        
+            <NavigationBar />
             <Hero/>
             <Feature/>
             <Footer />

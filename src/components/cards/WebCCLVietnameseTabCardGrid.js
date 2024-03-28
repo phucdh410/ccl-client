@@ -2,8 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { motion } from "framer-motion";
 import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
+import styled, { css } from "styled-components";
 import {
   Container,
   ContentWithPaddingResult,
@@ -108,7 +107,7 @@ export default ({
   const [dateDisplay, setDateDisplay] = useState([])
   const [cardData, setCardData] = useState([])
   const [tabsData, setTabsData] = useState([]);
-  const [tabNames, setTabNames] = useState([]);  
+  const [tabNames, setTabNames] = useState([]);
 
   const loadData = async () => {
     try {
@@ -132,28 +131,28 @@ export default ({
   const prepareTabData = useCallback(() => {
     const CARD_DATA_POPUP = getCardData();
     if (!CARD_DATA_POPUP) return;
-  
+
     dateDisplay.forEach(function(dateTime) {
       const yearKey = `Results${dateTime.year}`;
       let tabData = CARD_DATA_POPUP[yearKey];
-  
+
       if (tabData) {
         tabData.label = dateTime.label;
       } else {
         tabData = [];
         console.log(`No data found for year: ${dateTime.year}`);
       }
-  
+
       setTabsData(function(prevTabsData) {
         return prevTabsData.concat(tabData);
       });
-  
+
       setTabNames(function(prevTabNames) {
         return prevTabNames.concat(dateTime.label);
       });
     });
   }, [dateDisplay, getCardData]);
-  
+
 
   const getTabData = (key) => {
     const year = key.slice(3, key.length);
@@ -215,14 +214,18 @@ export default ({
             key={index}
             variants={{
               current: {
+                position: "relative",
                 opacity: 1,
                 scale: 1,
                 display: "flex",
               },
               hidden: {
+                position: "absolute",
                 opacity: 0,
                 scale: 0.8,
-                display: "none",
+                transitionEnd: {
+                  display: "none",
+                }
               },
             }}
             transition={{ duration: 0.3 }}

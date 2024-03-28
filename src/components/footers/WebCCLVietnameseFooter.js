@@ -2,7 +2,7 @@ import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { Analytics } from '@vercel/analytics/react';
-//import { css } from "styled-components/macro"; //eslint-disable-line
+//import { css } from "styled-components"; // /macro"; //eslint-disable-line
 
 import LogoImage from "../../images/logo/WebCCLVietnameseLogo.svg";
 import { ReactComponent as FacebookIcon } from "images/facebook-icon.svg";
@@ -52,7 +52,7 @@ export default () => {
               <LogoText>cclvietnamese.com.au</LogoText>
             </LogoContainer>
             <CompanyAddress>
-              Sydney, 
+              Sydney,
               New South Wales,
               Australia 2000
             </CompanyAddress>
@@ -82,8 +82,8 @@ export default () => {
                 <Link href="#">About Us</Link>
               </LinkListItem>
             </LinkList>
-          </Column> 
-          
+          </Column>
+
           <Column>
             <ColumnHeading>Legal</ColumnHeading>
             <LinkList>
@@ -101,7 +101,7 @@ export default () => {
               </LinkListItem>
             </LinkList>
           </Column>
-          
+
           */}
 
           <Column>
@@ -122,7 +122,7 @@ export default () => {
             </LinkList>
           </Column>
 
-          
+
 
         </NoOfColumns>
 
@@ -133,7 +133,7 @@ export default () => {
             <LogoImg src={LogoImage} /> Syndikates Education Pty Ltd ACN 667 428 864
           </CopyrightNotice>
           <CompanyInfo>
-            Built with {'\u2764\uFE0F'} &copy; 2023 
+            Built with {'\u2764\uFE0F'} &copy; 2023
           </CompanyInfo>
         </CopyrightAndCompanyInfoRow>
 

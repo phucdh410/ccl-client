@@ -2,7 +2,7 @@ import React from "react";
 //import { useState, useEffect } from "react";
 import { Analytics } from '@vercel/analytics/react';
 import { Link } from "react-router-dom";
-//import { css } from "styled-components/macro"; //eslint-disable-line
+//import { css } from "styled-components"; // /macro"; //eslint-disable-line
 import { SectionHeading as HeadingBase } from "components/misc/Headings";
 import { SectionDescription as DescriptionBase } from "components/misc/Typography";
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
@@ -112,7 +112,7 @@ export default ({
               </SecondaryButton>
             </Actions>
           </TextColumnContent>
-          
+
         </TextColumn>
         <HeroSliderImages />
       </TwoColumn>

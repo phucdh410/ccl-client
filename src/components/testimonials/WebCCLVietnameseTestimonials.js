@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-//import { css } from "styled-components/macro";
+//import { css } from "styled-components"; // /macro";
 import { Analytics } from '@vercel/analytics/react';
 import { SectionHeading as StudentScore } from "../misc/Headings.js";
 import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-2-icon.svg";
