@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import {Content2Xl, ContentRow as  ContainerInfo} from "components/misc/WebCCLVietnameseLayout.js";
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { SectionDescription } from "components/misc/Typography.js";
+import { Helmet } from "react-helmet";
 
 // import InfoSection from 'images/info/CCLOverviewInforgraphic.svg';
 import InfoSection1 from 'images/info/CCLOverviewInforgraphic-artboards-01.svg';
@@ -15,6 +16,7 @@ import InfoSection4 from 'images/info/CCLOverviewInforgraphic-artboards-04.svg';
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
 import "slick-carousel/slick/slick.css";
+
 
 //The foundation layout
 const PrimaryBackgroundContainer = tw.div` min-h-screen bg-primary-900 text-gray-100`;
@@ -37,9 +39,15 @@ export default ({
   subheading = "",
   heading = "THÔNG TIN VỀ KỲ THI",
   description = "Những chi tiết bạn nên biết về kỳ thi Credential Community Language (CCL)",
+  seoHeading = "Thông tin về kỳ thi CCL",
+  seoDescription = "Những chi tiết bạn nên biết về kỳ thi Credential Community Language (CCL)"
 }) => {
   return (
     <PrimaryBackgroundContainer>
+      <Helmet>
+        <title>{`${seoHeading}`}</title>
+        <meta name="description" content={seoDescription} />
+      </Helmet>
       <PrimaryPadding>
         <Content2Xl>
           <NavigationBar />

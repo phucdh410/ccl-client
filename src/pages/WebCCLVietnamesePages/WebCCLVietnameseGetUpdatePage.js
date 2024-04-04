@@ -10,6 +10,7 @@ import { ReactComponent as LoadingIcon } from "images/loading.svg";
 
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import EmailIllustrationSrc from "images/email-illustration.svg";
+import { Helmet } from "react-helmet";
 
 
 
@@ -68,6 +69,8 @@ export default ({
   heading = <>Nhận cập nhật ngày thi</>,
   description = <>Những thay đổi về ngày thi sẽ được gửi vào email cho bạn</>,
   textOnLeft = true,
+  seoHeading = "Nhận cập nhật ngày thi tự động ",
+  seoDescription = "Những thay đổi về ngày thi sẽ được gửi vào email cho bạn"
 }) => {
   //Declare the state variable, Initialise it with an empty string
   const [userName, set_userName] = useState("");
@@ -122,78 +125,82 @@ export default ({
 
   return (
     <PrimaryBackgroundContainer>
-        <FormContainer>
-          <Content2Xl>
-            <NavigationBar />
-          </Content2Xl>
-          <TwoColumn>
-            <ImageColumn>
-              <Image imageSrc={EmailIllustrationSrc} />
-            </ImageColumn>
-            <TextColumn textOnLeft={textOnLeft}>
-              <TextContent>
-                {subheading && <Subheading>{subheading}</Subheading>}
-                <Heading>{heading}</Heading>
-                {description && <Description>{description}</Description>}
-                <Column>
-                  <form onSubmit={handleSubmit}>
+      <Helmet>
+        <title>{`Khóa học tại CCL MASTER - cclvietnamese.com.au  - ${seoHeading}`}</title>
+        <meta name="description" content={seoDescription} />
+      </Helmet>
+      <FormContainer>
+        <Content2Xl>
+          <NavigationBar />
+        </Content2Xl>
+        <TwoColumn>
+          <ImageColumn>
+            <Image imageSrc={EmailIllustrationSrc} />
+          </ImageColumn>
+          <TextColumn textOnLeft={textOnLeft}>
+            <TextContent>
+              {subheading && <Subheading>{subheading}</Subheading>}
+              <Heading>{heading}</Heading>
+              {description && <Description>{description}</Description>}
+              <Column>
+                <form onSubmit={handleSubmit}>
+                <InputContainer>
+                  <Label htmlFor="name-input">Tên của bạn: <TextRequired>*</TextRequired></Label>
+                  <Input
+                      id="name-input"
+                      type="text"
+                      name="name"
+                      placeholder="E.g. Hoàng Sơn"
+                      value={userName}
+                      onChange={(e) => set_userName(e.target.value)}
+                      required
+                  />
+                </InputContainer>
                   <InputContainer>
-                    <Label htmlFor="name-input">Tên của bạn: <TextRequired>*</TextRequired></Label>
+                    <Label htmlFor="phone-input">Số điện thoại <TextRequired>*</TextRequired></Label>
                     <Input
-                        id="name-input"
-                        type="text"
-                        name="name"
-                        placeholder="E.g. Hoàng Sơn"
-                        value={userName}
-                        onChange={(e) => set_userName(e.target.value)}
-                        required
+                      id="phone-input"
+                      type="tel"
+                      name="phone"
+                      value={userPhoneno}
+                      onChange={(e) => set_userPhoneno(e.target.value)}
+                      placeholder="Thêm mã quốc gia và bỏ số 0 đầu e.g + 61 412 345 678 "
+                      required
                     />
                   </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="phone-input">Số điện thoại <TextRequired>*</TextRequired></Label>
-                      <Input
-                        id="phone-input"
-                        type="tel"
-                        name="phone"
-                        value={userPhoneno}
-                        onChange={(e) => set_userPhoneno(e.target.value)}
-                        placeholder="Thêm mã quốc gia và bỏ số 0 đầu e.g + 61 412 345 678 "
-                        required
-                      />
-                    </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="email-input">Địa chỉ Email <TextRequired>*</TextRequired></Label>
-                      <Input
-                        id="email-input"
-                        type="email"
-                        name="email"
-                        placeholder="E.g. your-email@mail.com"
-                        value={userEmail}
-                        onChange={(e) => set_userEmail(e.target.value)}
-                        required
-                      />
-                    </InputContainer>
-                    {
-                      <SubmitButton
-                        type="submit"
-                        value="Submit"
-                        disabled={submitting}>
-                        {submitting ? <LoadingIcon /> : null}
-                        Đăng ký nhận email
-                      </SubmitButton>
-                    }
-                  </form>
-                  {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
-                  {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                </Column>
-              </TextContent>
-            </TextColumn>
-          </TwoColumn>
-          <Content2Xl>
-            <Footer />
-          </Content2Xl>
-        </FormContainer>
-      </PrimaryBackgroundContainer>
+                  <InputContainer>
+                    <Label htmlFor="email-input">Địa chỉ Email <TextRequired>*</TextRequired></Label>
+                    <Input
+                      id="email-input"
+                      type="email"
+                      name="email"
+                      placeholder="E.g. your-email@mail.com"
+                      value={userEmail}
+                      onChange={(e) => set_userEmail(e.target.value)}
+                      required
+                    />
+                  </InputContainer>
+                  {
+                    <SubmitButton
+                      type="submit"
+                      value="Submit"
+                      disabled={submitting}>
+                      {submitting ? <LoadingIcon /> : null}
+                      Đăng ký nhận email
+                    </SubmitButton>
+                  }
+                </form>
+                {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+              </Column>
+            </TextContent>
+          </TextColumn>
+        </TwoColumn>
+        <Content2Xl>
+          <Footer />
+        </Content2Xl>
+      </FormContainer>
+    </PrimaryBackgroundContainer>
   );
 };
 

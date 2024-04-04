@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Analytics } from '@vercel/analytics/react';
 //import { useState } from "react";
 import { Content2Xl } from "components/misc/Layouts";
+import { Helmet } from "react-helmet";
 //import { Link } from 'react-router-dom';
 //import { motion } from "framer-motion";
 //import { css } from "styled-components"; // /macro";
@@ -18,7 +19,10 @@ import tw from "twin.macro";
 const PrimaryBackgroundContainer = tw.div`-mx-8 px-8 -mt-8 pt-8 -mb-8 pb-8 min-h-screen bg-primary-900 text-gray-100`;
 
 
-export default () => {
+export default ({
+  seoHeading = "CCL MASTER - CCLVIETNAMESE.COM.AU ",
+  seoDescription = "Nơi hội tụ bảng điểm kỷ lục"
+}) => {
   /*
    * Using gtag like this because we only want to use Google Analytics when Main Landing Page is rendered
    * Remove this part and the the gtag script inside public/index.html if you dont need google analytics
@@ -32,6 +36,10 @@ export default () => {
   return (
     <AnimationRevealPage disabled>
         <PrimaryBackgroundContainer>
+          <Helmet>
+            <title>{`${seoHeading}`}</title>
+            <meta name="description" content={seoDescription} />
+          </Helmet>
           <Analytics />
           <Content2Xl>
             <NavigationBar />

@@ -3,6 +3,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
 import { ReactComponent as LoadingIcon } from "images/loading.svg";
+import { Helmet } from "react-helmet";
 
 //import { css } from "styled-components"; // /macro"; //eslint-disable-line
 import {Content2Xl} from "components/misc/WebCCLVietnameseLayout.js";
@@ -10,8 +11,6 @@ import { SectionHeading, Subheading as SubheadingBase } from "components/misc/He
 
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import EmailIllustrationSrc from "images/email-illustration.svg";
-
-
 
 //Style and Layout of the page
 const PrimaryBackgroundContainer = tw.div`relative`;
@@ -66,7 +65,7 @@ const API_ENDPOINT = "https://cclvietnamese-proxy-server.azurewebsites.net/api/c
 
 export default ({
   subheading = "",
-  heading = <>Tư vấn khóa học </>,
+  heading = <>Khóa học tại CCL MASTER - cclvietnamese.com.au </>,
   description = <>Vui lòng điền mẫu sau để nhận được thông tin
                 <TextEmphasizes> KHÓA HỌC </TextEmphasizes>
                 <wbr/>
@@ -77,6 +76,8 @@ export default ({
                 </>,
   submitButtonText = "Gửi thông tin",
   textOnLeft = true,
+  seoHeading = "KHOÁ HỌC TẠI CCL MASTER - CCLVIETNAMESE.COM.AU ",
+  seoDescription = "Hệ thống sẽ tự động gửi toàn bộ thông tin ngay sau khi bạn để lại thông tin liên lạc"
 }) => {
   //Declare the state variable, Initialise it with an empty string
   const [firstName, setFirstName] = useState("");
@@ -137,100 +138,104 @@ export default ({
 
   return (
     <PrimaryBackgroundContainer>
-        <FormContainer>
-          <Content2Xl>
-            <NavigationBar />
-          </Content2Xl>
-          <TwoColumn>
-            <ImageColumn>
-              <Image imageSrc={EmailIllustrationSrc} />
-            </ImageColumn>
-            <TextColumn textOnLeft={textOnLeft}>
-              <TextContent>
-                {subheading && <Subheading>{subheading}</Subheading>}
-                <Heading>{heading}</Heading>
-                {description && <Description>{description}</Description>}
-                <Column>
-                  <form onSubmit={handleSubmit}>
+      <Helmet>
+        <title>{`${seoHeading}`}</title>
+        <meta name="description" content={seoDescription} />
+      </Helmet>
+      <FormContainer>
+        <Content2Xl>
+          <NavigationBar />
+        </Content2Xl>
+        <TwoColumn>
+          <ImageColumn>
+            <Image imageSrc={EmailIllustrationSrc} />
+          </ImageColumn>
+          <TextColumn textOnLeft={textOnLeft}>
+            <TextContent>
+              {subheading && <Subheading>{subheading}</Subheading>}
+              <Heading>{heading}</Heading>
+              {description && <Description>{description}</Description>}
+              <Column>
+                <form onSubmit={handleSubmit}>
+                <InputContainer>
+                  <Label htmlFor="name-input">Tên của bạn <TextRequired>*</TextRequired></Label>
+                  <Input
+                      id="name-input"
+                      type="text"
+                      name="name"
+                      placeholder="E.g. Hoàng Sơn"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                  />
+                </InputContainer>
                   <InputContainer>
-                    <Label htmlFor="name-input">Tên của bạn <TextRequired>*</TextRequired></Label>
+                    <Label htmlFor="phone-input">Số điện thoại <TextRequired>*</TextRequired></Label>
                     <Input
-                        id="name-input"
-                        type="text"
-                        name="name"
-                        placeholder="E.g. Hoàng Sơn"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
+                      id="phone-input"
+                      type="tel"
+                      name="phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="Thêm mã quốc gia và bỏ số 0 đầu e.g + 61 412 345 678 "
+                      required
                     />
                   </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="phone-input">Số điện thoại <TextRequired>*</TextRequired></Label>
-                      <Input
-                        id="phone-input"
-                        type="tel"
-                        name="phone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Thêm mã quốc gia và bỏ số 0 đầu e.g + 61 412 345 678 "
-                        required
-                      />
-                    </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="email-input">Địa chỉ Email <TextRequired>*</TextRequired></Label>
-                      <Input
-                        id="email-input"
-                        type="email"
-                        name="email"
-                        placeholder="E.g. your-email@mail.com"
-                        value={emailAddress}
-                        onChange={(e) => setEmailAddress(e.target.value)}
-                        required
-                      />
-                    </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="fb-input">Facebook URL</Label>
-                      <Input
-                        id="fb-input"
+                  <InputContainer>
+                    <Label htmlFor="email-input">Địa chỉ Email <TextRequired>*</TextRequired></Label>
+                    <Input
+                      id="email-input"
+                      type="email"
+                      name="email"
+                      placeholder="E.g. your-email@mail.com"
+                      value={emailAddress}
+                      onChange={(e) => setEmailAddress(e.target.value)}
+                      required
+                    />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="fb-input">Facebook URL</Label>
+                    <Input
+                      id="fb-input"
+                      type="text"
+                      name="facebook"
+                      placeholder="E.g. facebook.com/your-profile"
+                      value={facebookURL}
+                      onChange={(e) => setFacebookURL(e.target.value)}
+                    />
+                  </InputContainer>
+                  <InputContainer>
+                    <Label htmlFor="promocode-input">Mã giới thiệu</Label>
+                    <Input
+                        id="promocode-input"
                         type="text"
-                        name="facebook"
-                        placeholder="E.g. facebook.com/your-profile"
-                        value={facebookURL}
-                        onChange={(e) => setFacebookURL(e.target.value)}
+                        name="promocode"
+                        placeholder="(Viết hoa hay thường đều được)"
+                        value={promoCode}
+                        onChange={(e) => setPromoCode(e.target.value)}
                       />
-                    </InputContainer>
-                    <InputContainer>
-                      <Label htmlFor="promocode-input">Mã giới thiệu</Label>
-                      <Input
-                          id="promocode-input"
-                          type="text"
-                          name="promocode"
-                          placeholder="(Viết hoa hay thường đều được)"
-                          value={promoCode}
-                          onChange={(e) => setPromoCode(e.target.value)}
-                        />
-                    </InputContainer>
-                    {
-                      <SubmitButton
-                        type="submit"
-                        value="Submit"
-                        disabled={submitting}>
-                        {submitting ? <LoadingIcon /> : null}
-                        Gửi thông tin
-                      </SubmitButton>
-                    }
-                  </form>
-                  {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
-                  {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                </Column>
-              </TextContent>
-            </TextColumn>
-          </TwoColumn>
-          <Content2Xl>
-            <Footer />
-          </Content2Xl>
-        </FormContainer>
-      </PrimaryBackgroundContainer>
+                  </InputContainer>
+                  {
+                    <SubmitButton
+                      type="submit"
+                      value="Submit"
+                      disabled={submitting}>
+                      {submitting ? <LoadingIcon /> : null}
+                      Gửi thông tin
+                    </SubmitButton>
+                  }
+                </form>
+                {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+              </Column>
+            </TextContent>
+          </TextColumn>
+        </TwoColumn>
+        <Content2Xl>
+          <Footer />
+        </Content2Xl>
+      </FormContainer>
+    </PrimaryBackgroundContainer>
   );
 };
 
