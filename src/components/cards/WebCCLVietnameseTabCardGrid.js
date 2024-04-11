@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Analytics } from '@vercel/analytics/react';
+import React, { useEffect, useState, useCallback } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled, { css } from "styled-components";
@@ -7,7 +7,7 @@ import {
   Container,
   ContentWithPaddingResult,
 } from "components/misc/Layouts.js";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 import { SectionHeading } from "components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as StarIcon } from "images/star-icon.svg";
@@ -101,11 +101,9 @@ const TabContent = tw(
   motion.div
 )`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 
-export default ({
-  heading = "Checkout the Menu",
-}) => {
-  const [dateDisplay, setDateDisplay] = useState([])
-  const [cardData, setCardData] = useState([])
+export default ({ heading = "Checkout the Menu" }) => {
+  const [dateDisplay, setDateDisplay] = useState([]);
+  const [cardData, setCardData] = useState([]);
   const [tabsData, setTabsData] = useState([]);
   const [tabNames, setTabNames] = useState([]);
 
@@ -115,24 +113,24 @@ export default ({
       setCardData(cardData?.courseResults);
       setDateDisplay(cardData?.dateDisplay);
     } catch (error) {
-      console.error('loadData::', error)
+      console.error("loadData::", error);
     }
-  }
+  };
 
   const getCardData = useCallback(() => {
-    let data = {}
+    let data = {};
     const testYears = cardData.map((item) => item.TestYear);
     testYears.forEach((year) => {
       data[year] = cardData.filter((item) => item.TestYear === year);
-    })
+    });
     return data;
-  },[cardData]);
+  }, [cardData]);
 
   const prepareTabData = useCallback(() => {
     const CARD_DATA_POPUP = getCardData();
     if (!CARD_DATA_POPUP) return;
 
-    dateDisplay.forEach(function(dateTime) {
+    dateDisplay.forEach(function (dateTime) {
       const yearKey = `Results${dateTime.year}`;
       let tabData = CARD_DATA_POPUP[yearKey];
 
@@ -143,26 +141,27 @@ export default ({
         console.log(`No data found for year: ${dateTime.year}`);
       }
 
-      setTabsData(function(prevTabsData) {
+      setTabsData(function (prevTabsData) {
         return prevTabsData.concat(tabData);
       });
 
-      setTabNames(function(prevTabNames) {
+      setTabNames(function (prevTabNames) {
         return prevTabNames.concat(dateTime.label);
       });
     });
   }, [dateDisplay, getCardData]);
 
-
   const getTabData = (key) => {
     const year = key.slice(3, key.length);
     const month = key.slice(0, 2);
-    return tabsData.filter((item) => item.TestYear === `Results${year}` && item.TestMonth === month);
-  }
+    return tabsData.filter(
+      (item) => item.TestYear === `Results${year}` && item.TestMonth === month
+    );
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     loadData();
-  }, [])
+  }, []);
 
   useEffect(() => {
     prepareTabData();
@@ -170,7 +169,7 @@ export default ({
 
   useEffect(() => {
     setActiveTab(tabNames[0]);
-  }, [tabNames])
+  }, [tabNames]);
 
   /*
    * To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab
@@ -179,7 +178,7 @@ export default ({
    *
    * setSelectedCardData(cardData);
    */
-  const isSmallScreen = useMediaQuery({ query: '(max-width: 1023px)' });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 1023px)" });
 
   //Define the const variable that handles the pop-up when click the "Xem thêm Button"
   const [activeTab, setActiveTab] = useState();
@@ -225,7 +224,7 @@ export default ({
                 scale: 0.8,
                 transitionEnd: {
                   display: "none",
-                }
+                },
               },
             }}
             transition={{ duration: 0.3 }}
@@ -239,6 +238,7 @@ export default ({
                   initial="rest"
                   whileHover={!isSmallScreen ? "hover" : "rest"}
                   animate="rest"
+                  href="#"
                 >
                   <CardImageContainer imageSrc={card.imageSrc}>
                     <CardRatingContainer>
@@ -272,7 +272,7 @@ export default ({
                     <CardResultContainer>
                       <CardResult>{card.result}</CardResult>
                       <CardResultMoreDetail onClick={() => toggleModal(card)}>
-                      Xem thêm =>
+                        Xem thêm =>
                       </CardResultMoreDetail>
                     </CardResultContainer>
                   </CardText>
@@ -294,15 +294,14 @@ export default ({
         <TestimonialPopupBackground>
           <div className="testimonial" tw="w-full">
             <TestimonialPopupCloseButton onClick={toggleModal}>
-                <CloseIcon/>
-              </TestimonialPopupCloseButton>
+              <CloseIcon />
+            </TestimonialPopupCloseButton>
             <GallerySlider
               testimonials={selectedCardData ? [selectedCardData] : []}
               card={selectedCardData}
             />
           </div>
         </TestimonialPopupBackground>
-
       </TestimonialPopupArea>
     </Container>
   );
