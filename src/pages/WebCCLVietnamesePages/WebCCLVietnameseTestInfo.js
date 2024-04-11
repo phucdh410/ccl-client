@@ -16,6 +16,7 @@ import InfoSection4 from 'images/info/CCLOverviewInforgraphic-artboards-04.svg';
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
 import "slick-carousel/slick/slick.css";
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 //The foundation layout
@@ -42,6 +43,9 @@ export default ({
   seoHeading = "Thông tin về kỳ thi CCL",
   seoDescription = "Những chi tiết bạn nên biết về kỳ thi Credential Community Language (CCL)"
 }) => {
+  // Declare a ref for recaptcha plugin
+  const recaptchaRef = useRef(null);
+
   return (
     <PrimaryBackgroundContainer>
       <Helmet>
@@ -76,6 +80,15 @@ export default ({
           <Footer />
         </Content2Xl>
       </PrimaryPadding>
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={
+          process.env.REACT_APP_RECAPTCHA_KEY ||
+          "6LcdfrgpAAAAAKPFQjYCmP5Gaa5NQz1jwWQMMmVv"
+        }
+        size="invisible"
+        badge="bottomleft"
+      />
     </PrimaryBackgroundContainer>
   );
 };
