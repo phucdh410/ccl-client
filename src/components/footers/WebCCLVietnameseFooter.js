@@ -1,7 +1,7 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 //import { css } from "styled-components"; // /macro"; //eslint-disable-line
 
 import LogoImage from "../../images/logo/WebCCLVietnameseLogo.svg";
@@ -10,7 +10,7 @@ import { ReactComponent as FacebookIcon } from "images/facebook-icon.svg";
 import { ReactComponent as YoutubeIcon } from "images/youtube-icon.svg";
 
 const Container = tw.div`relative bg-gray-900 text-gray-100 -mx-8 -mb-8 px-8`;
-const Content = tw.div`max-w-screen-xl mx-auto pt-16 pb-8`
+const Content = tw.div`max-w-screen-xl mx-auto pt-16 pb-8`;
 const NoOfColumns = tw.div`flex flex-wrap justify-between`;
 
 const Column = tw.div`w-full md:w-1/6 mb-8 md:mb-0 text-sm sm:text-base text-center md:text-left`;
@@ -36,11 +36,11 @@ const SocialLink = styled.a`
   }
 `;
 
-const CopyrightAndCompanyInfoRow = tw.div`pb-0 text-sm font-normal flex flex-col sm:flex-row items-center justify-between`
+const CopyrightAndCompanyInfoRow = tw.div`pb-0 text-sm font-normal flex flex-col sm:flex-row items-center justify-between`;
 const CopyrightNotice = tw.div`flex items-center justify-center`;
-const CompanyInfo = tw.div`justify-end`
+const CompanyInfo = tw.div`justify-end`;
 
-const Divider = tw.div`my-8 border-b-2 border-gray-800`
+const Divider = tw.div`my-8 border-b-2 border-gray-800`;
 export default () => {
   return (
     <Container>
@@ -52,9 +52,7 @@ export default () => {
               <LogoText>cclvietnamese.com.au</LogoText>
             </LogoContainer>
             <CompanyAddress>
-              Sydney,
-              New South Wales,
-              Australia 2000
+              Sydney, New South Wales, Australia 2000
             </CompanyAddress>
             <SocialLinksContainer>
               <SocialLink href="https://www.facebook.com/cclmaster/">
@@ -107,36 +105,29 @@ export default () => {
           <Column>
             <ColumnHeading>Contact</ColumnHeading>
             <LinkList>
+              <LinkListItem>(+61) 415-608-868</LinkListItem>
               <LinkListItem>
-                (+61) 415-608-868
+                <Link href="mailto:support@cclvietnamese.com.au">
+                  support@cclvietnamese.com.au
+                </Link>
               </LinkListItem>
-              <LinkListItem>
-                <Link href="mailto:support@cclvietnamese.com.au">support@cclvietnamese.com.au</Link>
-              </LinkListItem>
-              <LinkListItem>
-                ABN: 76 667 428 864
-              </LinkListItem>
+              <LinkListItem>ABN: 76 667 428 864</LinkListItem>
               <LinkListItem>
                 <Link href="#">Home Page</Link>
               </LinkListItem>
             </LinkList>
           </Column>
-
-
-
         </NoOfColumns>
 
-        <Divider/>
+        <Divider />
 
         <CopyrightAndCompanyInfoRow>
           <CopyrightNotice>
-            <LogoImg src={LogoImage} /> Syndikates Education Pty Ltd ACN 667 428 864
+            <LogoImg src={LogoImage} alt="footer-logo" /> Syndikates Education
+            Pty Ltd ACN 667 428 864
           </CopyrightNotice>
-          <CompanyInfo>
-            Built with {'\u2764\uFE0F'} &copy; 2023
-          </CompanyInfo>
+          <CompanyInfo>Built with {"\u2764\uFE0F"} &copy; 2023</CompanyInfo>
         </CopyrightAndCompanyInfoRow>
-
       </Content>
     </Container>
   );

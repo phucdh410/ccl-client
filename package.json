@@ -46,7 +46,9 @@
     "react-dev-utils": "12.1.0-next.14+9802941f",
     "react-dom": "^18.2.0",
     "react-github-btn": "^1.4.0",
+    "react-google-recaptcha": "^3.1.0",
     "react-helmet": "^6.1.0",
+    "react-messenger-chat-plugin": "^3.0.5",
     "react-modal": "^3.16.1",
     "react-refresh": "^0.14.0",
     "react-responsive": "^10.0.0",
@@ -70,7 +72,7 @@
     "workbox-webpack-plugin": "^7.0.0"
   },
   "scripts": {
-    "start": "set PORT=3000 && node scripts/start.js",
+    "start": "set PORT=3030 && node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "deploy": "yarn build && netlify deploy --prod --dir=build"
