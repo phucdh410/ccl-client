@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import tw from "twin.macro";
 // eslint-disable-next-line
 import styled, { css } from "styled-components";
