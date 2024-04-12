@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useRef, useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
@@ -11,6 +11,7 @@ import { ReactComponent as LoadingIcon } from "images/loading.svg";
 import NavigationBar from "components/headers/WebCCLVietnameseNavBar.js"
 import EmailIllustrationSrc from "images/email-illustration.svg";
 import { Helmet } from "react-helmet";
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 
@@ -72,6 +73,17 @@ export default ({
   seoHeading = "Nhận cập nhật ngày thi tự động ",
   seoDescription = "Những thay đổi về ngày thi sẽ được gửi vào email cho bạn"
 }) => {
+
+  /*
+ * Using gtag like this because we only want to use Google Analytics when Main Landing Page is rendered
+ * Remove this part and the the gtag script inside public/index.html if you dont need google analytics
+ */
+  useEffect(() => {
+    window.gtag("js", new Date());
+    window.gtag("config", "G-B7N1H5S8N6");
+  }, []);
+  // Declare a ref for recaptcha plugin
+  const recaptchaRef = useRef(null);
   //Declare the state variable, Initialise it with an empty string
   const [userName, set_userName] = useState("");
   const [userPhoneno, set_userPhoneno] = useState("");
@@ -200,6 +212,15 @@ export default ({
           <Footer />
         </Content2Xl>
       </FormContainer>
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={
+          process.env.REACT_APP_RECAPTCHA_KEY ||
+          "6LcdfrgpAAAAAKPFQjYCmP5Gaa5NQz1jwWQMMmVv"
+        }
+        size="invisible"
+        badge="bottomleft"
+      />
     </PrimaryBackgroundContainer>
   );
 };
