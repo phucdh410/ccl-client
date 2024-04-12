@@ -216,7 +216,7 @@ export default ({
         ref={recaptchaRef}
         sitekey={
           process.env.REACT_APP_RECAPTCHA_KEY ||
-          "6LcdfrgpAAAAAKPFQjYCmP5Gaa5NQz1jwWQMMmVv"
+          "6LdVfrgpAAAAAM0ooGFLyFaCLxp0_2C-WPmmgWT7"
         }
         size="invisible"
         badge="bottomleft"
