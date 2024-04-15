@@ -17,9 +17,12 @@ const TestimonialImageSlider = tw(
 )`w-full lg:w-5/12 flex-shrink-0 max-w-screen-xl mx-auto`;
 
 const ImageAndControlContainer = tw.div`relative outline-none`;
-const Image = styled.div((props) => [
-  `background-image: url("${props.imageSrc}");`,
-  tw`rounded bg-cover bg-center h-80 sm:h-96 lg:h-144`,
+// const Image = styled.div((props) => [
+//   `background-image: url("${props.imageSrc}");`,
+//   tw`rounded bg-cover bg-center h-80 sm:h-96 lg:h-144`,
+// ]);
+const Image = styled.img((props) => [
+  tw`rounded object-cover h-80 sm:h-96 lg:h-144`,
 ]);
 
 const ControlContainer = tw.div`rounded-br-md absolute bottom-0 right-0 bg-gray-100 px-2 py-2 lg:px-6 lg:py-4 rounded-tl-3xl border`;
@@ -31,7 +34,7 @@ const ControlButton = styled(PrimaryButton)`
   }
 `;
 
-export default ({ testimonials = null, textOnLeft = false }) => {
+export default () => {
   const [dataSlider, setDataSlider] = useState([]);
 
   const getSliderData = async () => {
@@ -43,7 +46,7 @@ export default ({ testimonials = null, textOnLeft = false }) => {
         res.forEach((course) => {
           if (Array.isArray(course?.galleryImgs)) {
             course.galleryImgs.forEach((imgSrc) => {
-              _data.push(imgSrc);
+              _data.push({ imageSrc: imgSrc });
             });
           }
         });
@@ -51,6 +54,8 @@ export default ({ testimonials = null, textOnLeft = false }) => {
       setDataSlider(_data?.length > 0 ? _data : CARD_DATA_HERO);
     } catch (error) {
       setDataSlider(CARD_DATA_HERO);
+
+      console.error("Fetching error:", error);
     }
   };
 
@@ -77,7 +82,8 @@ export default ({ testimonials = null, textOnLeft = false }) => {
     >
       {dataSlider.map((testimonial, index) => (
         <ImageAndControlContainer key={index}>
-          <Image imageSrc={testimonial.imageSrc} />
+          {/* <Image imageSrc={testimonial.imageSrc} /> */}
+          <Image src={testimonial.imageSrc} loading="lazy" />
           <ControlContainer>
             <ControlButton onClick={imageSliderRef?.slickPrev}>
               <ChevronLeftIcon />

@@ -101,6 +101,14 @@ const TabContent = tw(
   motion.div
 )`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
 
+const sortDesScore = (arrayData) => {
+  return arrayData.sort((a, b) => {
+    let scoreA = parseInt(a?.result?.split("/")[0]);
+    let scoreB = parseInt(b?.result?.split("/")[0]);
+    return scoreB - scoreA;
+  });
+};
+
 export default ({ heading = "Checkout the Menu" }) => {
   const [dateDisplay, setDateDisplay] = useState([]);
   const [cardData, setCardData] = useState([]);
@@ -118,12 +126,16 @@ export default ({ heading = "Checkout the Menu" }) => {
   };
 
   const getCardData = useCallback(() => {
-    let data = {};
-    const testYears = cardData.map((item) => item.TestYear);
-    testYears.forEach((year) => {
-      data[year] = cardData.filter((item) => item.TestYear === year);
-    });
-    return data;
+    if (Array.isArray(cardData) && cardData.length > 0) {
+      let data = {};
+      const testYears = cardData.map((item) => item.TestYear);
+      testYears.forEach((year) => {
+        data[year] = cardData.filter((item) => item.TestYear === year);
+      });
+      return data;
+    } else {
+      return null;
+    }
   }, [cardData]);
 
   const prepareTabData = useCallback(() => {
@@ -153,9 +165,16 @@ export default ({ heading = "Checkout the Menu" }) => {
 
   const getTabData = (key) => {
     const year = key.slice(3, key.length);
-    const month = key.slice(0, 2);
-    return tabsData.filter(
-      (item) => item.TestYear === `Results${year}` && item.TestMonth === month
+    const quarter = key.slice(0, 2);
+    // const month = key.slice(0, 2);
+    //  return tabsData.filter(
+    //    (item) => item.TestYear === `Results${year}` && item.TestMonth === month
+    //  );
+    return sortDesScore(
+      tabsData.filter(
+        (item) =>
+          item.TestYear === `Results${year}` && item.TestTime === quarter
+      )
     );
   };
 
@@ -272,7 +291,7 @@ export default ({ heading = "Checkout the Menu" }) => {
                     <CardResultContainer>
                       <CardResult>{card.result}</CardResult>
                       <CardResultMoreDetail onClick={() => toggleModal(card)}>
-                        Xem thêm =>
+                        {"Xem thêm =>"}
                       </CardResultMoreDetail>
                     </CardResultContainer>
                   </CardText>

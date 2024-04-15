@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
@@ -49,7 +49,7 @@ const TextRequired = tw.span`text-red-500 select-none ml-1`;
 //Style on the input field elements
 const Input = tw.input`border-2 rounded mt-6 first:mt-0 border-b-2 focus:outline-none font-medium transition duration-300 hocus:border-teal-500`;
 const FormContainer = styled.div`
-  ${tw`p-8 sm:p-4 md:p-8 bg-primary-900 text-gray-100 relative`}
+  ${tw`p-8 sm:p-4 md:p-8 bg-primary-900 text-gray-100 relative font-display`}
   form {
     ${tw`mt-4`}
   }
@@ -91,15 +91,6 @@ export default ({
   seoHeading = "KHOÁ HỌC TẠI CCL MASTER - CCLVIETNAMESE.COM.AU ",
   seoDescription = "Hệ thống sẽ tự động gửi toàn bộ thông tin ngay sau khi bạn để lại thông tin liên lạc",
 }) => {
-
-    /*
-   * Using gtag like this because we only want to use Google Analytics when Main Landing Page is rendered
-   * Remove this part and the the gtag script inside public/index.html if you dont need google analytics
-   */
-  useEffect(() => {
-    window.gtag("js", new Date());
-    window.gtag("config", "G-B7N1H5S8N6");
-  }, []);
   // Declare a ref for recaptcha plugin
   const recaptchaRef = useRef(null);
 
@@ -277,10 +268,10 @@ export default ({
         ref={recaptchaRef}
         sitekey={
           process.env.REACT_APP_RECAPTCHA_KEY ||
-          "6LdVfrgpAAAAAM0ooGFLyFaCLxp0_2C-WPmmgWT7"
+          "6LcVFbQpAAAAADTwS_1mmhWjOFStyKeZqPQnLn22"
         }
         size="invisible"
-        badge="bottomleft"
+        badge="bottomright"
       />
     </PrimaryBackgroundContainer>
   );

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 //import { css } from "styled-components"; // /macro";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 import { SectionHeading as StudentScore } from "../misc/Headings.js";
 import { ReactComponent as ArrowLeftIcon } from "../../images/arrow-left-2-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "../../images/arrow-right-2-icon.svg";
@@ -30,26 +30,29 @@ const TheStudent = tw.h5`font-bold text-xl lg:text-xl xl:text-2xl text-primary-8
 const TheOccupation = tw.h5`font-bold text-lg lg:text-xl xl:text-2xl text-gray-700`;
 
 const SliderControlButtonContainer = styled.div`
-${tw`hidden lg:flex absolute top-0 h-full flex items-center z-20 p-8 `}
-button {
-  ${tw`rounded-full text-secondary-500 hover:text-primary-500 focus:outline-none transition duration-300 transform hover:scale-125`}
-  svg {
-    ${tw`w-8`}
+  ${tw`hidden lg:flex absolute top-0 h-full flex items-center z-20 p-8 `}
+  button {
+    ${tw`rounded-full text-secondary-500 hover:text-primary-500 focus:outline-none transition duration-300 transform hover:scale-125`}
+    svg {
+      ${tw`w-8`}
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      padding: 10px;
+    }
   }
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    padding: 10px;
-  }
-}
 `;
 
-
-const NextArrowSliderControlButtonContainer = styled(SliderControlButtonContainer)`
+const NextArrowSliderControlButtonContainer = styled(
+  SliderControlButtonContainer
+)`
   ${tw`right-0`}
 `;
 
-const PreviousArrowSliderControlButtonContainer = styled(SliderControlButtonContainer)`
+const PreviousArrowSliderControlButtonContainer = styled(
+  SliderControlButtonContainer
+)`
   ${tw`left-0`}
 `;
 
@@ -71,7 +74,6 @@ const PreviousArrow = ({ currentSlide, slideCount, className, ...props }) => (
   </PreviousArrowSliderControlButtonContainer>
 );
 
-
 export default ({ testimonials = [] }) => {
   return (
     <Container>
@@ -85,7 +87,7 @@ export default ({ testimonials = [] }) => {
             <Analytics />
           </HeadingInfoContainer>
         ))}
-        <TestimonialSliderContainer >
+        <TestimonialSliderContainer>
           <TestimonialSlider
             dots
             nextArrow={<NextArrow />}
@@ -102,15 +104,14 @@ export default ({ testimonials = [] }) => {
                     <img
                       src={image}
                       alt={`${testimonial.studentName}-${imageIndex}`}
+                      loading="lazy"
                     />
                   </ImageContainer>
-
                 </Testimonial>
               ));
             })}
           </TestimonialSlider>
         </TestimonialSliderContainer>
-
       </Content>
     </Container>
   );
