@@ -15,6 +15,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MessengerChat } from "react-messenger-chat-plugin";
 
 export default function App() {
+  console.log("Running app");
+
   return (
     <>
       <GlobalStyles />
