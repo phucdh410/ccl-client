@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Footer from "components/footers/WebCCLVietnameseFooter.js";
@@ -91,6 +91,14 @@ export default ({
   seoHeading = "KHOÁ HỌC TẠI CCL MASTER - CCLVIETNAMESE.COM.AU ",
   seoDescription = "Hệ thống sẽ tự động gửi toàn bộ thông tin ngay sau khi bạn để lại thông tin liên lạc",
 }) => {
+  /*
+   * Using gtag like this because we only want to use Google Analytics when Main Landing Page is rendered
+   * Remove this part and the the gtag script inside public/index.html if you dont need google analytics
+   */
+  useEffect(() => {
+    window.gtag("js", new Date());
+    window.gtag("config", "G-B7N1H5S8N6");
+  }, []);
   // Declare a ref for recaptcha plugin
   const recaptchaRef = useRef(null);
 
@@ -271,7 +279,7 @@ export default ({
           "6LcVFbQpAAAAADTwS_1mmhWjOFStyKeZqPQnLn22"
         }
         size="invisible"
-        badge="bottomright"
+        badge="bottomleft"
       />
     </PrimaryBackgroundContainer>
   );
