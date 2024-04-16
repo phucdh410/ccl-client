@@ -204,7 +204,9 @@ export default ({ heading = "Checkout the Menu" }) => {
   const [selectedCardData, setSelectedCardData] = useState(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = (cardData) => {
+  const toggleModal = (e, cardData) => {
+    e.preventDefault();
+
     setSelectedCardData(cardData);
     setIsModalOpen(!isModalOpen);
   };
@@ -280,7 +282,7 @@ export default ({ heading = "Checkout the Menu" }) => {
                       }}
                       transition={{ duration: 0.2 }}
                     >
-                      <CardButton onClick={() => toggleModal(card)}>
+                      <CardButton onClick={(e) => toggleModal(e, card)}>
                         Xem thêm
                       </CardButton>
                     </CardHoverOverlay>
@@ -290,7 +292,9 @@ export default ({ heading = "Checkout the Menu" }) => {
                     <CardOccupation>{card.occupation}</CardOccupation>
                     <CardResultContainer>
                       <CardResult>{card.result}</CardResult>
-                      <CardResultMoreDetail onClick={() => toggleModal(card)}>
+                      <CardResultMoreDetail
+                        onClick={(e) => toggleModal(e, card)}
+                      >
                         {"Xem thêm =>"}
                       </CardResultMoreDetail>
                     </CardResultContainer>
