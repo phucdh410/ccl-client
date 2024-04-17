@@ -273,11 +273,11 @@ export default ({ heading = "Checkout the Menu" }) => {
                       variants={{
                         hover: {
                           opacity: 1,
-                          height: "auto",
+                          scale: 1,
                         },
                         rest: {
                           opacity: 0,
-                          height: 0,
+                          scale: 0,
                         },
                       }}
                       transition={{ duration: 0.2 }}
